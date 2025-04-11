@@ -1,6 +1,0 @@
-import{r,j as a}from"./vendor-07504a4b.js";import{R as d,I as m,H as l,T as i,C as c}from"./index-7addddf0.js";import{c as n}from"./utils-3f044a58.js";import{c as p}from"./createLucideIcon-502f21c0.js";/**
- * @license lucide-react v0.439.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const f=p("ChevronDown",[["path",{d:"m6 9 6 6 6-6",key:"qrunsl"}]]),v=d,x=r.forwardRef(({className:e,...s},o)=>a.jsx(m,{ref:o,className:n("border-b",e),...s}));x.displayName="AccordionItem";const N=r.forwardRef(({className:e,children:s,...o},t)=>a.jsx(l,{className:"flex",children:a.jsxs(i,{ref:t,className:n("flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",e),...o,children:[s,a.jsx(f,{className:"h-4 w-4 shrink-0 transition-transform duration-200"})]})}));N.displayName=i.displayName;const h=r.forwardRef(({className:e,children:s,...o},t)=>a.jsx(c,{ref:t,className:"overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",...o,children:a.jsx("div",{className:n("pb-4 pt-0",e),children:s})}));h.displayName=c.displayName;export{v as A,x as a,N as b,h as c};
