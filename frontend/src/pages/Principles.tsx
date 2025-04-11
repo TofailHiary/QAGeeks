@@ -154,78 +154,7 @@ export default function Principles() {
           <p className="mt-2 italic">Examples: User acceptance testing, system testing, beta testing</p>
         </div>
       </div>
-      {/* SDLC Integration Section */}
-      <div className="mt-8 bg-white shadow-lg rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-4">SDLC Integration</h3>
-        <p className="mb-4">Both verification and validation are essential throughout the software development lifecycle:</p>
-        <div className="relative overflow-hidden">
-          {/* Timeline */}
-          <div className="absolute h-full w-1 bg-gradient-to-b from-[#00A2FF] to-[#9C27FF] left-[15px] top-0"></div>
-          {/* SDLC Phases */}
-          <div className="space-y-6 ml-10">
-            {/* Requirements Phase */}
-            <div className="relative">
-              <div className="absolute w-6 h-6 bg-[#00A2FF] rounded-full -left-[18px] top-0 shadow-lg"></div>
-              <h4 className="font-bold">Requirements Phase</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                <div className="bg-blue-50 p-3 rounded">
-                  <p className="font-medium text-[#00A2FF]">Verification</p>
-                  <p className="text-sm">Review requirements for consistency, completeness, and clarity</p>
-                </div>
-                <div className="bg-purple-50 p-3 rounded">
-                  <p className="font-medium text-[#9C27FF]">Validation</p>
-                  <p className="text-sm">Confirm requirements actually meet user needs and business goals</p>
-                </div>
-              </div>
-            </div>
-            {/* Design Phase */}
-            <div className="relative">
-              <div className="absolute w-6 h-6 bg-[#4482FF] rounded-full -left-[18px] top-0 shadow-lg"></div>
-              <h4 className="font-bold">Design Phase</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                <div className="bg-blue-50 p-3 rounded">
-                  <p className="font-medium text-[#00A2FF]">Verification</p>
-                  <p className="text-sm">Ensure design aligns with requirements specifications</p>
-                </div>
-                <div className="bg-purple-50 p-3 rounded">
-                  <p className="font-medium text-[#9C27FF]">Validation</p>
-                  <p className="text-sm">Review design with stakeholders to confirm it meets expectations</p>
-                </div>
-              </div>
-            </div>
-            {/* Implementation Phase */}
-            <div className="relative">
-              <div className="absolute w-6 h-6 bg-[#7B54FF] rounded-full -left-[18px] top-0 shadow-lg"></div>
-              <h4 className="font-bold">Implementation Phase</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                <div className="bg-blue-50 p-3 rounded">
-                  <p className="font-medium text-[#00A2FF]">Verification</p>
-                  <p className="text-sm">Code reviews, static analysis, unit tests to verify against design</p>
-                </div>
-                <div className="bg-purple-50 p-3 rounded">
-                  <p className="font-medium text-[#9C27FF]">Validation</p>
-                  <p className="text-sm">Component/integration tests to validate against requirements</p>
-                </div>
-              </div>
-            </div>
-            {/* Testing Phase */}
-            <div className="relative">
-              <div className="absolute w-6 h-6 bg-[#9C27FF] rounded-full -left-[18px] top-0 shadow-lg"></div>
-              <h4 className="font-bold">Testing Phase</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                <div className="bg-blue-50 p-3 rounded">
-                  <p className="font-medium text-[#00A2FF]">Verification</p>
-                  <p className="text-sm">System testing, test coverage analysis, compliance checking</p>
-                </div>
-                <div className="bg-purple-50 p-3 rounded">
-                  <p className="font-medium text-[#9C27FF]">Validation</p>
-                  <p className="text-sm">User acceptance testing, beta testing, usability testing</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* SDLC Integration Section removed from here, now rendered separately below */}
     </div>
   );
 

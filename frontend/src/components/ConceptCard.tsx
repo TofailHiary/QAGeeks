@@ -18,12 +18,12 @@ export const ConceptCard = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div 
+    <div
       className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'ring-2' : ''}`}
-      style={{ ringColor: accentColor }}
+      style={{ '--tw-ring-color': accentColor } as React.CSSProperties} // Set Tailwind's ring color variable
     >
       {/* Card Header */}
-      <div 
+      <div
         className="p-6 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
@@ -53,8 +53,8 @@ export const ConceptCard = ({
       </div>
       
       {/* Expandable Content */}
-      <div 
-        className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[500px]' : 'max-h-0'}`}
+      <div
+        className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[2000px]' : 'max-h-0'}`}
       >
         <div className="p-6 pt-0 border-t border-gray-100">
           <div className="prose max-w-none text-gray-700">
