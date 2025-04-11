@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -401,6 +402,16 @@ Authorization: Bearer eyJhbGciOiJIU...`}
              </CardContent>
           </Card>
         </SectionCard>
+
+        {/* Next Button */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/general-topic"
+            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
+          >
+            General Topic →
+          </Link>
+        </div>
 
       </div>
     </PageLayout>

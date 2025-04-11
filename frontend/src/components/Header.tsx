@@ -43,8 +43,8 @@ const navItems = [
   { label: "Contact", path: "/contact" },
 ];
 
-// Number of items to show directly before putting into "More" dropdown
-const VISIBLE_NAV_ITEMS_COUNT = 8; // Adjust this number based on design/fit
+// Default number of items before "More" at the lg breakpoint
+const BASE_VISIBLE_NAV_ITEMS_COUNT = 8;
 
 export const Header = ({ transparent = false }: Props) => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export const Header = ({ transparent = false }: Props) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false); // Desktop "More" menu
   const moreMenuRef = useRef<HTMLDivElement>(null);
-  // const [width] = useWindowSize(); // Optional: use hook for dynamic count
+  const [width] = useWindowSize(); // Use hook for dynamic count
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleMoreMenu = () => setIsMoreMenuOpen(!isMoreMenuOpen);
@@ -75,23 +75,41 @@ export const Header = ({ transparent = false }: Props) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [moreMenuRef]);
 
-
-  const visibleItems = navItems.slice(0, VISIBLE_NAV_ITEMS_COUNT);
-  const hiddenItems = navItems.slice(VISIBLE_NAV_ITEMS_COUNT);
+  // Determine visible items based on width - Adjusted breakpoints
+  const getVisibleCount = (currentWidth: number) => {
+    // Adjust these pixel values based on testing to find the best fit
+    if (currentWidth >= 1600) return 11;
+    if (currentWidth >= 1366) return 9; // Adjusted breakpoint
+    if (currentWidth >= 1024) return BASE_VISIBLE_NAV_ITEMS_COUNT; // LG breakpoint
+    // Below lg, the desktop nav is hidden anyway
+    return BASE_VISIBLE_NAV_ITEMS_COUNT;
+  };
+  const currentVisibleCount = getVisibleCount(width);
+  const visibleItems = navItems.slice(0, currentVisibleCount);
+  const hiddenItems = navItems.slice(currentVisibleCount);
 
   const renderNavItem = (item: { label: string; path: string }, isDropdownItem = false) => {
     const isActive = location.pathname === item.path;
-    const baseClasses = `relative font-semibold rounded-full transition-all duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#00A2FF]`;
-    const sizeClasses = isDropdownItem ? 'px-4 py-2 text-sm w-full text-left' : 'px-3 py-1.5 text-sm'; // Smaller buttons again
-    const activeClasses = isActive ? "bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white shadow" : "text-gray-700 hover:bg-blue-100 hover:text-blue-700";
+    // Base classes for all nav items
+    const baseClasses = `relative font-medium rounded-md transition-colors duration-200 ease-in-out whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`;
+    // Specific classes for desktop nav items (not in dropdown) - Reduced padding
+    const desktopSizeClasses = 'px-3 py-2 text-sm';
+    // Specific classes for dropdown items (desktop "More" or mobile menu)
+    const dropdownSizeClasses = 'px-4 py-2 text-sm w-full text-left block'; // Use block for dropdown items
+
+    // Unified active/inactive styles
+    const activeClasses = isActive ? "bg-blue-100 text-blue-700" : "text-gray-600 hover:text-gray-900 hover:bg-gray-100";
+
+    const finalClasses = isDropdownItem
+      ? `${baseClasses} ${dropdownSizeClasses} ${activeClasses}` // Use unified style for dropdown
+      : `${baseClasses} ${desktopSizeClasses} ${activeClasses}`; // Use unified style for desktop
 
     return (
       <button
         key={item.label}
         onClick={() => React.startTransition(() => navigateTo(item.path))}
-        className={`${baseClasses} ${sizeClasses} ${activeClasses}`}
+        className={finalClasses}
         title={item.label}
-        style={{ lineHeight: "1.2" }}
         role={isDropdownItem ? "menuitem" : "button"}
       >
         {item.label}
@@ -100,75 +118,62 @@ export const Header = ({ transparent = false }: Props) => {
   };
 
   return (
-    <header className={`fixed w-full top-0 z-50 bg-gradient-to-r from-white via-blue-50 to-purple-50 border-b border-gray-200 shadow-sm`}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-2 md:py-3 w-full gap-4">
+    <header className={`fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200/80 shadow-sm transition-all duration-300`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Grid layout with minmax for center column */}
+        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center h-16 md:h-20 w-full gap-4">
 
-          {/* Logo */}
+          {/* Logo (Column 1) */}
           <div className="flex-shrink-0">
-            <div className="flex items-center cursor-pointer" onClick={() => React.startTransition(() => navigateTo("/"))}>
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
+            <div className="flex items-center cursor-pointer group" onClick={() => React.startTransition(() => navigateTo("/"))}>
+              <span className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] group-hover:opacity-80 transition-opacity">
                 QAGeeks
               </span>
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex justify-center flex-grow min-w-0 mx-4">
-            <nav className="flex items-center justify-center gap-x-1 bg-white rounded-full px-3 py-1 shadow border border-gray-200">
+          {/* Desktop Navigation (Column 2) */}
+          {/* This div sits in the minmax(0, 1fr) column. Removed overflow-hidden */}
+          <div className="hidden lg:flex justify-center items-center min-w-0">
+            {/* Reduced gap */}
+            <nav className="flex items-center justify-center gap-x-0.5">
               {visibleItems.map(item => renderNavItem(item))}
 
               {/* "More" Dropdown */}
               {hiddenItems.length > 0 && (
-                <div className="relative" ref={moreMenuRef}>
+                <div className="relative flex-shrink-0" ref={moreMenuRef}> {/* Keep flex-shrink-0 */}
                   <button
                     onClick={toggleMoreMenu}
-                    className={`relative font-semibold px-3 py-1.5 rounded-full transition-all duration-200 text-sm whitespace-nowrap text-gray-700 hover:bg-blue-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#00A2FF]`}
-                    style={{ lineHeight: "1.2" }}
+                    className={`relative font-medium px-4 py-2 rounded-md transition-colors duration-200 ease-in-out text-sm whitespace-nowrap text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center gap-1`}
                     aria-haspopup="true"
                     aria-expanded={isMoreMenuOpen}
                   >
-                    More <span className="text-xs">▼</span> {/* Simple dropdown indicator */}
+                    More
+                    <svg className={`w-4 h-4 transition-transform duration-200 ${isMoreMenuOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
                   </button>
                   {/* Simple Dropdown Implementation */}
                   {isMoreMenuOpen && (
                     <div
-                      className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-10"
+                      className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none p-2 z-10 space-y-1"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="more-menu-button"
                     >
-                      {hiddenItems.map(item => (
-                        <div key={item.label} className="px-1 py-1" role="none">
-                           {renderNavItem(item, true)}
-                        </div>
-                      ))}
+                      {hiddenItems.map(item => renderNavItem(item, true))}
                     </div>
                   )}
-                   {/* --- OR --- Use Shadcn DropdownMenu if available ---
-                   <DropdownMenu open={isMoreMenuOpen} onOpenChange={setIsMoreMenuOpen}>
-                     <DropdownMenuTrigger asChild>
-                       <button className="...">More ▼</button>
-                     </DropdownMenuTrigger>
-                     <DropdownMenuContent align="end">
-                       {hiddenItems.map(item => (
-                         <DropdownMenuItem key={item.label} onClick={() => navigateTo(item.path)}>
-                           {item.label}
-                         </DropdownMenuItem>
-                       ))}
-                     </DropdownMenuContent>
-                   </DropdownMenu>
-                   ---------------------------------------------------- */}
                 </div>
               )}
             </nav>
           </div>
 
-          {/* Right Icons Group */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          {/* Right Icons Group (Column 3) */}
+          <div className="flex items-center justify-end gap-2 flex-shrink-0">
             {/* Search Icon */}
             <button
-              className="text-gray-700 hover:text-blue-600 focus:outline-none p-1"
+              className="text-gray-500 hover:text-blue-600 focus:outline-none p-2 rounded-full hover:bg-gray-100 transition-colors"
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search"
             >
@@ -179,11 +184,11 @@ export const Header = ({ transparent = false }: Props) => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden text-gray-700 focus:outline-none p-1"
+              className="lg:hidden text-gray-500 focus:outline-none p-2 rounded-full hover:bg-gray-100 transition-colors"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -196,25 +201,9 @@ export const Header = ({ transparent = false }: Props) => {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 lg:hidden bg-white py-3 px-2 rounded-b-lg shadow-md border border-t-0 border-gray-200 max-h-[80vh] overflow-y-auto"> {/* Added max-height and scroll */}
-            <div className="flex flex-col space-y-1">
-              {navItems.map((item) => { // Show all items in mobile menu
-                const isActive = location.pathname === item.path;
-                return (
-                  <button
-                    key={item.label}
-                    onClick={() => React.startTransition(() => navigateTo(item.path))}
-                    className={`w-full text-left font-semibold px-4 py-2 rounded-md transition-all duration-200 text-sm
-                      ${isActive
-                        ? "bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white shadow"
-                        : "text-gray-700 hover:bg-blue-100 hover:text-blue-700"}
-                      focus:outline-none focus:ring-1 focus:ring-[#00A2FF]`}
-                    title={item.label}
-                  >
-                    {item.label}
-                  </button>
-                );
-              })}
+          <div className="absolute top-full left-0 right-0 lg:hidden bg-white py-4 px-4 rounded-b-lg shadow-lg border border-t-0 border-gray-200 max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => renderNavItem(item, true))}
             </div>
           </div>
         )}
