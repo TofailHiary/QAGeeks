@@ -7,34 +7,7 @@ import { OuterErrorBoundary } from "./prod-components/OuterErrorBoundary";
 import { router } from "./router";
 import { HelmetProvider } from "react-helmet-async"; // ✅ NEW
 
-// Component to handle the redirect logic
-const RedirectHandler = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const redirectPath = sessionStorage.getItem("redirect");
-    if (redirectPath) {
-      sessionStorage.removeItem("redirect");
-
-      const basename = router.basename || "/";
-      const relativePath = redirectPath.startsWith(basename)
-        ? redirectPath.substring(basename.length - 1)
-        : redirectPath;
-
-      const finalPath =
-        relativePath === ""
-          ? "/"
-          : relativePath.startsWith("/")
-          ? relativePath
-          : `/${relativePath}`;
-
-      console.log(`Redirecting to: ${finalPath}`);
-      navigate(finalPath, { replace: true });
-    }
-  }, [navigate]);
-
-  return null;
-};
+// RedirectHandler component moved to App.tsx
 
 export const AppWrapper = () => {
   return (
@@ -43,7 +16,7 @@ export const AppWrapper = () => {
         <ThemeProvider defaultTheme={DEFAULT_THEME}>
           <React.Suspense fallback={<div className="text-center py-20 text-xl">Loading...</div>}>
             <RouterProvider router={router} />
-            {/* RedirectHandler should ideally go inside a route-level layout */}
+            {/* RedirectHandler removed, will be placed inside App.tsx */}
           </React.Suspense>
           <Head />
         </ThemeProvider>

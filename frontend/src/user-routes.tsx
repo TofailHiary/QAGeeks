@@ -39,8 +39,7 @@ export const userRoutes: RouteObject[] = [
   { path: "/testingmethods", element: <TestingMethods /> },
   { path: "/testing-tools", element: <TestingTools /> },
   { path: "/testingtools", element: <TestingTools /> },
-  { path: "/intro", element: <Intro /> },
-  { path: "/intro", element: <Intro /> },
+  { path: "/intro", element: <Intro /> }, // Removed duplicate intro route
   { path: "/levels-of-testing", element: <LevelsOfTesting /> },
   { path: "/testing-types", element: <TestingTypes /> },
   { path: "/resources", element: <Resources /> }, // Add Resources route

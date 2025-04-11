@@ -414,15 +414,15 @@ export default function TestingMethods() {
            <Card className="overflow-hidden shadow-xl rounded-lg border border-gray-200"> {/* Adjusted shadow/rounding */}
              <CardContent className="p-0">
               <div className="overflow-x-auto">
-                <Table className="min-w-full"> {/* Removed border-separate */}
-                  <TableHeader className="bg-gray-100"> {/* Lighter header background */}
+                <Table className="min-w-full">{/* Removed whitespace */}
+                  <TableHeader className="bg-gray-100">{/* Removed whitespace */}
                     <TableRow className="border-b border-gray-300">
                       <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aspect</TableHead>
                       <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Black Box</TableHead>
                       <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">White Box</TableHead>
                       <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Gray Box</TableHead>
                     </TableRow>
-                  </TableHeader>
+                  </TableHeader>{/* Removed whitespace */}
                   <TableBody className="bg-white divide-y divide-gray-200">
                     {comparisonData.map((row, idx) => (
                       <TableRow

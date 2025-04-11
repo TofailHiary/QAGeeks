@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react"; // Import useEffect
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Header } from "components/Header";
 import { HeroSection } from "components/HeroSection";
 import { FeatureSection } from "components/FeatureSection";
 import { PrinciplesSection } from "components/PrinciplesSection";
+import { router } from "../router"; // Import router to access basename
 
 export default function App() {
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Add the redirect logic here
+  useEffect(() => {
+    const redirectPath = sessionStorage.getItem("redirect");
+    if (redirectPath) {
+      sessionStorage.removeItem("redirect");
+
+      // Use router.state.location.pathname which includes basename if available
+      // Or fallback to router.basename if needed, ensuring correct handling
+      const basename = router.basename || "/";
+      const relativePath = redirectPath.startsWith(basename)
+        ? redirectPath.substring(basename.length -1) // Keep leading slash if present after basename
+        : redirectPath;
+
+      // Ensure final path starts with a slash if it's not just "/"
+      const finalPath = relativePath === "" || relativePath === "/" ? "/" : (relativePath.startsWith("/") ? relativePath : `/${relativePath}`);
+
+      console.log(`Redirecting from sessionStorage to: ${finalPath}`);
+      navigate(finalPath, { replace: true });
+    }
+  }, [navigate]);
+
+
   // Feature section data
   const features = [
     {
