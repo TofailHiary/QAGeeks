@@ -15,7 +15,7 @@ const Stlc = lazy(() => import("./pages/Stlc.tsx"));
 const SdlcStlc = lazy(() => import("./pages/SdlcStlc.tsx"));
 const TestingMethods = lazy(() => import("./pages/TestingMethods.tsx"));
 const TestingTools = lazy(() => import("./pages/TestingTools.tsx"));
-const SiteContent = lazy(() => import("./pages/SiteContent.tsx"));
+const Intro = lazy(() => import("./pages/Intro.tsx"));
 const LevelsOfTesting = lazy(() => import("./pages/LevelsOfTesting.tsx"));
 const TestingTypes = lazy(() => import("./pages/TestingTypes.tsx"));
 const Resources = lazy(() => import("./pages/Resources.tsx")); // Import Resources
@@ -39,8 +39,8 @@ export const userRoutes: RouteObject[] = [
   { path: "/testingmethods", element: <TestingMethods /> },
   { path: "/testing-tools", element: <TestingTools /> },
   { path: "/testingtools", element: <TestingTools /> },
-  { path: "/site-content", element: <SiteContent /> },
-  { path: "/sitecontent", element: <SiteContent /> },
+  { path: "/intro", element: <Intro /> },
+  { path: "/intro", element: <Intro /> },
   { path: "/levels-of-testing", element: <LevelsOfTesting /> },
   { path: "/testing-types", element: <TestingTypes /> },
   { path: "/resources", element: <Resources /> }, // Add Resources route

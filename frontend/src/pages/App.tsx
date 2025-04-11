@@ -48,7 +48,7 @@ export default function App() {
         title="Elevate Your QA Engineering Skills"
         subtitle="Comprehensive training for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools."
         ctaText="Get Started"
-        ctaLink="/site-content"
+        ctaLink="/intro"
       />
       
       {/* Feature Section */}

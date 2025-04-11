@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent } from "@/components/ui/card"; // Assuming Card component exists
 
 export default function SiteContent() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const objectives = [
     "To understand what is testing",
     "To understand Software development model",
@@ -35,6 +37,10 @@ export default function SiteContent() {
     "Database Testing",
     "Team Structure and Roles",
   ];
+
+  const filteredContentItems = contentItems.filter((item) =>
+    item.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <PageLayout
@@ -73,7 +79,7 @@ export default function SiteContent() {
         {/* Site Objectives */}
         <div className="bg-gradient-to-br from-[#00A2FF]/10 to-[#9C27FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
-            Site Objectives
+            Objectives
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
             {objectives.map((item, index) => (
@@ -85,19 +91,24 @@ export default function SiteContent() {
           </ul>
         </div>
 
+
         {/* Site Content */}
         <div className="bg-gradient-to-br from-[#9C27FF]/10 to-[#00A2FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">
-            Site Content
+            Content
           </h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
-            {contentItems.map((item, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-blue-500 mr-3 mt-1">✓</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          {filteredContentItems.length > 0 ? (
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
+              {filteredContentItems.map((item, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-blue-500 mr-3 mt-1">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-gray-500">No content matches your search.</p>
+          )}
         </div>
 
         {/* Next Button */}
