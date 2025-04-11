@@ -1,127 +1,122 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import React from "react";
+import { Link } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
-import { Card, CardContent } from "@/components/ui/card"; // Assuming Card component exists
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Assuming Card components exist
+import { ArrowRight, BookOpen, Code, Settings, TestTubeDiagonal, Network, Wrench, HelpCircle, FileText, MessageSquare } from 'lucide-react'; // Import relevant icons
 
-export default function SiteContent() {
-  const [searchQuery, setSearchQuery] = useState("");
+// Define the key topic areas for the cards
+const keyTopics = [
+  {
+    title: "Principles & Concepts",
+    description: "Core ideas and fundamental principles guiding effective QA.",
+    icon: <BookOpen size={32} className="text-blue-600" />,
+    path: "/principles",
+    color: "border-blue-500",
+  },
+  {
+    title: "SDLC & STLC",
+    description: "Understand the Software and Testing Development Lifecycles.",
+    icon: <Settings size={32} className="text-purple-600" />,
+    path: "/sdlc-stlc", // Link to the combined page first
+    color: "border-purple-500",
+  },
+  {
+    title: "Testing Levels & Types",
+    description: "Explore different levels (Unit, Integration) and types (Functional, Security).",
+    icon: <TestTubeDiagonal size={32} className="text-green-600" />,
+    path: "/levels-of-testing", // Or link to /testing-types
+    color: "border-green-500",
+  },
+  {
+    title: "API Testing",
+    description: "Learn the fundamentals of testing application programming interfaces.",
+    icon: <Network size={32} className="text-red-600" />,
+    path: "/api-testing",
+    color: "border-red-500",
+  },
+  {
+    title: "Testing Tools",
+    description: "Discover popular tools used in the QA industry for various testing needs.",
+    icon: <Wrench size={32} className="text-yellow-600" />,
+    path: "/testing-tools",
+    color: "border-yellow-500",
+  },
+  {
+    title: "Interview Questions",
+    description: "Prepare for QA roles with common interview questions and topics.",
+    icon: <HelpCircle size={32} className="text-indigo-600" />,
+    path: "/interview-questions",
+    color: "border-indigo-500",
+  },
+   {
+    title: "Templates & Resources",
+    description: "Access useful templates and curated resources for QA tasks.",
+    icon: <FileText size={32} className="text-pink-600" />,
+    path: "/templates", // Or link to /resources
+    color: "border-pink-500",
+  },
+   {
+    title: "Contact Us",
+    description: "Get in touch with questions or feedback.",
+    icon: <MessageSquare size={32} className="text-teal-600" />,
+    path: "/contact",
+    color: "border-teal-500",
+  },
+];
 
-  const objectives = [
-    "To understand what is testing",
-    "To understand Software development model",
-    "To understand architectures of software development",
-    "To learn the features of software development models",
-    "To learn major concepts of testing methodologies",
-    "To know different approaches to testing",
-    "To understand the types of testing",
-    "To plan and create test plans",
-    "To create and manage test cases",
-    "To create and manage bugs",
-    "To build strategies to track testing processes in bug tracking systems",
-    "To document test reports in testing enclosure documents",
-    "To understand project management tools like Jira",
-    "To understand basics of API testing using Postman",
-  ];
-
-  const contentItems = [
-    "Introduction of Software Testing / Software Testing Principles",
-    "Software Development Life Cycle",
-    "Concepts in Quality you must know about",
-    "Software Testing Life Cycle",
-    "Bugs & Issues Management",
-    "Testing Levels",
-    "Testing Types and Related Types",
-    "Software Testing Methods and Techniques",
-    "Work Management Tools",
-    "API Testing",
-    "Mobile Testing",
-    "Database Testing",
-    "Team Structure and Roles",
-  ];
-
-  const filteredContentItems = contentItems.filter((item) =>
-    item.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+export default function IntroPage() {
   return (
     <PageLayout
-      title="Overview"
-      subtitle="Welcome to QAGeeks—your hub for mastering software quality assurance. Explore principles, practices, and tools for software reliability."
+      title="Welcome to QAGeeks" // Keep title simple
+      subtitle="Your comprehensive guide to mastering Software Quality Assurance." // Refined subtitle
     >
-      <div className="relative py-12 max-w-6xl mx-auto space-y-16">
+      {/* Hero Section */}
+      <div className="text-center py-16 md:py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-lg shadow-inner border border-gray-100 mb-16">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Elevate Your QA Engineering Skills
+          </span>
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 px-4">
+          Comprehensive guid for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools.
+        </p>
+        <Link
+          to="/principles" // Link to the first logical step
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Get Started
+          <ArrowRight size={20} />
+        </Link>
+      </div>
 
-        {/* Introduction Section */}
-        <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <CardContent className="p-8">
-            <h2 className="text-2xl font-bold mb-4 text-[#00A2FF]">Welcome to QAGeeks</h2>
-            <div className="text-lg text-gray-700 leading-relaxed space-y-4">
-              <p>
-                <strong>Software Testing Fundamentals:</strong> Discover core principles, why early testing is critical, and how to systematically uncover bugs using frameworks like ISTQB and IEEE.
-              </p>
-              <p>
-                <strong>SDLC & STLC:</strong> Understand the full software journey, from requirements to maintenance, ensuring quality is integrated at every stage.
-              </p>
-              <p>
-                <strong>Quality Concepts & Defect Management:</strong> Learn key metrics, QA vs. QC, and robust bug management practices.
-              </p>
-              <p>
-                <strong>Testing Levels & Types:</strong> Explore unit, integration, system, acceptance testing, and various types like functional, performance, security, usability, and compatibility.
-              </p>
-              <p>
-                <strong>Advanced Techniques:</strong> Gain insights into API, mobile, and database testing with practical tips.
-              </p>
-              <p>
-                <strong>Tools & Team Dynamics:</strong> Discover tools to streamline processes and learn about effective team structures for collaboration.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Site Objectives */}
-        <div className="bg-gradient-to-br from-[#00A2FF]/10 to-[#9C27FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
-            Objectives
-          </h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
-            {objectives.map((item, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-green-500 mr-3 mt-1">✓</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-
-        {/* Site Content */}
-        <div className="bg-gradient-to-br from-[#9C27FF]/10 to-[#00A2FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">
-            Content
-          </h2>
-          {filteredContentItems.length > 0 ? (
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
-              {filteredContentItems.map((item, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-blue-500 mr-3 mt-1">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-center text-gray-500">No content matches your search.</p>
-          )}
-        </div>
-
-        {/* Next Button */}
-        <div className="mt-16 text-center">
-          <Link
-            to="/principles"
-            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
-          >
-            Principles & Concepts →
-          </Link>
+      {/* Key Topics Section */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Explore Key Areas</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {keyTopics.map((topic) => (
+            <Link to={topic.path} key={topic.title} className="group block">
+              <Card className={`h-full transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 border-l-4 ${topic.color}`}>
+                <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                  {topic.icon}
+                  <CardTitle className="text-xl font-semibold text-gray-800">{topic.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{topic.description}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
+
+      {/* Optional: Add a small section about the site's goal or target audience */}
+      <div className="text-center py-12 border-t border-gray-200">
+         <h3 className="text-2xl font-semibold mb-4 text-gray-700">Built for QA Professionals</h3>
+         <p className="text-gray-600 max-w-2xl mx-auto">
+           Whether you're starting your journey or looking to refine your expertise, QAGeeks provides structured content, practical examples, and resources to help you succeed in the field of Quality Assurance.
+         </p>
+      </div>
+
     </PageLayout>
   );
 }

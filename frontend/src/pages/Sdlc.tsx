@@ -1,7 +1,52 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Assuming Card components exist
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"; // Import Accordion components
+import {
+  ClipboardList, // Planning
+  SearchCheck,   // Requirement Analysis
+  LayoutGrid,    // Design
+  Code2,         // Development
+  TestTubeDiagonal, // Testing
+  Rocket,        // Deployment
+  Wrench,        // Maintenance (used within Deployment)
+  Users,         // Roles
+  Target,        // Outcome
+  CheckSquare,   // QA Involvement
+  Activity,      // Activities
+  TrendingDown,  // Waterfall
+  GitCommit,     // V-Model
+  IterationCw,   // Iterative/Agile
+  UsersRound,    // Scrum Team
+  BookUser,      // Product Owner
+  ShieldCheck,   // Scrum Master
+  KanbanSquare,  // Kanban
+} from 'lucide-react'; // Import icons
+
+// Helper to get icon based on title
+const getPhaseIcon = (title: string): React.ReactNode => {
+  if (title.includes("Planning")) return <ClipboardList className="w-5 h-5 mr-2 text-blue-600" />;
+  if (title.includes("Requirement")) return <SearchCheck className="w-5 h-5 mr-2 text-green-600" />;
+  if (title.includes("Design")) return <LayoutGrid className="w-5 h-5 mr-2 text-purple-600" />;
+  if (title.includes("Development")) return <Code2 className="w-5 h-5 mr-2 text-red-600" />;
+  if (title.includes("Testing")) return <TestTubeDiagonal className="w-5 h-5 mr-2 text-orange-600" />;
+  if (title.includes("Deployment")) return <Rocket className="w-5 h-5 mr-2 text-teal-600" />;
+  return <Activity className="w-5 h-5 mr-2 text-gray-600" />; // Default
+};
+
+// Helper to get icon for SDLC models
+const getModelIcon = (title: string): React.ReactNode => {
+  if (title.includes("Waterfall")) return <TrendingDown className="w-5 h-5 mr-2 text-blue-600" />;
+  if (title.includes("V-Model")) return <GitCommit className="w-5 h-5 mr-2 text-purple-600" />;
+  if (title.includes("Agile")) return <IterationCw className="w-5 h-5 mr-2 text-red-600" />;
+  return <Activity className="w-5 h-5 mr-2 text-gray-600" />; // Default
+};
 
 export default function Sdlc() {
   const sdlcPhases = [
@@ -113,44 +158,52 @@ export default function Sdlc() {
           </Card>
         </section>
 
-        {/* SDLC Phases */}
-        <section>
+        {/* SDLC Phases - Refactored with Accordion */}
+        <section className="animate-fade-in">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">SDLC Phases</h2>
-          <div className="space-y-8">
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {sdlcPhases.map((phase, index) => (
-              <Card key={index} className="overflow-hidden shadow-lg border-l-4 border-[#00A2FF]">
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold text-[#00A2FF]">{index + 1}. {phase.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <p className="text-gray-700">{phase.description}</p>
+              <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 text-lg font-semibold hover:bg-gray-50 flex items-center">
+                  {getPhaseIcon(phase.title)}
+                  <span>{index + 1}. {phase.title}</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6 pt-2 space-y-4 text-gray-700">
+                  <p>{phase.description}</p>
                   {phase.activities && (
-                    <div>
-                      <p className="font-semibold text-gray-600">Activities:</p>
-                      <ul className="list-disc list-inside text-sm text-gray-600">
+                    <div className="bg-gray-50 p-3 rounded-md border border-gray-100">
+                      <p className="font-semibold text-gray-800 mb-1 flex items-center"><Activity className="w-4 h-4 mr-1.5 text-gray-500"/>Activities:</p>
+                      <ul className="list-disc list-inside text-sm text-gray-600 pl-2 space-y-1">
                         {phase.activities.map(act => <li key={act}>{act}</li>)}
                       </ul>
                     </div>
                   )}
-                  <p className="text-sm text-gray-600"><strong className="text-gray-700">Roles Involved:</strong> {phase.roles}</p>
-                  <p className="text-sm text-gray-600"><strong className="text-gray-700">Outcome:</strong> <em className="italic">{phase.outcome}</em></p>
-                  {phase.qaInvolvement && <p className="text-sm text-purple-700 bg-purple-50 p-2 rounded"><strong className="font-semibold">QA Involvement:</strong> {phase.qaInvolvement}</p>}
-                </CardContent>
-              </Card>
+                  <p className="text-sm flex items-start"><Users className="w-4 h-4 mr-1.5 mt-0.5 text-gray-500 shrink-0"/><strong className="text-gray-800 mr-1 shrink-0">Roles:</strong> {phase.roles}</p>
+                  <p className="text-sm flex items-start"><Target className="w-4 h-4 mr-1.5 mt-0.5 text-gray-500 shrink-0"/><strong className="text-gray-800 mr-1 shrink-0">Outcome:</strong> <em className="italic">{phase.outcome}</em></p>
+                  {phase.qaInvolvement && (
+                    <p className="text-sm text-purple-800 bg-purple-50 p-3 rounded-md border border-purple-100 flex items-start">
+                      <CheckSquare className="w-4 h-4 mr-1.5 mt-0.5 text-purple-600 shrink-0"/>
+                      <strong className="font-semibold mr-1 shrink-0">QA Involvement:</strong>
+                      <span>{phase.qaInvolvement}</span>
+                    </p>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </section>
 
-        {/* SDLC Models */}
-        <section>
+        {/* SDLC Models - Refactored with Accordion */}
+        <section className="animate-fade-in">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">SDLC Models</h2>
-          <div className="space-y-12">
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {/* Waterfall */}
-            <Card className="shadow-md">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#00A2FF]">Waterfall Model</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <AccordionItem value="waterfall" className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+              <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:bg-gray-50 flex items-center">
+                {getModelIcon("Waterfall")}
+                <span>Waterfall Model</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-2 space-y-4 text-gray-700">
                 <p className="text-gray-700">A linear, sequential approach where each phase must be completed before the next begins. One cannot visit the 2nd phase unless the 1st phase is complete.</p>
                 <p className="text-sm text-purple-700 bg-purple-50 p-2 rounded"><strong className="font-semibold">QA Involvement:</strong> QA typically gets involved after development, focusing on defect detection late in the cycle.</p>
                 <div>
@@ -186,15 +239,16 @@ export default function Sdlc() {
                     </ul>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </AccordionContent>
+            </AccordionItem>
 
             {/* V-Model */}
-            <Card className="shadow-md">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#9C27FF]">V-Model (Verification & Validation)</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+            <AccordionItem value="v-model" className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+               <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:bg-gray-50 flex items-center">
+                 {getModelIcon("V-Model")}
+                 <span>V-Model (Verification & Validation)</span>
+               </AccordionTrigger>
+               <AccordionContent className="px-6 pb-6 pt-2 space-y-4 text-gray-700">
                 <p className="text-gray-700">An extension of Waterfall with corresponding test phases for each development stage. For every development phase, there is an associated testing phase. Highly disciplined.</p>
                  <p className="text-sm text-purple-700 bg-purple-50 p-2 rounded"><strong className="font-semibold">QA Involvement:</strong> QA activities run in parallel with development phases, ensuring verification and validation steps occur early.</p>
                 <div>
@@ -230,11 +284,11 @@ export default function Sdlc() {
                     </ul>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+               </AccordionContent>
+             </AccordionItem>
 
-            {/* Iterative & Incremental */}
-             <Card className="shadow-md">
+            {/* Iterative & Incremental (Keep as separate card for context before Agile) */}
+             <Card className="shadow-md bg-gradient-to-r from-red-50 to-orange-50 border border-red-100">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-[#00A2FF]">Iterative & Incremental Model</CardTitle>
               </CardHeader>
@@ -263,11 +317,12 @@ export default function Sdlc() {
             </Card>
 
             {/* Agile */}
-            <Card className="shadow-md">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#9C27FF]">Agile Model</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
+             <AccordionItem value="agile" className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+               <AccordionTrigger className="px-6 py-4 text-xl font-semibold hover:bg-gray-50 flex items-center">
+                 {getModelIcon("Agile")}
+                 <span>Agile Model</span>
+               </AccordionTrigger>
+               <AccordionContent className="px-6 pb-6 pt-2 space-y-4 text-gray-700">
                 <p className="text-gray-700">An iterative and incremental approach emphasizing collaboration, flexibility, customer feedback, and rapid delivery of working software. Tasks are broken into smaller iterations.</p>
                  <p className="text-sm text-purple-700 bg-purple-50 p-2 rounded"><strong className="font-semibold">QA Involvement:</strong> QA is integrated continuously, working closely with developers and product owners, testing features in each iteration for immediate feedback.</p>
                 <div>
@@ -317,48 +372,49 @@ export default function Sdlc() {
 
                  {/* Scrum */}
                 <div className="pt-4">
-                   <h4 className="text-xl font-semibold mb-2 text-[#00A2FF]">Scrum Framework</h4>
-                   <p className="text-gray-700 mb-2">An Agile method focusing on managing tasks in small, empowered teams (7-9 members). Derived from rugby.</p>
+                   <h4 className="text-xl font-semibold mb-2 text-[#00A2FF] flex items-center"><IterationCw className="w-5 h-5 mr-2"/>Scrum Framework</h4>
+                   <p className="text-gray-700 mb-3">An Agile method focusing on managing tasks in small, empowered teams (7-9 members). Derived from rugby.</p>
                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                     <div className="bg-blue-50 p-3 rounded"><strong>Scrum Master:</strong> Sets up team, sprint meetings, removes obstacles.</div>
-                     <div className="bg-blue-50 p-3 rounded"><strong>Product Owner:</strong> Creates & prioritizes backlog, responsible for iteration delivery.</div>
-                     <div className="bg-blue-50 p-3 rounded"><strong>Scrum Team:</strong> Self-manages work to complete the sprint.</div>
+                     <div className="bg-blue-50 p-3 rounded border border-blue-100 flex items-start"><ShieldCheck className="w-4 h-4 mr-2 mt-0.5 text-blue-600 shrink-0"/><div><strong>Scrum Master:</strong> Sets up team, sprint meetings, removes obstacles.</div></div>
+                     <div className="bg-green-50 p-3 rounded border border-green-100 flex items-start"><BookUser className="w-4 h-4 mr-2 mt-0.5 text-green-600 shrink-0"/><div><strong>Product Owner:</strong> Creates & prioritizes backlog, responsible for iteration delivery.</div></div>
+                     <div className="bg-purple-50 p-3 rounded border border-purple-100 flex items-start"><UsersRound className="w-4 h-4 mr-2 mt-0.5 text-purple-600 shrink-0"/><div><strong>Scrum Team:</strong> Self-manages work to complete the sprint.</div></div>
                    </div>
-                   <p><strong className="text-gray-800">Product Backlog:</strong> Repository of requirements (user stories) prioritized by Product Owner.</p>
-                   <p><strong className="text-gray-800">Scrum Practices:</strong> Include Sprint Planning, Daily Stand-ups, Sprint Review, Sprint Retrospective.</p>
+                   <p className="text-sm"><strong className="text-gray-800">Product Backlog:</strong> Repository of requirements (user stories) prioritized by Product Owner.</p>
+                   <p className="text-sm"><strong className="text-gray-800">Scrum Practices:</strong> Include Sprint Planning, Daily Stand-ups, Sprint Review, Sprint Retrospective.</p>
                 </div>
 
                  {/* Kanban */}
                  <div className="pt-4">
-                   <h4 className="text-xl font-semibold mb-2 text-[#9C27FF]">Kanban Method</h4>
+                   <h4 className="text-xl font-semibold mb-2 text-[#9C27FF] flex items-center"><KanbanSquare className="w-5 h-5 mr-2"/>Kanban Method</h4>
                    <p className="text-gray-700">Focuses on visualizing workflow, limiting Work In Progress (WIP), and improving flow. Uses visual signals (kanban) to control work. Great for teams with varying request priorities/sizes.</p>
                  </div>
-              </CardContent>
-            </Card>
-          </div>
+               </AccordionContent>
+             </AccordionItem>
+          </Accordion>
         </section>
 
         {/* Agile Terminologies */}
-        <section>
-           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">Agile Terminologies</h2>
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-             {agileTerminologies.map((item, index) => (
-               <Card key={index} className="shadow-md hover:shadow-lg transition-shadow">
-                 <CardHeader>
-                   <CardTitle className="text-lg font-semibold text-[#0052CC]">{item.term}</CardTitle>
-                 </CardHeader>
-                 <CardContent>
-                   <p className="text-sm text-gray-700">{item.definition}</p>
-                 </CardContent>
-               </Card>
-             ))}
-           </div>
+        <section className="animate-fade-in"> {/* Added animation */}
+          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">Agile Terminologies</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {agileTerminologies.map((item, index) => (
+              // Corrected Card structure with hover effect
+              <Card key={index} className="shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 ease-in-out">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-[#0052CC]">{item.term}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-700">{item.definition}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </section>
 
         {/* Model Comparison Table */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">Model Comparison</h2>
-          <div className="overflow-x-auto rounded-lg shadow-lg">
+         <section className="animate-fade-in"> {/* Added animation */}
+           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">Model Comparison</h2>
+           <div className="overflow-x-auto rounded-lg shadow-lg">
             <table className="w-full text-sm">
               <thead className="bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white">
                 <tr>

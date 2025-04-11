@@ -77,9 +77,5 @@ export default defineConfig(({ command }) => ({
 			},
 		},
 	},
-	resolve: {
-		alias: {
-			"@": path.resolve(__dirname, "./src"),
-		},
-	},
+	// Removed manual resolve.alias, relying on vite-tsconfig-paths plugin
 }));

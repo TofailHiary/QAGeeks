@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { ConceptCard } from "components/ConceptCard";
+import { TestTubeDiagonal, Code, Package, ClipboardList, Bug } from 'lucide-react';
 
 export default function Principles() {
   // Seven Principles of Testing
@@ -163,41 +164,41 @@ export default function Principles() {
       title="Principles & Concepts"
       subtitle="Learn the core principles and concepts that guide effective quality assurance"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center mb-12 border-b">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> {/* Added padding */}
+        {/* Tabs - Adjusted padding, border, hover */}
+        <div className="flex flex-wrap justify-center mb-12 border-b border-gray-200">
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'principles' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'principles' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('principles'))}
           >
             Seven Principles
           </button>
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'keyConcepts' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'keyConcepts' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('keyConcepts'))}
           >
             Key Concepts
           </button>
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'staticVsDynamic' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'staticVsDynamic' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('staticVsDynamic'))}
           >
             Static vs Dynamic
           </button>
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'manualVsAuto' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'manualVsAuto' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('manualVsAuto'))}
           >
             Manual vs Automation
           </button>
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'qaqc' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'qaqc' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('qaqc'))}
           >
             QA vs QC
           </button>
           <button
-            className={`px-6 py-3 font-medium transition-colors ${activeTab === 'verificationVsValidation' ? 'text-[#00A2FF] border-b-2 border-[#00A2FF]' : 'text-gray-600 hover:text-[#00A2FF]'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'verificationVsValidation' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
             onClick={() => React.startTransition(() => setActiveTab('verificationVsValidation'))}
           >
             Verification vs Validation
@@ -206,35 +207,38 @@ export default function Principles() {
 
         {/* Seven Principles of Testing */}
         {activeTab === 'principles' && (
-          <div>
-            <div className="mb-8">
-              <p className="text-lg text-center max-w-4xl mx-auto mb-16">
-                The Seven Principles of Software Testing provide fundamental guidelines that every QA professional should understand and apply in their testing practice.
+          <div className="animate-fade-in"> {/* Added animation class */}
+            <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin */}
+              <h2 className="text-3xl font-bold mb-4">The Seven Principles of Testing</h2>
+              <p className="text-lg text-gray-600">
+                These fundamental guidelines form the bedrock of effective software testing. Understanding and applying them helps ensure quality and efficiency in the QA process.
               </p>
             </div>
 
-            {/* Detailed Principles Section */}
+            {/* Detailed Principles Section - Added hover effects and refined styling */}
             <div className="space-y-8 mb-16">
               {sevenPrinciples.map((principle, index) => (
-                <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden border-l-4 border-[#00A2FF]">
-                  <div className="p-6">
-                    <div className="flex items-baseline mb-3">
-                      <span className="text-4xl font-black text-[#00A2FF] mr-4">{principle.number}</span>
-                      <h3 className="text-2xl font-bold text-gray-800">{principle.title}</h3>
+                <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden border-l-4 border-blue-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:border-blue-600 group">
+                  <div className="p-6 md:p-8"> {/* Increased padding */}
+                    <div className="flex items-start md:items-baseline mb-4"> {/* Adjusted alignment for different screens */}
+                      <span className="text-4xl md:text-5xl font-black text-blue-500 mr-4 md:mr-6 group-hover:text-blue-600 transition-colors">{principle.number}</span>
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">{principle.title}</h3>
                     </div>
-                    <p className="text-gray-700 mb-4 leading-relaxed">
+                    {/* Use prose for better text formatting */}
+                    <div className="prose prose-lg max-w-none text-gray-700 mb-6">
                       {/* Map descriptions based on title */}
-                      {principle.title === "Testing Shows Presence of Defects" && "The goal of software testing is to make the software fail. Software testing reduces the presence of defects. Software testing talks about the presence of defects and doesn’t talk about the absence of defects. Software testing can ensure that defects are present but it can not prove that software is defect-free. Even multiple tests can never ensure that software is 100% bug-free. Testing can reduce the number of defects but not remove all defects."}
-                      {principle.title === "Exhaustive Testing is Impossible" && "It is the process of testing the functionality of the software in all possible inputs (valid or invalid) and pre-conditions is known as exhaustive testing. Exhaustive testing is impossible means the software can never test at every test case. It can test only some test cases and assume that the software is correct and it will produce the correct output in every test case. If the software will test every test case then it will take more cost, effort, etc., which is impractical."}
-                      {principle.title === "Early Testing" && "To find the defect in the software, early test activity shall be started. The defect detected in the early phases of SDLC will be very less expensive. For better performance of software, software testing will start at the initial phase i.e. testing will perform at the requirement analysis phase."}
-                      {principle.title === "Defect Clustering" && "In a project, a small number of modules can contain most of the defects. The Pareto Principle for software testing states that 80% of software defects come from 20% of modules."}
-                      {principle.title === "Pesticide Paradox" && "Repeating the same test cases, again and again, will not find new bugs. So it is necessary to review the test cases and add or update test cases to find new bugs."}
-                      {principle.title === "Testing is Context Dependent" && "The testing approach depends on the context of the software developed. Different types of software need to perform different types of testing. For example, The testing of the e-commerce site is different from the testing of the Android application."}
-                      {principle.title === "Absence of Errors Fallacy" && "If a built software is 99% bug-free but does not follow the user requirement then it is unusable. It is not only necessary that software is 99% bug-free but it is also mandatory to fulfill all the customer requirements."}
-                    </p>
-                    <div className="bg-gradient-to-r from-[#00A2FF]/10 to-[#9C27FF]/10 p-4 rounded-md border-l-4 border-[#9C27FF]">
-                      <p className="font-semibold text-[#9C27FF] mb-1">Example:</p>
-                      <p className="text-gray-600 italic">
+                      {principle.title === "Testing Shows Presence of Defects" && <p>The goal of software testing is to make the software fail. Software testing reduces the presence of defects. Software testing talks about the presence of defects and doesn’t talk about the absence of defects. Software testing can ensure that defects are present but it can not prove that software is defect-free. Even multiple tests can never ensure that software is 100% bug-free. Testing can reduce the number of defects but not remove all defects.</p>}
+                      {principle.title === "Exhaustive Testing is Impossible" && <p>It is the process of testing the functionality of the software in all possible inputs (valid or invalid) and pre-conditions is known as exhaustive testing. Exhaustive testing is impossible means the software can never test at every test case. It can test only some test cases and assume that the software is correct and it will produce the correct output in every test case. If the software will test every test case then it will take more cost, effort, etc., which is impractical.</p>}
+                      {principle.title === "Early Testing" && <p>To find the defect in the software, early test activity shall be started. The defect detected in the early phases of SDLC will be very less expensive. For better performance of software, software testing will start at the initial phase i.e. testing will perform at the requirement analysis phase.</p>}
+                      {principle.title === "Defect Clustering" && <p>In a project, a small number of modules can contain most of the defects. The Pareto Principle for software testing states that 80% of software defects come from 20% of modules.</p>}
+                      {principle.title === "Pesticide Paradox" && <p>Repeating the same test cases, again and again, will not find new bugs. So it is necessary to review the test cases and add or update test cases to find new bugs.</p>}
+                      {principle.title === "Testing is Context Dependent" && <p>The testing approach depends on the context of the software developed. Different types of software need to perform different types of testing. For example, The testing of the e-commerce site is different from the testing of the Android application.</p>}
+                      {principle.title === "Absence of Errors Fallacy" && <p>If a built software is 99% bug-free but does not follow the user requirement then it is unusable. It is not only necessary that software is 99% bug-free but it is also mandatory to fulfill all the customer requirements.</p>}
+                    </div>
+                    {/* Example Section */}
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
+                      <p className="font-semibold text-purple-700 mb-2 text-sm uppercase tracking-wide">Example:</p>
+                      <p className="text-gray-700 italic text-sm md:text-base">
                         {/* Map examples based on title */}
                         {principle.title === "Testing Shows Presence of Defects" && "Imagine you test a calculator app and find a bug when adding large numbers. This proves there is a defect. However, even after extensive testing, you can’t be absolutely certain that no other defects exist. You’ve shown that problems are present, but you can’t prove that the product is now perfect."}
                         {principle.title === "Exhaustive Testing is Impossible" && "Consider a login form. If you tried every possible combination of usernames, passwords, special characters, and browser/device variations, you’d never finish testing. Instead, you pick the most important and likely scenarios to test, such as common usernames, boundary-length passwords, and popular browsers."}
@@ -262,34 +266,56 @@ export default function Principles() {
           </div>
         )}
 
-        {/* Key Concepts Tab */}
+        {/* Key Concepts Tab - Redesigned with Cards and Icons */}
         {activeTab === 'keyConcepts' && (
-          <div className="space-y-8">
-            <div className="mb-8">
-              <p className="text-lg text-center max-w-4xl mx-auto mb-8">
-                Understanding these fundamental terms is essential for effective communication and practice in software quality assurance.
+          <div className="space-y-8 animate-fade-in"> {/* Added animation class */}
+            <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin and added title */}
+              <h2 className="text-3xl font-bold mb-4">Key QA Concepts</h2>
+              <p className="text-lg text-gray-600">
+                Grasp these core definitions to build a solid foundation for understanding software quality assurance practices and discussions.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-[#00A2FF]">
-                <h3 className="text-xl font-bold mb-2 text-[#00A2FF]">Testing</h3>
-                <p className="text-gray-700">The process of verifying and validating that a software application is bug-free, meets technical requirements, and fulfills user needs efficiently, handling all exceptional and boundary cases.</p>
+            {/* Using a similar card structure as Intro page */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Testing Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-blue-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                 <div className="flex items-center mb-3">
+                   <TestTubeDiagonal size={24} className="text-blue-600 mr-3" />
+                   <h3 className="text-xl font-bold text-blue-700">Testing</h3>
+                 </div>
+                <p className="text-gray-700 text-sm">The process of verifying and validating that a software application is bug-free, meets technical requirements, and fulfills user needs efficiently, handling all exceptional and boundary cases.</p>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-[#9C27FF]">
-                <h3 className="text-xl font-bold mb-2 text-[#9C27FF]">Debugging</h3>
-                <p className="text-gray-700">The process of identifying, analyzing, and removing errors (bugs) in the software after it fails to execute correctly. It's a complex activity aimed at solving the root cause of a problem.</p>
+              {/* Debugging Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-purple-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                 <div className="flex items-center mb-3">
+                   <Code size={24} className="text-purple-600 mr-3" />
+                   <h3 className="text-xl font-bold text-purple-700">Debugging</h3>
+                 </div>
+                <p className="text-gray-700 text-sm">The process of identifying, analyzing, and removing errors (bugs) in the software after it fails to execute correctly. It's a complex activity aimed at solving the root cause of a problem.</p>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-[#00A2FF]">
-                <h3 className="text-xl font-bold mb-2 text-[#00A2FF]">Product</h3>
-                <p className="text-gray-700">Software developed for multiple customers based on consolidated requirements, intended for broad use.</p>
+              {/* Product Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-green-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                 <div className="flex items-center mb-3">
+                   <Package size={24} className="text-green-600 mr-3" /> {/* Assuming Package icon exists */}
+                   <h3 className="text-xl font-bold text-green-700">Product</h3>
+                 </div>
+                <p className="text-gray-700 text-sm">Software developed for multiple customers based on consolidated requirements, intended for broad use.</p>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-[#9C27FF]">
-                <h3 className="text-xl font-bold mb-2 text-[#9C27FF]">Project</h3>
-                <p className="text-gray-700">Software developed for a single customer based on their specific requirements, intended for use only by that customer.</p>
+              {/* Project Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-red-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                 <div className="flex items-center mb-3">
+                   <ClipboardList size={24} className="text-red-600 mr-3" /> {/* Assuming ClipboardList icon exists */}
+                   <h3 className="text-xl font-bold text-red-700">Project</h3>
+                 </div>
+                <p className="text-gray-700 text-sm">Software developed for a single customer based on their specific requirements, intended for use only by that customer.</p>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-[#00A2FF] md:col-span-2">
-                <h3 className="text-xl font-bold mb-2 text-[#00A2FF]">Bugs / Issues</h3>
-                <p className="text-gray-700">A coding error causing an unexpected defect, fault, flaw, or imperfection. If a program doesn't perform as intended, it likely has a bug.</p>
+              {/* Bugs / Issues Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-yellow-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 md:col-span-2 lg:col-span-1"> {/* Adjust span */}
+                 <div className="flex items-center mb-3">
+                   <Bug size={24} className="text-yellow-600 mr-3" /> {/* Assuming Bug icon exists */}
+                   <h3 className="text-xl font-bold text-yellow-700">Bugs / Issues</h3>
+                 </div>
+                <p className="text-gray-700 text-sm">A coding error causing an unexpected defect, fault, flaw, or imperfection. If a program doesn't perform as intended, it likely has a bug.</p>
               </div>
             </div>
           </div>
@@ -297,11 +323,12 @@ export default function Principles() {
 
         {/* QA vs QC Tab */}
         {activeTab === 'qaqc' && (
-          <div className="space-y-8">
-            <div className="mb-8">
-              <p className="text-lg text-center max-w-4xl mx-auto mb-8">
-                Understanding the difference between Quality Assurance (QA) and Quality Control (QC) is fundamental to building high-quality software.
-              </p>
+          <div className="space-y-8 animate-fade-in"> {/* Added animation class */}
+            <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin and added title */}
+               <h2 className="text-3xl font-bold mb-4">Quality Assurance vs Quality Control</h2>
+               <p className="text-lg text-gray-600">
+                 Learn the crucial differences between QA (process-oriented, preventive) and QC (product-oriented, detective) and how they work together.
+               </p>
             </div>
 
             {/* SQA Concept Card */}
@@ -310,6 +337,7 @@ export default function Principles() {
               summary="A proactive process focused on preventing defects by ensuring adherence to defined standards and processes throughout the SDLC."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                  {/* Shield icon for QA */}
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.588-3.79l-.01-.01z" />
                 </svg>
               }
@@ -331,6 +359,7 @@ export default function Principles() {
               summary="A reactive process focused on identifying defects in the actual product by monitoring and verifying deliverables against defined quality standards."
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                  {/* Search icon for QC */}
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               }
@@ -372,82 +401,88 @@ export default function Principles() {
           </div>
         )}
 
-        {/* Static vs Dynamic Testing */}
+        {/* Static vs Dynamic Testing - Updated Layout */}
         {activeTab === 'staticVsDynamic' && (
-          <div>
-            <div className="mb-8">
-              <p className="text-lg text-center max-w-4xl mx-auto mb-8">
-                Understanding the difference between static and dynamic testing helps in creating a comprehensive testing strategy that addresses all aspects of software quality.
+          <div className="space-y-12 animate-fade-in">
+            <div className="mb-12 text-center max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4">Static vs Dynamic Testing</h2>
+              <p className="text-lg text-gray-600">
+                Compare the two fundamental approaches to software testing that complement each other throughout the development lifecycle.
               </p>
             </div>
 
-            <ConceptCard
-              title="Static vs Dynamic Testing"
-              summary="Compare the two fundamental approaches to software testing that complement each other throughout the development lifecycle."
-              icon={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>}
-              details={staticVsDynamicDetails}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-              <div className="bg-white shadow-lg rounded-lg p-6 relative overflow-hidden hover:shadow-xl transition-shadow">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-[#00A2FF]">
-                  <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            {/* Comparison Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              {/* Static Testing Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-blue-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-blue-600">
+                  <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Benefits of Static Testing
+                  Static Testing
                 </h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-[#00A2FF] mr-2">•</span>
-                    <span>Early defect detection, reducing cost of fixes</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#00A2FF] mr-2">•</span>
-                    <span>Identifies issues that might be missed during execution</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#00A2FF] mr-2">•</span>
-                    <span>Improves code maintainability and readability</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#00A2FF] mr-2">•</span>
-                    <span>Finds defects in documents and specifications</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#00A2FF] mr-2">•</span>
-                    <span>Enhances team communication and knowledge sharing</span>
-                  </li>
+                <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                  <li>Performed without executing code</li>
+                  <li>Reviews, walkthroughs, inspections</li>
+                  <li>Focuses on prevention rather than detection</li>
+                  <li>Finds defects rather than failures</li>
+                  <li>Can improve product quality early in the lifecycle</li>
+                </ul>
+                <p className="mt-4 italic text-sm text-gray-600">Examples: Code reviews, document analysis, static analysis tools</p>
+              </div>
+
+              {/* Dynamic Testing Card */}
+              <div className="bg-white shadow-lg rounded-lg p-6 border-l-4 border-purple-500 transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-purple-600">
+                  <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Dynamic Testing
+                </h3>
+                 <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                  <li>Requires execution of the software</li>
+                  <li>Functional, non-functional, and structural testing</li>
+                  <li>Focuses on behavior of the software</li>
+                  <li>Detects failures in the software</li>
+                  <li>Verifies the functionality works as expected</li>
+                </ul>
+                <p className="mt-4 italic text-sm text-gray-600">Examples: Unit testing, integration testing, system testing</p>
+              </div>
+            </div>
+
+            {/* When to use Section */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md mb-12">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">When to use each approach</h3>
+              <p className="text-gray-700 mb-4">Both static and dynamic testing are complementary and should be used together for effective quality assurance:</p>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <li><span className="font-medium">Early development phases:</span> Focus on static testing to prevent defects</li>
+                <li><span className="font-medium">Later development phases:</span> Focus on dynamic testing to validate functionality</li>
+                <li><span className="font-medium">Critical systems:</span> Use both extensively throughout development</li>
+              </ul>
+            </div>
+
+            {/* Benefits Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Benefits of Static Testing */}
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 className="text-lg font-semibold mb-3 text-blue-700">Benefits of Static Testing</h3>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                  <li>Early defect detection, reducing cost of fixes</li>
+                  <li>Identifies issues that might be missed during execution</li>
+                  <li>Improves code maintainability and readability</li>
+                  <li>Finds defects in documents and specifications</li>
+                  <li>Enhances team communication and knowledge sharing</li>
                 </ul>
               </div>
-              
-              <div className="bg-white shadow-lg rounded-lg p-6 relative overflow-hidden hover:shadow-xl transition-shadow">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-[#9C27FF]">
-                  <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Benefits of Dynamic Testing
-                </h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-[#9C27FF] mr-2">•</span>
-                    <span>Validates actual behavior of the software</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#9C27FF] mr-2">•</span>
-                    <span>Catches runtime and integration issues</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#9C27FF] mr-2">•</span>
-                    <span>Tests the user experience and performance</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#9C27FF] mr-2">•</span>
-                    <span>Verifies functionality against requirements</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#9C27FF] mr-2">•</span>
-                    <span>Builds confidence in the system before release</span>
-                  </li>
+              {/* Benefits of Dynamic Testing */}
+              <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                <h3 className="text-lg font-semibold mb-3 text-purple-700">Benefits of Dynamic Testing</h3>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                  <li>Validates actual behavior of the software</li>
+                  <li>Catches runtime and integration issues</li>
+                  <li>Tests the user experience and performance</li>
+                  <li>Verifies functionality against requirements</li>
+                  <li>Builds confidence in the system before release</li>
                 </ul>
               </div>
             </div>
@@ -456,13 +491,14 @@ export default function Principles() {
 
         {/* Manual vs Automation Testing */}
         {activeTab === 'manualVsAuto' && (
-          <div>
-            <div className="mb-8">
-              <p className="text-lg text-center max-w-4xl mx-auto mb-8">
-                Both manual and automated testing have unique strengths. Understanding when to use each approach is crucial for efficient and effective quality assurance.
-              </p>
-            </div>
-            
+          <div className="animate-fade-in"> {/* Added animation class */}
+             <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin and added title */}
+               <h2 className="text-3xl font-bold mb-4">Manual vs Automation Testing</h2>
+               <p className="text-lg text-gray-600">
+                 Compare manual testing (human-driven) and automation testing (tool-driven) to determine the best strategy for different testing needs.
+               </p>
+             </div>
+
             <ConceptCard
               title="Manual vs Automation Testing"
               summary="Compare the two primary testing methods to understand their appropriate applications and how to balance them in your testing strategy."
@@ -550,13 +586,14 @@ export default function Principles() {
 
       {/* Verification vs Validation */}
       {activeTab === 'verificationVsValidation' && (
-        <div>
-          <div className="mb-8">
-            <p className="text-lg text-center max-w-4xl mx-auto mb-8">
-              Verification and validation are complementary processes that ensure both technical correctness and fulfillment of user needs.
-            </p>
-          </div>
-          
+        <div className="animate-fade-in"> {/* Added animation class */}
+           <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin and added title */}
+             <h2 className="text-3xl font-bold mb-4">Verification vs Validation</h2>
+             <p className="text-lg text-gray-600">
+               Distinguish between Verification ("Are we building the product right?") and Validation ("Are we building the right product?") and see how they apply across the SDLC.
+             </p>
+           </div>
+
           <ConceptCard
             title="Verification vs Validation"
             summary="Understand the distinction between building the product right (verification) and building the right product (validation)."
@@ -645,8 +682,9 @@ export default function Principles() {
           </div>
         </div>
       )}
+
         {/* Next Button */}
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center"> {/* Increased top margin */}
           <Link
             to="/sdlc"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"

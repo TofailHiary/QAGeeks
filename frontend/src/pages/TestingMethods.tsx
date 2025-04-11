@@ -4,7 +4,27 @@ import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react"; // Assuming lucide-react is available
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"; // Import Accordion
+import {
+  ArrowRight,
+  Box, // For Black Box
+  Code, // For White Box
+  Blend, // For Gray Box
+  Lightbulb, // For Experience-Based
+  ListChecks, // For How To / Steps / Verification
+  ThumbsUp, // For Advantages
+  ThumbsDown, // For Disadvantages
+  HelpCircle, // For When to Use
+  Target, // For Techniques / Types
+  Info, // For Definition/General Info
+  Layers3, // For Types
+  Workflow, // For Steps
+  CheckCircle, // For Verification Points
+  AlertTriangle, // For Disadvantages
+  Sparkles, // For Advantages
+  Puzzle, // For Techniques
+  Clock // For When to Use
+} from "lucide-react"; // Import relevant icons
 
 // Define interfaces for structured data (optional but good practice)
 interface TestingTechnique {
@@ -26,126 +46,181 @@ interface TestingMethodProps {
   whenToUse?: string[];
   steps?: string[];
   color: string; // e.g., 'text-[#00A2FF]' or 'border-[#9C27FF]'
+  icon: React.ElementType; // Add icon type
 }
 
-// Component to render a testing method card
+// Component to render a testing method card with Accordion
 const MethodCard: React.FC<TestingMethodProps> = ({
-  title, definition, howTo, types, techniques, advantages, disadvantages, verificationPoints, whenToUse, steps, color
+  title, definition, howTo, types, techniques, advantages, disadvantages, verificationPoints, whenToUse, steps, color, icon: Icon
 }) => {
   const borderColorClass = color.startsWith('text-gray') ? 'border-gray-400' : color.replace('text-', 'border-');
-  const titleColorClass = color.startsWith('text-gray') ? 'text-gray-700' : color; // Keep original color for title if not gray
+  const titleColorClass = color.startsWith('text-gray') ? 'text-gray-700' : color;
 
   return (
-  <Card className={`shadow-lg border-l-4 ${borderColorClass} transition-shadow duration-300 hover:shadow-xl`}>
-    <CardHeader className="pb-4">
-      {/* Use the color for the title, but maybe slightly less prominent */}
-      <CardTitle className={`text-2xl font-bold ${titleColorClass}`}>{title}</CardTitle>
-    </CardHeader>
-    <CardContent className="space-y-6 pt-0"> {/* Reduced top padding */}
-      <p className="text-gray-700 leading-relaxed">{definition}</p> {/* Improved line height */}
+    <Card className={`shadow-lg border-l-4 ${borderColorClass} transition-shadow duration-300 hover:shadow-xl overflow-hidden`}>
+      <CardHeader className="pb-4 flex flex-row items-center gap-3"> {/* Use flex for icon alignment */}
+        <Icon className={`w-7 h-7 ${titleColorClass}`} aria-hidden="true" />
+        <CardTitle className={`text-2xl font-bold ${titleColorClass}`}>{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4 pt-0"> {/* Adjusted spacing */}
+        <p className="text-gray-700 leading-relaxed px-4 pb-4">{definition}</p> {/* Added padding */}
 
-      {howTo && (
-        <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">How to Perform:</h4>
-          <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-            {howTo.map((step, i) => <li key={i}>{step}</li>)}
-          </ol>
-        </div>
-      )}
+        {/* Use Accordion for collapsible sections */}
+        <Accordion type="multiple" className="w-full">
 
-      {verificationPoints && (
-        <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">What to Verify:</h4>
-          <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-            {verificationPoints.map((point, i) => <li key={i}>{point}</li>)}
-          </ul>
-        </div>
-      )}
-
-      {types && (
-        <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">Types:</h4>
-          <div className="space-y-3">
-            {types.map((type, i) => (
-              // Use Card for consistency
-              <Card key={i} className="p-3 bg-gray-50/70 rounded shadow-sm border border-gray-200">
-                <p className="font-medium text-gray-800">{type.name}</p>
-                <p className="text-sm text-gray-600 mt-1">{type.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {techniques && (
-        <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">Common Techniques:</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {techniques.map((tech, i) => (
-              <Card key={i} className="bg-white shadow-sm border border-gray-200 hover:border-gray-300 transition-colors">
-                <CardHeader className="pb-2 pt-4 px-4">
-                   {/* Use method color subtly, maybe as an accent or keep title neutral */}
-                  <CardTitle className={`text-md font-semibold text-gray-800`}>{tech.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="px-4 pb-4">
-                  <p className="text-sm text-gray-600 mb-2 leading-snug">{tech.description}</p> {/* Slightly tighter leading */}
-                  {tech.example && <div className="text-xs italic text-gray-500 bg-gray-100 p-2 rounded border border-gray-200">{tech.example}</div>}
-                   {tech.importance && (
-                     <div className="mt-3"> {/* Increased margin */}
-                       <p className="text-xs font-semibold text-gray-600 mb-1">Importance:</p> {/* Slightly darker */}
-                       <ul className="list-disc list-inside space-y-1 text-xs text-gray-500 pl-2"> {/* Added padding */}
-                         {tech.importance.map((imp, idx) => <li key={idx}>{imp}</li>)}
-                       </ul>
-                     </div>
-                   )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      )}
-
-       {steps && (
-        <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">Generic Steps:</h4>
-          <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-            {steps.map((step, i) => <li key={i}>{step}</li>)}
-          </ol>
-        </div>
-      )}
-
-      {(advantages || disadvantages) && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-          {advantages && (
-            <div>
-              <h4 className="font-semibold text-lg mb-2 text-green-700">Advantages:</h4> {/* Slightly darker green */}
-              <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-                {advantages.map((adv, i) => <li key={i}>{adv}</li>)}
-              </ul>
-            </div>
+          {howTo && (
+            <AccordionItem value="how-to">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                <div className="flex items-center gap-2">
+                  <ListChecks className="w-5 h-5 text-gray-600" />
+                  <span>How to Perform</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                  {howTo.map((step, i) => <li key={i}>{step}</li>)}
+                </ol>
+              </AccordionContent>
+            </AccordionItem>
           )}
-          {disadvantages && (
-            <div>
-              <h4 className="font-semibold text-lg mb-2 text-red-700">Disadvantages:</h4> {/* Slightly darker red */}
-              <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-                {disadvantages.map((dis, i) => <li key={i}>{dis}</li>)}
-              </ul>
-            </div>
+
+          {verificationPoints && (
+            <AccordionItem value="verify">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-gray-600" />
+                  <span>What to Verify</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                  {verificationPoints.map((point, i) => <li key={i}>{point}</li>)}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
           )}
-        </div>
-      )}
 
-       {whenToUse && (
-         <div>
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">When to Use:</h4>
-          <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2"> {/* Added padding */}
-            {whenToUse.map((use, i) => <li key={i}>{use}</li>)}
-          </ul>
-        </div>
-      )}
+          {types && (
+            <AccordionItem value="types">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                <div className="flex items-center gap-2">
+                  <Layers3 className="w-5 h-5 text-gray-600" />
+                  <span>Types</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <div className="space-y-3">
+                  {types.map((type, i) => (
+                    <Card key={i} className="p-3 bg-gray-50/70 rounded shadow-sm border border-gray-200">
+                      <p className="font-medium text-gray-800">{type.name}</p>
+                      <p className="text-sm text-gray-600 mt-1">{type.description}</p>
+                    </Card>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-    </CardContent>
-  </Card>
+          {techniques && (
+            <AccordionItem value="techniques">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                <div className="flex items-center gap-2">
+                  <Puzzle className="w-5 h-5 text-gray-600" />
+                  <span>Common Techniques</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {techniques.map((tech, i) => (
+                    <Card key={i} className="bg-white shadow-sm border border-gray-200 hover:border-gray-300 transition-colors">
+                      <CardHeader className="pb-2 pt-4 px-4">
+                        <CardTitle className={`text-md font-semibold text-gray-800`}>{tech.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="px-4 pb-4">
+                        <p className="text-sm text-gray-600 mb-2 leading-snug">{tech.description}</p>
+                        {tech.example && <div className="text-xs italic text-gray-500 bg-gray-100 p-2 rounded border border-gray-200">{tech.example}</div>}
+                        {tech.importance && (
+                          <div className="mt-3">
+                            <p className="text-xs font-semibold text-gray-600 mb-1">Importance:</p>
+                            <ul className="list-disc list-inside space-y-1 text-xs text-gray-500 pl-2">
+                              {tech.importance.map((imp, idx) => <li key={idx}>{imp}</li>)}
+                            </ul>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          )}
+
+          {steps && (
+             <AccordionItem value="steps">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                <div className="flex items-center gap-2">
+                  <Workflow className="w-5 h-5 text-gray-600" />
+                  <span>Generic Steps</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                  {steps.map((step, i) => <li key={i}>{step}</li>)}
+                </ol>
+              </AccordionContent>
+            </AccordionItem>
+          )}
+
+          {(advantages || disadvantages) && (
+            <AccordionItem value="pros-cons">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                 <div className="flex items-center gap-2">
+                   <Sparkles className="w-5 h-5 text-green-600" /> / <AlertTriangle className="w-5 h-5 text-red-600" />
+                   <span>Advantages & Disadvantages</span>
+                 </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {advantages && (
+                    <div>
+                      <h4 className="font-semibold text-lg mb-2 text-green-700 flex items-center gap-1.5"><Sparkles className="w-4 h-4"/> Advantages:</h4>
+                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                        {advantages.map((adv, i) => <li key={i}>{adv}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {disadvantages && (
+                    <div>
+                      <h4 className="font-semibold text-lg mb-2 text-red-700 flex items-center gap-1.5"><AlertTriangle className="w-4 h-4"/> Disadvantages:</h4>
+                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                        {disadvantages.map((dis, i) => <li key={i}>{dis}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          )}
+
+          {whenToUse && (
+            <AccordionItem value="when-to-use">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+                 <div className="flex items-center gap-2">
+                   <Clock className="w-5 h-5 text-gray-600" />
+                   <span>When to Use</span>
+                 </div>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                  {whenToUse.map((use, i) => <li key={i}>{use}</li>)}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          )}
+
+        </Accordion>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -164,6 +239,13 @@ export default function TestingMethods() {
       "Compare actual outputs with expected outputs.",
       "Report defects, re-test fixes."
     ],
+    whenToUse: [ // Added When to Use
+      "When internal structure is unknown or irrelevant.",
+      "Testing from an end-user perspective.",
+      "Validating software against requirements.",
+      "System testing, Acceptance testing.",
+      "Testing large, complex applications where internal details are too vast."
+    ],
     types: [
       { name: "Functional Testing", description: "Tests specific functions/features (e.g., login validation). Includes smoke, sanity, integration, system testing." },
       { name: "Non-Functional Testing", description: "Tests 'how' software performs (usability, performance, compatibility, security)." },
@@ -176,7 +258,8 @@ export default function TestingMethods() {
       { name: "State Transition Testing", description: "Models how the system moves between different states based on events/inputs." },
       { name: "Graph-Based Testing", description: "Models the application as a graph to identify test paths." }
     ],
-    color: "text-[#00A2FF]" // Electric Blue
+    color: "text-[#00A2FF]", // Electric Blue
+    icon: Box // Added missing icon
   };
 
   const whiteBoxData: TestingMethodProps = {
@@ -215,7 +298,16 @@ export default function TestingMethods() {
       { name: "Path Coverage", description: "Aims to execute every possible path through the code (often impractical)." },
       // Other types listed in text can be added here if needed: Loop, Mutation, Integration, Penetration, Memory, Performance, Control flow, Data flow
     ],
-    color: "text-[#9C27FF]" // Neon Purple
+    whenToUse: [ // Added When to Use
+      "When internal code structure is accessible.",
+      "Unit testing and component testing.",
+      "Integration testing (verifying interactions between components).",
+      "Optimizing code and improving performance.",
+      "Security testing to find vulnerabilities in the code.",
+      "Early in the SDLC."
+    ],
+    color: "text-[#9C27FF]", // Neon Purple
+    icon: Code // Added icon
   };
 
    const grayBoxData: TestingMethodProps = {
@@ -260,7 +352,8 @@ export default function TestingMethods() {
       { name: "Back-End Testing", description: "Tests server-side components and databases using knowledge of schemas/queries.", example: "Verify creating/updating a user correctly modifies the database and enforces constraints." },
       { name: "Configuration Testing", description: "Checks application behavior across different hardware/software configurations.", example: "Test mobile app on various devices, OS versions, screen sizes, and system settings." }
     ],
-    color: "text-gray-600" // Neutral Gray
+    color: "text-gray-600", // Neutral Gray
+    icon: Blend // Added icon
   };
 
    const experienceBasedData: TestingMethodProps = {
@@ -279,7 +372,8 @@ export default function TestingMethods() {
       { name: "Exploratory Testing", description: "Simultaneous learning, test design, and execution. Testers explore the system 'on the fly' without pre-defined cases. Focuses on 'thinking' and discovery. Widely used in Agile.", example: "Like driving in a new region without a map, using intuition and standard strategies (ask directions, look for signs) to reach the destination.", importance: ["Useful with poor requirements.", "Finds more bugs through investigation.", "Uncovers bugs missed by other techniques.", "Improves tester creativity/productivity.", "Drills down into application details."] },
       { name: "Attack Testing", description: "Simulates potential attacks to find security vulnerabilities. Relies on knowledge of common attack vectors.", example: "Attempting to reset another user's password by manipulating URLs or guessing security questions.", importance: ["Enhances security posture.", "Prevents financial/reputational damage.", "Improves software quality & user trust.", "Helps meet compliance standards.", "Promotes proactive risk management."] }
     ],
-    color: "text-orange-500" // Vibrant Orange
+    color: "text-orange-500", // Vibrant Orange
+    icon: Lightbulb // Added icon
   };
 
    const comparisonData = [
@@ -349,6 +443,7 @@ export default function TestingMethods() {
              </CardContent>
            </Card>
         </section>
+
 
         {/* Next Button */}
         <div className="mt-20 text-center"> {/* Increased margin */}

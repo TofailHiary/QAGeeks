@@ -7,7 +7,7 @@ import { RouteObject } from "react-router";
 
 const ApiTesting = lazy(() => import("./pages/ApiTesting.tsx"));
 const App = lazy(() => import("./pages/App.tsx"));
-const Contact = lazy(() => import("./pages/Contact.tsx"));
+const Creator = lazy(() => import("./pages/Creator.tsx")); // Renamed from Contact
 const DefectManagement = lazy(() => import("./pages/DefectManagement.tsx"));
 const Principles = lazy(() => import("./pages/Principles.tsx"));
 const Sdlc = lazy(() => import("./pages/Sdlc.tsx"));
@@ -27,7 +27,7 @@ export const userRoutes: RouteObject[] = [
   { path: "/api-testing", element: <ApiTesting /> },
   { path: "/apitesting", element: <ApiTesting /> },
   { path: "/", element: <App /> },
-  { path: "/contact", element: <Contact /> },
+  { path: "/creator", element: <Creator /> }, // Renamed path and component
   { path: "/defect-management", element: <DefectManagement /> },
   { path: "/defectmanagement", element: <DefectManagement /> },
   { path: "/principles", element: <Principles /> },

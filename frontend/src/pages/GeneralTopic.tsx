@@ -1,58 +1,96 @@
 import React from "react";
 import { PageLayout } from "components/PageLayout";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "components/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "components/ui/tooltip";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "components/ui/accordion"; // Import Accordion components
+import { motion } from "framer-motion"; // Import motion for animations
+import {
+  FaMobileAlt, FaLaptopCode, FaListUl, FaExchangeAlt, FaDatabase, FaGlobe, FaUsers, FaComments, FaBug, FaLink, FaQuestionCircle, FaTools, FaFlask
+} from 'react-icons/fa'; // Import relevant icons
 
-// Enhanced SectionCard for light blue background, maintaining modern feel
-const SectionCard: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({ title, children, className = "" }) => (
-  // Using bg-sky-50 for a very light "white blue", adjusted borders and shadows
-  <div className={`bg-sky-50 border border-blue-200 rounded-3xl shadow-lg p-8 mb-12 transition-all duration-300 hover:shadow-blue-200/50 hover:border-blue-300 ${className}`}>
-    {/* Title color changed to dark blue for contrast */}
-    <h2 className="text-4xl font-extrabold mb-6 text-blue-700">{title}</h2>
-    {/* Body text color changed to dark gray for readability */}
+// Enhanced SectionCard with optional icon and animation
+const SectionCard: React.FC<{ title: string; icon?: React.ElementType; children: React.ReactNode; className?: string }> = ({ title, icon: Icon, children, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.5 }}
+    className={`bg-sky-50 border border-blue-200 rounded-3xl shadow-lg p-8 mb-12 transition-all duration-300 hover:shadow-blue-200/50 hover:border-blue-300 ${className}`}
+  >
+    <h2 className="text-4xl font-extrabold mb-6 text-blue-700 flex items-center">
+      {Icon && <Icon className="mr-4 text-blue-500" size="1.1em" />} {/* Render icon if provided */}
+      {title}
+    </h2>
     <div className="text-slate-700 space-y-5 text-lg leading-relaxed">{children}</div>
-  </div>
+  </motion.div>
 );
 
 // Enhanced StyledListItem for light background
 const StyledListItem: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  // Adjusted hover background for light theme
   <li className="relative pl-8 py-3 border-l-4 border-blue-500 transition duration-300 ease-in-out hover:bg-blue-100/70 hover:border-blue-600 group">
-    {/* Dot color remains blue */}
     <span className="absolute left-[-0.7rem] top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full transition duration-300 group-hover:scale-125 group-hover:bg-blue-600"></span>
     {children}
   </li>
 );
 
+// Tooltip Wrapper for definitions
+const InfoTip: React.FC<{ term: string; definition: string }> = ({ term, definition }) => (
+  <TooltipProvider delayDuration={100}>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="text-blue-600 font-semibold border-b border-dotted border-blue-600 cursor-help">{term}</span>
+      </TooltipTrigger>
+      <TooltipContent className="bg-slate-800 text-white p-2 rounded max-w-xs text-sm">
+        <p>{definition}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
+
+
 // Enhanced Strong component for alternating accent colors on light background
 const StrongHighlight: React.FC<{ children: React.ReactNode; color?: 'blue' | 'purple' | 'gray' }> = ({ children, color = 'blue' }) => {
-  // Using darker shades for better contrast on light background
   const colorClass =
     color === 'purple' ? 'text-purple-600 font-semibold' :
     color === 'gray' ? 'text-slate-600 font-semibold' :
-    'text-blue-600 font-semibold'; // Default to blue
+    'text-blue-600 font-semibold';
   return <strong className={colorClass}>{children}</strong>;
 };
 
 export default function GeneralTopic() {
   return (
     <PageLayout title="General QA Topics" subtitle="An overview of general concepts in Quality Assurance">
-      {/* Main container text color defaults to dark for readability on light background */}
       <div className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-slate-800">
 
         {/* --- Mobile vs Web Testing --- */}
-        <SectionCard title="Mobile Application Testing VS Web App Testing">
-          {/* Table container style adjusted slightly if needed */}
+        <SectionCard title="Mobile vs. Web App Testing" icon={FaMobileAlt}>
           <div className="overflow-x-auto rounded-xl border border-blue-300/70 shadow-inner">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                {/* Header remains vibrant, contrast is good */}
-                <tr className="bg-gradient-to-r from-blue-600 to-purple-600">
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Feature</th>
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Mobile App Testing</th>
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Web App Testing</th>
-                </tr>
-              </thead>
-              {/* Table body background changed to white, text to dark */}
-              <tbody className="bg-white">
+            <Table>
+              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600">
+                <TableRow>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Feature</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Mobile App Testing</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Web App Testing</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-white">
                 {[
                   { feature: "Usage", mobile: "Software programs used on mobile devices.", web: "Software programs used on computers." },
                   { feature: "User Base", mobile: "Developed for a broader range of users.", web: "Developed for a shorter range of users compared to mobile." },
@@ -62,27 +100,25 @@ export default function GeneralTopic() {
                   { feature: "Connectivity", mobile: "May not require internet, but connection quality/speed matters (LTE, etc.).", web: "Generally requires an internet connection." },
                   { feature: "Complexity", mobile: "More complex due to diverse devices and functionalities.", web: "Simpler due to standardized desktop functionality." },
                   { feature: "Battery Life", mobile: "Performance on full/low charge is critical; battery-draining apps get deleted.", web: "Not a concern." },
-                  { feature: "Considerations", mobile: "Screen size, OEMs, storage capacity, etc.", web: "Fewer device-specific considerations." },
+                  { feature: "Considerations", mobile: <>Screen size, <InfoTip term="OEMs" definition="Original Equipment Manufacturers (e.g., Samsung, Apple, Google)" />, storage capacity, etc.</>, web: "Fewer device-specific considerations." },
                   { feature: "Interaction", mobile: "Focus on interaction with user moves, voice, environment, gestures, etc.", web: "Less focus on complex user interactions." },
                   { feature: "Tools/Frameworks", mobile: "Appium, Espresso, XCUITest, Xamarin, Robotium, etc.", web: "Selenium, WebLOAD, Acunetix, Netsparker, etc." },
                   { feature: "Peripheral Testing", mobile: "Tablets, smartwatches, fitness trackers, medical devices.", web: "Mouse, webcams, game controllers, keyboards." },
-                ].map((row, index) => (
-                  // Adjusted hover, borders, and text colors for light theme
-                  <tr key={row.feature} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
-                    <td className="p-5 border-r border-blue-200/80 font-semibold text-blue-700">{row.feature}</td>
-                    <td className="p-5 border-r border-blue-200/80 text-slate-700">{row.mobile}</td>
-                    <td className="p-5 text-slate-700">{row.web}</td>
-                  </tr>
+                ].map((row) => (
+                  <TableRow key={row.feature} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
+                    <TableCell className="p-5 font-semibold text-blue-700">{row.feature}</TableCell>
+                    <TableCell className="p-5 text-slate-700">{row.mobile}</TableCell>
+                    <TableCell className="p-5 text-slate-700">{row.web}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </SectionCard>
 
-        {/* Grid layout remains */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
           {/* --- Mobile Testing Challenges --- */}
-          <SectionCard title="Mobile Testing Challenges">
+          <SectionCard title="Mobile Testing Challenges" icon={FaQuestionCircle}>
             <ul className="list-none space-y-4">
               <StyledListItem>Multitude of Mobile Devices</StyledListItem>
               <StyledListItem>Device Fragmentation & Various OS Platforms</StyledListItem>
@@ -93,20 +129,18 @@ export default function GeneralTopic() {
           </SectionCard>
 
           {/* --- Types of Mobile Apps --- */}
-          <SectionCard title="Types of Mobile Applications">
-            {/* Using updated StrongHighlight for light background */}
-            <p><StrongHighlight color="blue">Native:</StrongHighlight> Built in a specific language (Swift/Objective-C for iOS, Java/Kotlin for Android) for a specific platform.</p>
+          <SectionCard title="Types of Mobile Applications" icon={FaMobileAlt}>
+            <p><StrongHighlight color="blue">Native:</StrongHighlight> Built in a specific language (<InfoTip term="Swift/Objective-C" definition="Primary languages for iOS development" /> for iOS, <InfoTip term="Java/Kotlin" definition="Primary languages for Android development" /> for Android) for a specific platform.</p>
             <p><StrongHighlight color="purple">Hybrid:</StrongHighlight> Designed for multiple platforms using standard web languages (HTML5, JavaScript, C#) and compiled. Uses plugins for device-specific interactions.</p>
             <p><StrongHighlight color="gray">Browser-based (Web App):</StrongHighlight> Runs inside a mobile web browser, essentially a website optimized for mobile.</p>
           </SectionCard>
         </div>
 
         {/* --- Emulator vs Simulator --- */}
-        <SectionCard title="Emulator vs. Simulator">
+        <SectionCard title="Emulator vs. Simulator" icon={FaExchangeAlt}>
           <p><StrongHighlight color="blue">Simulator:</StrongHighlight> Models an environment to mimic behavior without replicating hardware. Used for analysis and study, showing how the device *would* work. Doesn't exactly follow real environment activity.</p>
-          <p><StrongHighlight color="purple">Emulator:</StrongHighlight> Software allowing one system (host) to imitate another (guest), including hardware, by translating the Instruction Set Architecture.</p>
+          <p><StrongHighlight color="purple">Emulator:</StrongHighlight> Software allowing one system (host) to imitate another (guest), including hardware, by translating the <InfoTip term="Instruction Set Architecture (ISA)" definition="The part of the computer architecture related to programming, including the native data types, instructions, registers, addressing modes, memory architecture, interrupt and exception handling, and external I/O." />.</p>
 
-          {/* Adjusted heading colors for light theme */}
           <h3 className="text-2xl font-semibold mt-10 mb-5 text-blue-700">Analogies & Examples</h3>
           <p><StrongHighlight color="blue">Simulator Analogy (Flight Simulator):</StrongHighlight> Replicates flying experience (software behavior) but not the actual hardware mechanics.</p>
           <p><StrongHighlight color="blue">Simulator Example (iOS Simulator):</StrongHighlight> Mimics iPhone/iPad appearance/functionality. Faster but limited for hardware features (Bluetooth, push notifications).</p>
@@ -115,17 +149,15 @@ export default function GeneralTopic() {
 
           <h3 className="text-2xl font-semibold mt-10 mb-5 text-purple-700">Comparison</h3>
           <div className="overflow-x-auto rounded-xl border border-blue-300/70 shadow-inner mt-4">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                 {/* Header remains vibrant */}
-                 <tr className="bg-gradient-to-r from-blue-600 to-purple-600">
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Aspect</th>
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Emulator</th>
-                  <th className="p-5 border-b border-blue-300/50 font-bold uppercase tracking-wider text-sm text-white">Simulator</th>
-                </tr>
-              </thead>
-               {/* Table body background changed to white, text to dark */}
-               <tbody className="bg-white">
+            <Table>
+              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600">
+                <TableRow>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Aspect</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Emulator</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Simulator</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-white">
                 {[
                   { aspect: "Definition", emulator: "Replicates hardware and software.", simulator: "Models software behavior only." },
                   { aspect: "Purpose", emulator: "Testing hardware-specific features, close replication.", simulator: "Testing app functionality without precise hardware replication." },
@@ -135,38 +167,59 @@ export default function GeneralTopic() {
                   { aspect: "Use Cases", emulator: "Firmware, OS features, hardware-dependent apps.", simulator: "UI/UX, basic functionality testing in development." },
                   { aspect: "Example", emulator: "Android Emulator", simulator: "iOS Simulator" },
                 ].map((row) => (
-                  // Adjusted hover, borders, and text colors for light theme
-                  <tr key={row.aspect} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
-                    <td className="p-5 border-r border-blue-200/80 font-semibold text-blue-700">{row.aspect}</td>
-                    <td className="p-5 border-r border-blue-200/80 text-slate-700">{row.emulator}</td>
-                    <td className="p-5 text-slate-700">{row.simulator}</td>
-                  </tr>
+                  <TableRow key={row.aspect} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
+                    <TableCell className="p-5 font-semibold text-blue-700">{row.aspect}</TableCell>
+                    <TableCell className="p-5 text-slate-700">{row.emulator}</TableCell>
+                    <TableCell className="p-5 text-slate-700">{row.simulator}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         </SectionCard>
 
         {/* --- Mobile App Test Types --- */}
-        <SectionCard title="Mobile Application Test Types">
-          <ul className="list-none space-y-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+        <SectionCard title="Mobile Application Test Types" icon={FaFlask}>
+          <Accordion type="single" collapsible className="w-full">
             {[
-              "Compatibility with Device Hardware", "Device Features (Camera, GPS, etc.)", "Different Displays (Size, Resolution)",
-              "Device Temperature", "Device Input Sensors", "Various Input Methods (Touch, Voice)", "Screen Orientation Change",
-              "Typical Interrupts (Calls, SMS, Notifications)", "Access Permissions to Device Features", "Power Consumption and State",
-              "App Interactions with Device Software", "Notifications", "Quick-access Links", "User Preferences Provided by OS",
-              "Different Types of Apps (Native, Hybrid, Web)", "Interoperability (Platforms, OS Versions)", "Co-existence with other Apps",
-              "Various Connectivity Methods (WiFi, Cellular, Offline)", "Installability / Uninstallation / Updates", "Stress Testing",
-              "Security Testing", "Performance Testing", "Usability Testing"
-            ].map(item => <StyledListItem key={item}>{item}</StyledListItem>)}
-          </ul>
+              { trigger: "Hardware Compatibility", content: "Testing across various device hardware configurations (CPU, RAM, etc.)." },
+              { trigger: "Device Features", content: "Verifying functionality of integrated features like Camera, GPS, Bluetooth, NFC." },
+              { trigger: "Display Variations", content: "Ensuring proper rendering on different screen sizes and resolutions." },
+              { trigger: "Device Temperature", content: "Monitoring app performance under varying thermal conditions." },
+              { trigger: "Input Sensors", content: "Testing interaction with accelerometer, gyroscope, proximity sensors, etc." },
+              { trigger: "Input Methods", content: "Validating touch gestures, voice commands, and external keyboard inputs." },
+              { trigger: "Screen Orientation", content: "Checking layout and functionality during portrait and landscape mode changes." },
+              { trigger: "Interrupt Handling", content: "Testing app behavior during incoming calls, SMS, notifications, low battery warnings." },
+              { trigger: "Permissions", content: "Verifying correct handling of access permissions to device features." },
+              { trigger: "Power Consumption", content: "Analyzing battery usage and app behavior in different power states (charging, low battery)." },
+              { trigger: "OS Interactions", content: "Testing interactions with device software like settings, contacts, calendar." },
+              { trigger: "Notifications", content: "Validating push notifications and in-app notification behavior." },
+              { trigger: "Quick-access Links", content: "Testing deep links and shortcuts." },
+              { trigger: "User Preferences", content: "Ensuring the app respects OS-level user preferences (font size, accessibility settings)." },
+              { trigger: "App Type Specifics", content: "Addressing unique testing needs for Native, Hybrid, and Web mobile apps." },
+              { trigger: "Interoperability", content: "Testing compatibility across different platforms and OS versions." },
+              { trigger: "Co-existence", content: "Ensuring the app functions correctly alongside other installed applications." },
+              { trigger: "Connectivity", content: "Testing performance on WiFi, various cellular networks (3G, 4G, 5G), and offline scenarios." },
+              { trigger: "Installation & Updates", content: "Verifying smooth installation, uninstallation, and update processes." },
+              { trigger: "Stress Testing", content: "Pushing the app beyond normal operational capacity to identify breaking points." },
+              { trigger: "Security Testing", content: "Identifying vulnerabilities related to data storage, transmission, and authentication." },
+              { trigger: "Performance Testing", content: "Measuring responsiveness, stability, and resource utilization under various loads." },
+              { trigger: "Usability Testing", content: "Evaluating the ease of use and overall user experience." },
+            ].map((item, index) => (
+              <AccordionItem value={`item-${index}`} key={item.trigger}>
+                <AccordionTrigger className="text-lg hover:no-underline">{item.trigger}</AccordionTrigger>
+                <AccordionContent className="text-base text-slate-600 pt-2"> {/* Added content */}
+                  {item.content}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </SectionCard>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
           {/* --- Database Testing --- */}
-          <SectionCard title="Database Testing">
+          <SectionCard title="Database Testing" icon={FaDatabase}>
             <p>A type of software testing that checks the schema, tables, triggers, etc., of the database. It also checks data integrity and consistency and may involve creating complex queries to load/stress test the database and check its responsiveness.</p>
-            {/* Adjusted heading colors */}
             <h3 className="text-2xl font-semibold mt-8 mb-4 text-blue-700">Coverage Includes:</h3>
             <ul className="list-none space-y-4">
               <StyledListItem>Testing data integrity</StyledListItem>
@@ -184,14 +237,15 @@ export default function GeneralTopic() {
           </SectionCard>
 
           {/* --- Globalization vs Localization --- */}
-          <SectionCard title="Globalization and Localization Testing">
-            <p><StrongHighlight color="blue">Globalization Testing:</StrongHighlight> Ensures an application can run in *any* cultural/local environment, supporting multiple languages and attributes without code changes (e.g., Facebook).</p>
-            <p><StrongHighlight color="purple">Localization Testing:</StrongHighlight> Checks an application for a *specific* geographical and cultural environment, supporting a specific language and region (e.g., QQ.com for China).</p>
+          <SectionCard title="Globalization vs. Localization" icon={FaGlobe}>
+            <p><StrongHighlight color="blue">Globalization Testing (G11N):</StrongHighlight> Ensures an application can function correctly in *any* cultural or local environment without requiring code changes. This involves testing support for multiple languages, date/time formats, currencies, and character sets. Example: Facebook supporting numerous languages globally.</p>
+            <p><StrongHighlight color="purple">Localization Testing (L10N):</StrongHighlight> Verifies that an application has been adapted for a *specific* target geographical region and culture. This includes checking language translation accuracy, cultural appropriateness of UI elements, local conventions (like address formats), and regulatory compliance. Example: A website tailored specifically for the Chinese market (like QQ.com).</p>
+            <p className="mt-4 text-sm text-slate-500 italic">Why test G11N/L10N? To ensure a positive user experience, avoid cultural misunderstandings, meet market expectations, and comply with local regulations, ultimately expanding the application's reach and usability.</p>
           </SectionCard>
         </div>
 
         {/* --- Team Structure --- */}
-        <SectionCard title="Typical Software Development Team Roles">
+        <SectionCard title="Typical Software Team Roles" icon={FaUsers}>
           <ul className="list-none space-y-5">
             <StyledListItem><StrongHighlight color="blue">Business Analyst:</StrongHighlight> Understands business processes, translates needs into requirements.</StyledListItem>
             <StyledListItem><StrongHighlight color="purple">Product Owner:</StrongHighlight> Holds product vision, ensures product meets customer requirements.</StyledListItem>
@@ -206,8 +260,9 @@ export default function GeneralTopic() {
         </SectionCard>
 
         {/* --- Dev & QA Communication --- */}
-        <SectionCard title="Strategies to Improve Communication Between Dev & QA">
-          <ul className="list-none space-y-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+        <SectionCard title="Improving Dev & QA Communication" icon={FaComments}>
+           {/* Reverted to checklist format based on feedback */}
+           <ul className="list-none space-y-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
             {[
               "Ensure Clear Requirements & Goals", "Build Empathy Across Teams", "Pair Testers with Developers",
               "Consistent & Constructive Feedback", "Emphasize “Test First” Approach", "Cross-Train Teams",
@@ -221,15 +276,14 @@ export default function GeneralTopic() {
         </SectionCard>
 
         {/* --- JIRA --- */}
-        <SectionCard title="JIRA for Issue Tracking & Project Management">
+        <SectionCard title="JIRA for Project Management" icon={FaBug}>
           <p>JIRA is a software application from Atlassian used for issue tracking and project management, widely adopted by agile development teams to track bugs, stories, epics, and other tasks.</p>
-          {/* Adjusted heading colors */}
           <h3 className="text-2xl font-semibold mt-8 mb-4 text-blue-700">Key Aspects:</h3>
           <ul className="list-none space-y-4">
             <StyledListItem><StrongHighlight color="blue">Projects:</StrongHighlight> Manage defects effectively within project contexts.</StyledListItem>
             <StyledListItem><StrongHighlight color="purple">Issues:</StrongHighlight> Track and manage defects, tasks, stories, etc.</StyledListItem>
             <StyledListItem><StrongHighlight color="blue">Workflow:</StrongHighlight> Process the issue/defect life cycle (e.g., Open &rarr; In Progress &rarr; Resolved &rarr; Closed).</StyledListItem>
-            <StyledListItem><StrongHighlight color="purple">Search:</StrongHighlight> Find issues easily using basic search, filters, or JQL (JIRA Query Language).</StyledListItem>
+            <StyledListItem><StrongHighlight color="purple">Search:</StrongHighlight> Find issues easily using basic search, filters, or <InfoTip term="JQL" definition="JIRA Query Language - a powerful way to search for issues in JIRA." />.</StyledListItem>
             <StyledListItem><StrongHighlight color="blue">Dashboards:</StrongHighlight> Customizable display of project metrics, assignments, and issue status using gadgets.</StyledListItem>
           </ul>
            <h3 className="text-2xl font-semibold mt-8 mb-4 text-purple-700">Benefits:</h3>
@@ -252,7 +306,7 @@ export default function GeneralTopic() {
         </SectionCard>
 
         {/* --- Resources --- */}
-        <SectionCard title="Helpful Resources">
+        <SectionCard title="Helpful Resources" icon={FaLink}>
           <ul className="list-none space-y-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
             {[
               { name: "Guru99", url: "https://www.guru99.com/" },
@@ -270,7 +324,6 @@ export default function GeneralTopic() {
               { name: "Swagger Petstore", url: "https://petstore.swagger.io/" },
             ].map(link => (
               <StyledListItem key={link.name}>
-                {/* Link color adjusted for light background */}
                 <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline transition duration-200">
                   {link.name}
                 </a>

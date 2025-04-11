@@ -1,178 +1,277 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"; // Import Accordion
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip.tsx"; // Import Tooltip - Added .tsx extension
+import { motion } from "framer-motion";
+import { Bug, ClipboardList, Workflow, Wrench, Lightbulb, AlertTriangle, CheckCircle, XCircle, FileQuestion, Clock, Copy, Archive, HelpCircle, ArrowRight, Settings, Puzzle, UserCog, TestTubeDiagonal, RotateCcw } from "lucide-react"; // Import relevant icons (Added Settings, Puzzle, UserCog, TestTubeDiagonal, RotateCcw; Replaced Duplicate with Copy)
 
 export default function DefectManagement() {
 
   const terminology = [
-    { term: "Defect", definition: "Application not working as per the requirement." },
-    { term: "Bug", definition: "Informal name for a defect." },
-    { term: "Error", definition: "Problem in code leading to incorrect behavior." },
-    { term: "Issue", definition: "Application not meeting business requirements." },
-    { term: "Mistake", definition: "Problem in documentation." },
-    { term: "Failure", definition: "Accumulation of defects leading to software failure." },
+    { term: "Defect", definition: "A flaw or imperfection in a software component or system that causes it to fail to perform its required function.", icon: <Bug className="w-4 h-4 mr-1 inline-block" /> },
+    { term: "Bug", definition: "An informal name for a defect, often used interchangeably.", icon: <Bug className="w-4 h-4 mr-1 inline-block" /> },
+    { term: "Error", definition: "A human action that produces an incorrect result. Errors in code lead to defects.", icon: <AlertTriangle className="w-4 h-4 mr-1 inline-block" /> },
+    { term: "Issue", definition: "A general term for a problem or concern, which might be a defect, enhancement request, or question.", icon: <HelpCircle className="w-4 h-4 mr-1 inline-block" /> },
+    { term: "Mistake", definition: "An error made by a person, often referring to errors in documentation or requirements.", icon: <FileQuestion className="w-4 h-4 mr-1 inline-block" /> },
+    { term: "Failure", definition: "The inability of a system or component to perform its required functions within specified performance requirements. Often the observable result of one or more defects.", icon: <XCircle className="w-4 h-4 mr-1 inline-block" /> },
   ];
 
   const bugCauses = [
-    { title: "Wrong Coding", description: "Improper implementation. Example: Clicking 'Inbox' navigates to 'Draft'." },
-    { title: "Missing Coding", description: "A feature is not implemented at all. Example: The 'Inbox' link is missing entirely." },
-    { title: "Extra Coding", description: "Features added beyond client requirements. Example: Adding middle name field when only first/last name was required." },
+    { title: "Incorrect Implementation", description: "Code doesn't match the specified logic. Example: Clicking 'Save' deletes the record instead.", icon: <AlertTriangle className="w-5 h-5 text-red-500" /> },
+    { title: "Missing Functionality", description: "A required feature is not implemented. Example: The 'Export to CSV' button is absent.", icon: <FileQuestion className="w-5 h-5 text-orange-500" /> },
+    { title: "Unexpected Interactions", description: "Different modules interfere negatively. Example: Enabling dark mode breaks the search functionality.", icon: <Wrench className="w-5 h-5 text-yellow-500" /> },
+    { title: "Poor Design/Architecture", description: "Fundamental design flaws lead to issues. Example: System slows down drastically with more than 10 users.", icon: <Bug className="w-5 h-5 text-purple-500" /> },
+    { title: "Environment Issues", description: "Problems specific to certain OS, browsers, or configurations.", icon: <Settings className="w-5 h-5 text-blue-500" /> },
+    { title: "Third-Party Code", description: "Bugs originating from external libraries or APIs.", icon: <Puzzle className="w-5 h-5 text-gray-500" /> },
   ];
 
   const bugReportElements = [
-    { field: "Bug Name/Title", description: "Clear, specific headline describing the defect." },
-    { field: "Bug ID", description: "Unique identification number." },
-    { field: "Precondition", description: "Any setup needed before reproducing (if applicable)." },
-    { field: "Test Data", description: "Specific data used during testing (if applicable)." },
-    { field: "Description", description: "Detailed summary including module, severity, priority, expected vs actual results." },
-    { field: "Severity", description: "Impact on functionality (e.g., High: Crash, Low: UI cosmetic). Determined by QA.", examples: ["High: Login crash prevents access.", "Low: Minor UI misalignment."] },
-    { field: "Priority", description: "Urgency to fix (e.g., High: Launch blocker, Low: Fix in future). Determined by PM/PO.", examples: ["High: Spelling error on homepage before launch.", "Low: Rare issue in a less-used feature."] },
-    { field: "Reported By", description: "Name/ID of the tester." },
-    { field: "Reported On", description: "Date the defect was raised." },
-    { field: "Assigned To", description: "Developer responsible for fixing." },
-    { field: "Steps to Reproduce", description: "Clear, numbered steps to replicate the bug. Include screenshots/videos if possible." },
-    { field: "Status", description: "Current state in the bug life cycle (e.g., New, Open, Fixed)." },
-    { field: "Environment", description: "System details (e.g., Browser, OS version, Device)." },
+    { field: "Bug Title", description: "Concise, unique, and descriptive summary of the issue.", example: "Example: 'User cannot log in with valid credentials on Chrome v120'" },
+    { field: "Bug ID", description: "Unique identifier automatically assigned by the tracking tool." },
+    { field: "Project/Module", description: "Specific area of the application where the bug occurs." },
+    { field: "Environment", description: "System details (e.g., OS: Windows 11, Browser: Chrome v120, Device: Desktop)." },
+    { field: "Severity", description: "Impact on functionality (e.g., Blocker, Critical, Major, Minor, Trivial). Determined by QA.", example: "Example: Blocker - Prevents core functionality; Trivial - Minor UI cosmetic issue." },
+    { field: "Priority", description: "Urgency to fix (e.g., High, Medium, Low). Determined by Product Owner/Manager.", example: "Example: High - Must fix before release; Low - Fix if time permits." },
+    { field: "Status", description: "Current state in the bug life cycle (e.g., New, Assigned, Fixed, Closed)." },
+    { field: "Reported By", description: "Name/ID of the person who found the bug." },
+    { field: "Reported On", description: "Date and time the bug was logged." },
+    { field: "Assigned To", description: "Developer or team responsible for fixing the bug." },
+    { field: "Steps to Reproduce", description: "Clear, numbered steps to reliably trigger the bug." },
+    { field: "Expected Result", description: "What should have happened according to requirements." },
     { field: "Actual Result", description: "What actually happened when the steps were followed." },
-    { field: "Expected Result", description: "What should have happened based on requirements." },
-    { field: "Attachments", description: "Screenshots, videos, logs." },
-    { field: "Notes", description: "Any additional relevant comments." },
+    { field: "Attachments", description: "Screenshots, videos, logs, or other relevant files." },
+    { field: "Notes/Comments", description: "Any additional context, observations, or discussion." },
   ];
 
   const bugLifeCycleStates = [
-    { state: "New", description: "First state when a defect is found and logged.", color: "bg-blue-100 text-blue-800" },
-    { state: "Assigned", description: "Defect assigned to a developer by the lead/manager.", color: "bg-yellow-100 text-yellow-800" },
-    { state: "Open", description: "Developer starts analyzing and working on fixing the defect.", color: "bg-orange-100 text-orange-800" },
-    { state: "Fixed", description: "Developer has fixed the defect and made necessary code changes.", color: "bg-green-100 text-green-800" },
-    { state: "Pending Retest", description: "Fixed defect assigned back to the tester for verification.", color: "bg-purple-100 text-purple-800" },
-    { state: "Retest", description: "Tester is actively verifying the fix.", color: "bg-indigo-100 text-indigo-800" },
-    { state: "Verified", description: "Tester confirms the defect is fixed accurately.", color: "bg-teal-100 text-teal-800" },
-    { state: "Reopen", description: "Issue persists after the fix; assigned back to the developer.", color: "bg-pink-100 text-pink-800" },
-    { state: "Closed", description: "Defect is resolved, verified, and no longer exists.", color: "bg-gray-100 text-gray-800" },
-    { state: "Rejected", description: "Developer considers the defect not genuine.", color: "bg-red-100 text-red-800" },
-    { state: "Duplicate", description: "Defect is the same as another existing defect.", color: "bg-gray-100 text-gray-500" },
-    { state: "Deferred", description: "Fix postponed to a future release (low priority/impact).", color: "bg-gray-100 text-gray-600" },
-    { state: "Not a Bug", description: "Reported issue does not impact functionality as per requirements.", color: "bg-gray-100 text-gray-700" },
+    { state: "New", description: "Bug is logged for the first time.", icon: <Lightbulb className="w-4 h-4 mr-1.5" />, color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700" },
+    { state: "Assigned", description: "Bug is assigned to a developer.", icon: <UserCog className="w-4 h-4 mr-1.5" />, color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700" },
+    { state: "Open", description: "Developer starts working on the fix.", icon: <Wrench className="w-4 h-4 mr-1.5" />, color: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 border-orange-300 dark:border-orange-700" },
+    { state: "Fixed", description: "Developer has applied a fix.", icon: <CheckCircle className="w-4 h-4 mr-1.5" />, color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border-green-300 dark:border-green-700" },
+    { state: "Pending Retest", description: "Fix is ready for QA verification.", icon: <ClipboardList className="w-4 h-4 mr-1.5" />, color: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 border-purple-300 dark:border-purple-700" },
+    { state: "Retest", description: "QA is actively verifying the fix.", icon: <TestTubeDiagonal className="w-4 h-4 mr-1.5" />, color: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 border-indigo-300 dark:border-indigo-700" },
+    { state: "Verified", description: "QA confirms the fix is working.", icon: <CheckCircle className="w-4 h-4 mr-1.5" />, color: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200 border-teal-300 dark:border-teal-700" },
+    { state: "Reopened", description: "Fix didn't work; bug sent back.", icon: <RotateCcw className="w-4 h-4 mr-1.5" />, color: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 border-pink-300 dark:border-pink-700" },
+    { state: "Closed", description: "Bug is resolved and verified.", icon: <Archive className="w-4 h-4 mr-1.5" />, color: "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border-gray-400 dark:border-gray-600" },
+    { state: "Rejected", description: "Considered not a valid defect.", icon: <XCircle className="w-4 h-4 mr-1.5" />, color: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border-red-300 dark:border-red-700" },
+    { state: "Duplicate", description: "Same as another reported bug.", icon: <Copy className="w-4 h-4 mr-1.5" />, color: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-gray-300 dark:border-gray-600" },
+    { state: "Deferred", description: "Fix postponed to a later release.", icon: <Clock className="w-4 h-4 mr-1.5" />, color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600" },
   ];
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
 
   return (
     <PageLayout
-      title="Defect Management & Bug Tracking"
-      subtitle="Learn how to effectively identify, report, and track software defects"
+      title="Mastering Defect Management"
+      subtitle="Identify, Report, Track, and Resolve Software Defects Effectively"
     >
-      <div className="max-w-6xl mx-auto space-y-16 py-12">
+      <div className="max-w-7xl mx-auto space-y-20 py-16 px-4 sm:px-6 lg:px-8">
 
         {/* What is a Bug/Defect? */}
-        <section className="text-center">
-          <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">What is a Bug / Defect?</h2>
-          <p className="text-lg text-gray-700 max-w-4xl mx-auto">
-            When the expected and actual behavior of software doesn't match, an incident is raised. If caused by incorrect code implementation, it's called a <strong>Bug</strong> or <strong>Defect</strong>. It represents a programmer's fault where the code fails to conform to the intended behavior. While testing, if the test engineer doesn't get the expected result as per requirements, a bug is identified.
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+          className="text-center"
+        >
+          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white flex items-center justify-center">
+            <Bug className="w-8 h-8 mr-3 text-red-500" /> What is a Bug / Defect?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            In software, a <strong>defect</strong> (often called a <strong>bug</strong>) is any deviation from the expected behavior or requirements. It's a flaw that can cause the application to produce incorrect results, behave unexpectedly, or fail entirely. Identifying and managing these defects is a critical part of ensuring software quality.
           </p>
-        </section>
+        </motion.section>
 
         {/* Basic Terminology */}
-        <section>
-           <Card className="bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center text-[#0052CC]">Basic Terminology</CardTitle>
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+        >
+           <Card className="bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+            <CardHeader className="bg-gray-50 dark:bg-gray-700 p-6">
+              <CardTitle className="text-2xl font-bold text-center text-gray-800 dark:text-white flex items-center justify-center">
+                <HelpCircle className="w-7 h-7 mr-3 text-blue-600 dark:text-blue-400" /> Key Terminology
+              </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {terminology.map((item) => (
-                  <div key={item.term} className="bg-white p-4 rounded shadow-sm border-l-4 border-[#00A2FF]">
-                    <h4 className="font-semibold text-lg text-[#00A2FF] mb-1">{item.term}</h4>
-                    <p className="text-sm text-gray-700">{item.definition}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Why Bugs Occur */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">Why Do Bugs Occur?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bugCauses.map((cause, index) => (
-              <Card key={index} className="shadow-md hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-[#9C27FF]">{cause.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-700">{cause.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Bug Tracking Tools */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">Popular Bug Tracking Tools</h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {["Jira", "Bugzilla", "Redmine", "Mantis", "Backlog"].map(tool => (
-              <Badge key={tool} variant="outline" className="text-lg px-4 py-2 bg-white border-[#00A2FF] text-[#00A2FF] shadow-sm">{tool}</Badge>
-            ))}
-          </div>
-        </section>
-
-        {/* Effective Bug Reporting */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">Effective Bug Reporting</h2>
-           <Card className="shadow-lg">
-             <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#0052CC]">Why Report Effectively?</CardTitle>
-             </CardHeader>
-             <CardContent>
-                <p className="text-gray-700 mb-6">
-                  Report bugs as early as possible with clear, detailed information. This helps developers reproduce the issue quickly and fix it efficiently, saving time and resources. A good bug report is crucial for smooth collaboration between QA and development.
-                </p>
-                <h3 className="text-xl font-semibold mb-4 text-[#0052CC]">Key Elements of a Bug Report:</h3>
-                <div className="space-y-4">
-                  {bugReportElements.map((item) => (
-                    <div key={item.field} className="p-3 bg-gray-50 rounded border-l-4 border-[#9C27FF]">
-                      <p className="font-medium text-gray-800">{item.field}:</p>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                      {item.examples && (
-                        <ul className="list-disc list-inside text-xs text-gray-500 mt-1 pl-4">
-                          {item.examples.map((ex, i) => <li key={i}><em>Example: {ex}</em></li>)}
-                        </ul>
-                      )}
-                    </div>
+            <CardContent className="p-6">
+              <TooltipProvider delayDuration={100}>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {terminology.map((item) => (
+                    <Tooltip key={item.term}>
+                      <TooltipTrigger asChild>
+                        <motion.div
+                          whileHover={{ scale: 1.05 }}
+                          className="cursor-pointer p-3 rounded-md border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors flex items-center"
+                        >
+                          {item.icon}
+                          <span className="font-medium text-gray-700 dark:text-gray-200">{item.term}</span>
+                        </motion.div>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-black text-white dark:bg-white dark:text-black rounded-md shadow-lg p-2 max-w-xs text-sm">
+                        <p>{item.definition}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   ))}
                 </div>
-                 <p className="text-xs italic text-gray-500 mt-4">(A visual template example would typically be shown here)</p>
-             </CardContent>
-           </Card>
-        </section>
+              </TooltipProvider>
+            </CardContent>
+          </Card>
+        </motion.section>
 
-        {/* Bug Life Cycle */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">Bug Life Cycle</h2>
-          <p className="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-8">
-            The Defect Life Cycle (or Bug Life Cycle) tracks a defect through various states from its discovery until it's closed.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {bugLifeCycleStates.map((item) => (
-              <div key={item.state} className={`p-4 rounded-lg shadow-sm border ${item.color.replace('bg-', 'border-').replace('text-', 'border-')}`}>
-                <Badge variant="outline" className={`${item.color} font-semibold mb-2`}>{item.state}</Badge>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
+        {/* Why Bugs Occur */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+        >
+          <h2 className="text-3xl font-bold mb-10 text-center text-gray-900 dark:text-white flex items-center justify-center">
+            <AlertTriangle className="w-8 h-8 mr-3 text-orange-500" /> Common Causes of Bugs
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {bugCauses.map((cause, index) => (
+              <motion.div key={index} whileHover={{ y: -5 }} className="h-full">
+                <Card className="shadow-md hover:shadow-xl transition-shadow h-full flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800">
+                  <CardHeader className="flex flex-row items-center space-x-3 pb-3">
+                    {cause.icon}
+                    <CardTitle className="text-lg font-semibold text-gray-800 dark:text-white">{cause.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{cause.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-           <p className="text-center text-sm text-gray-500 mt-6 italic">(A visual flow diagram is often used to represent the transitions between these states)</p>
-        </section>
+        </motion.section>
+
+        {/* Bug Tracking Tools */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+             <Wrench className="w-8 h-8 mr-3 text-purple-500" /> Popular Bug Tracking Tools
+          </h2>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {["Jira", "Bugzilla", "Azure DevOps (ADO)", "Redmine", "MantisBT", "Asana", "Trello", "ClickUp"].map(tool => (
+               <motion.div key={tool} whileHover={{ scale: 1.1 }}>
+                 <Badge variant="secondary" className="text-base px-4 py-1.5 shadow-sm cursor-default border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                   {tool}
+                 </Badge>
+               </motion.div>
+            ))}
+          </div>
+           <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4 italic">
+             (Tool choice often depends on project size, methodology, and budget.)
+           </p>
+        </motion.section>
+
+        {/* Effective Bug Reporting */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+            <ClipboardList className="w-8 h-8 mr-3 text-green-600" /> Effective Bug Reporting
+          </h2>
+           <Card className="shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800">
+             <CardHeader className="bg-gray-50 dark:bg-gray-700 p-6">
+                <CardTitle className="text-2xl font-bold text-gray-800 dark:text-white">Why Report Effectively?</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-300 pt-2">
+                  Clear, concise, and complete bug reports are essential. They help developers understand and reproduce the issue quickly, leading to faster fixes and saving valuable project time. Good reporting fosters better collaboration between QA and development teams.
+                </CardDescription>
+             </CardHeader>
+             <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Key Elements of a Bug Report:</h3>
+                <Accordion type="single" collapsible className="w-full">
+                  {bugReportElements.map((item, index) => (
+                    <AccordionItem value={`item-${index}`} key={item.field} className="border-b border-gray-200 dark:border-gray-700">
+                      <AccordionTrigger className="text-left font-medium text-gray-700 dark:text-gray-200 hover:no-underline py-4">
+                        {item.field}
+                      </AccordionTrigger>
+                      <AccordionContent className="pt-1 pb-4 text-sm text-gray-600 dark:text-gray-300">
+                        {item.description}
+                        {item.example && <em className="block mt-1 text-xs text-gray-500 dark:text-gray-400">{item.example}</em>}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+                 <p className="text-xs italic text-gray-500 dark:text-gray-400 mt-6">
+                   Tip: Many teams use standardized templates within their bug tracking tools to ensure consistency.
+                 </p>
+             </CardContent>
+           </Card>
+        </motion.section>
+
+        {/* Bug Life Cycle */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+            <Workflow className="w-8 h-8 mr-3 text-indigo-600" /> The Bug Life Cycle
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+            The Defect (or Bug) Life Cycle defines the sequence of states a defect goes through from its initial discovery to its final resolution. Understanding this cycle helps teams track progress and manage defects efficiently.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {bugLifeCycleStates.map((item) => (
+              <motion.div
+                key={item.state}
+                whileHover={{ y: -3 }}
+                className={`p-4 rounded-lg shadow-md border ${item.color} flex flex-col items-start transition-shadow hover:shadow-lg`}
+              >
+                <div className="flex items-center font-semibold mb-2">
+                  {item.icon}
+                  <span>{item.state}</span>
+                </div>
+                <p className="text-xs flex-grow">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+           <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-8 italic">
+             Note: The specific states and transitions can vary slightly depending on the project's workflow and tracking tool configuration.
+           </p>
+        </motion.section>
+
+        {/* Conclusion */}
+         <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={sectionVariants}
+          className="text-center border-t border-gray-200 dark:border-gray-700 pt-12"
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Effective Defect Management is Key</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            A systematic approach to defect management, including clear reporting and understanding the life cycle, is crucial for delivering high-quality software. It improves communication, speeds up resolution times, and ultimately leads to a better end product.
+          </p>
+        </motion.section>
 
         {/* Next Button */}
-        <div className="mt-16 text-center">
+        <div className="mt-12 text-center">
           <Link
-            to="/levels-of-testing" // Use Link component
-            className="inline-flex items-center px-10 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+            to="/levels-of-testing"
+            className="inline-flex items-center px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-base shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group"
           >
-            Next: Levels of Testing
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+            Explore Levels of Testing
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { Code, Network, Monitor, UserCheck } from 'lucide-react'; // Import icons
 import {
   Accordion,
   AccordionContent,
@@ -19,160 +21,297 @@ export default function LevelsOfTesting() {
         {/* Introduction Section */}
         <section className="text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
-            What are Levels of Testing?
+            The Hierarchy of Software Verification
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
-            Testing levels define a systematic approach to verifying software quality. They represent a hierarchy of testing activities, starting from individual components and progressing towards the complete system validation. This structured process helps find defects early, prevents overlapping efforts, and ensures comprehensive coverage across the development lifecycle.
+            Software testing isn't a single activity but a structured process involving multiple <strong className="font-semibold text-blue-600 dark:text-blue-400">levels of verification</strong>. Each level focuses on a specific scope, building confidence progressively from the smallest code units to the complete system in its operational environment.
           </p>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
-            By applying these distinct levels—Unit, Integration, System, and Acceptance Testing—organizations can systematically identify and fix defects, resulting in a higher-quality product delivered to end users.
+            Understanding these levels—<strong className="font-semibold">Unit, Integration, System, and Acceptance Testing</strong>—is crucial for QA professionals to design effective test strategies, detect defects early, ensure comprehensive coverage, and ultimately deliver high-quality software that meets user expectations.
           </p>
         </section>
+
+        {/* Visual Hierarchy Section */}
+        <section className="flex flex-col items-center space-y-[-1px] my-12">
+          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-700 dark:text-gray-300">The Testing Pyramid</h3>
+          {/* Acceptance */}
+          <div className="bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-100 font-medium w-full md:w-3/4 lg:w-1/2 text-center py-3 px-4 rounded-t-lg shadow-sm z-10 border border-b-0 border-pink-300 dark:border-pink-700">
+            Acceptance Testing (UAT, Alpha, Beta)
+          </div>
+          {/* System */}
+          <div className="bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-100 font-medium w-full md:w-4/5 lg:w-7/12 text-center py-3 px-4 shadow-sm z-20 border border-b-0 border-teal-300 dark:border-teal-700">
+            System Testing
+          </div>
+          {/* Integration */}
+          <div className="bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-100 font-medium w-full md:w-11/12 lg:w-3/4 text-center py-3 px-4 shadow-sm z-30 border border-b-0 border-purple-300 dark:border-purple-700">
+            Integration Testing
+          </div>
+          {/* Unit */}
+          <div className="bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-100 font-medium w-full text-center py-3 px-4 rounded-b-lg shadow-sm z-40 border border-blue-300 dark:border-blue-700">
+            Unit Testing
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 italic">Tests build upon each other, starting from the smallest units.</p>
+        </section>
+
 
         {/* Accordion Section */}
         <Accordion type="single" collapsible className="w-full space-y-4">
           {/* Unit Testing */}
           <AccordionItem value="unit" className="border border-blue-300 dark:border-blue-700 rounded-lg shadow-md overflow-hidden">
-            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-blue-100 dark:bg-blue-900 hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200 transition-colors duration-200">
-              1. Unit Testing
+            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-blue-100 dark:bg-blue-900 hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200 transition-colors duration-200 flex items-center justify-between w-full">
+              <span className="flex items-center">
+                <Code className="mr-3 h-6 w-6 text-blue-600 dark:text-blue-400" />
+                1. Unit Testing
+              </span>
             </AccordionTrigger>
-            <AccordionContent className="p-6 bg-white dark:bg-gray-800 space-y-4 text-gray-700 dark:text-gray-300">
-              <p><strong>Definition:</strong> Unit testing is a type of software testing where individual, isolated units or components of software (like functions, methods, or modules) are tested to validate their correctness.</p>
-              <p><strong>Performed By:</strong> Developers during the coding phase.</p>
-              <p><strong>Why Perform Unit Testing?</strong> Inappropriate unit testing leads to high costs for defect fixing later. Proper unit testing saves time and money in the long run.</p>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Key Reasons:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>Fix bugs early in the development cycle and save costs.</li>
+            <AccordionContent className="p-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              {/* Core Info */}
+              <div className="mb-6 space-y-3">
+                <p><strong className="text-blue-700 dark:text-blue-300 font-semibold">Definition:</strong> Unit testing is a type of software testing where individual, isolated units or components of software (like functions, methods, or modules) are tested to validate their correctness.</p>
+                <p><strong className="font-semibold">Performed By:</strong> Developers during the coding phase.</p>
+                <p><strong className="font-semibold">Why Perform Unit Testing?</strong> Inappropriate unit testing leads to high costs for defect fixing later. Proper unit testing saves time and money in the long run.</p>
+              </div>
+
+              {/* Key Reasons */}
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-gray-700/30 rounded-md border border-blue-200 dark:border-blue-900">
+                <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400 mb-2">Key Reasons:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>Fix bugs early in the development cycle and save costs.</li>
                 <li>Helps developers understand the codebase and make changes quickly.</li>
                 <li>Good unit tests serve as project documentation.</li>
-                <li>Helps with code re-use; migrate code and tests together.</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Types:</h4>
-              <p>Manual, Automated</p>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Tools:</h4>
-              <p>Jtest, Junit, NUnit, EMMA, PHPUnit, TestNG</p>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Advantages:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>Allows developers to understand unit functionality and API.</li>
+                  <li>Helps with code re-use; migrate code and tests together.</li>
+                </ul>
+              </div>
+
+              {/* Types & Tools */}
+              <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400 mb-1">Types:</h4>
+                  <p>Manual, Automated</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400 mb-1">Tools:</h4>
+                  <p>Jtest, Junit, NUnit, EMMA, PHPUnit, TestNG</p>
+                </div>
+              </div>
+
+              {/* Advantages */}
+              <div className="mb-6 p-4 bg-green-50 dark:bg-gray-700/30 rounded-md border border-green-200 dark:border-green-900">
+                <h4 className="font-semibold text-lg text-green-700 dark:text-green-400 mb-2">Advantages:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>Allows developers to understand unit functionality and API.</li>
                 <li>Refines code and ensures module correctness.</li>
-                <li>Enables testing parts of the project without waiting for others.</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Disadvantages:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>Writing test cases can be time-consuming.</li>
+                  <li>Enables testing parts of the project without waiting for others.</li>
+                </ul>
+              </div>
+
+              {/* Disadvantages */}
+              <div className="mb-6 p-4 bg-red-50 dark:bg-gray-700/30 rounded-md border border-red-200 dark:border-red-900">
+                <h4 className="font-semibold text-lg text-red-700 dark:text-red-400 mb-2">Disadvantages:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>Writing test cases can be time-consuming.</li>
                 <li>Will not cover all errors, especially integration issues.</li>
                 <li>Not efficient for UI testing.</li>
                 <li>Requires maintenance when source code changes frequently.</li>
-                <li>Cannot cover non-functional testing (scalability, performance).</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400">Example:</h4>
-              <p>Main function:</p>
-              <pre className="bg-gray-100 dark:bg-gray-700 rounded-md p-3 text-sm overflow-x-auto border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200">
-                {`int Add(int a, int b) { return a+b; }`}
-              </pre>
-              <p>Unit test code:</p>
-              <pre className="bg-gray-100 dark:bg-gray-700 rounded-md p-3 text-sm overflow-x-auto border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200">
-                {`void TestAdd1() { Assert.IsEqual(Add(5, 10), 15); }`}
-              </pre>
+                  <li>Cannot cover non-functional testing (scalability, performance).</li>
+                </ul>
+              </div>
+
+              {/* Example */}
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg text-blue-700 dark:text-blue-400 mb-2">Example:</h4>
+                <p className="mb-1">Main function:</p>
+                <pre className="bg-gray-100 dark:bg-gray-900 rounded-md p-3 text-sm overflow-x-auto border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 mb-3">
+                  {`int Add(int a, int b) { return a+b; }`}
+                </pre>
+                <p className="mb-1">Unit test code:</p>
+                <pre className="bg-gray-100 dark:bg-gray-900 rounded-md p-3 text-sm overflow-x-auto border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200">
+                  {`void TestAdd1() { Assert.IsEqual(Add(5, 10), 15); }`}
+                </pre>
+              </div>
             </AccordionContent>
           </AccordionItem>
 
-          {/* Integration Testing */}
+           {/* Integration Testing */}
           <AccordionItem value="integration" className="border border-purple-300 dark:border-purple-700 rounded-lg shadow-md overflow-hidden">
-            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-purple-100 dark:bg-purple-900 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-800 dark:text-purple-200 transition-colors duration-200">
-              2. Integration Testing
+            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-purple-100 dark:bg-purple-900 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-800 dark:text-purple-200 transition-colors duration-200 flex items-center justify-between w-full">
+               <span className="flex items-center">
+                 <Network className="mr-3 h-6 w-6 text-purple-600 dark:text-purple-400" />
+                 2. Integration Testing
+               </span>
             </AccordionTrigger>
-            <AccordionContent className="p-6 bg-white dark:bg-gray-800 space-y-4 text-gray-700 dark:text-gray-300">
-              <p><strong>Definition:</strong> Integration testing is where software modules are integrated logically and tested as a group to expose defects in their interactions.</p>
-              <p><strong>Performed By:</strong> Developers, QA, or specialized integration teams.</p>
-              <h4 className="font-semibold text-lg text-purple-700 dark:text-purple-400">Advantages:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>Ensures integrated modules work properly together.</li>
+            <AccordionContent className="p-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              {/* Core Info */}
+              <div className="mb-6 space-y-3">
+                <p><strong className="text-purple-700 dark:text-purple-300 font-semibold">Definition:</strong> Integration testing is where software modules are integrated logically and tested as a group to expose defects in their interactions.</p>
+                <p><strong className="font-semibold">Performed By:</strong> Developers, QA, or specialized integration teams.</p>
+              </div>
+
+              {/* Advantages */}
+              <div className="mb-6 p-4 bg-green-50 dark:bg-gray-700/30 rounded-md border border-green-200 dark:border-green-900">
+                <h4 className="font-semibold text-lg text-green-700 dark:text-green-400 mb-2">Advantages:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>Ensures integrated modules work properly together.</li>
                 <li>Testing can start once relevant modules are available.</li>
                 <li>Detects errors related to interfaces between modules.</li>
                 <li>Helps verify interactions with APIs and third-party tools.</li>
                 <li>Typically covers a large volume of the system, increasing efficiency.</li>
-                <li>Increases test coverage and reliability.</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-purple-700 dark:text-purple-400">Example:</h4>
-              <p>Check that after adding items to the cart, the checkout module correctly receives that information and calculates shipping costs.</p>
-              <h4 className="font-semibold text-lg text-purple-700 dark:text-purple-400">Approaches:</h4>
-              <dl className="space-y-2 pl-4">
-                <div>
-                  <dt className="font-medium">Big Bang Approach:</dt>
-                  <dd className="ml-4">All components are integrated at once and tested as a single unit. Requires all components to be ready. <br /><em>Example: Waiting for the Login, User Profile, and Order History modules to be complete before testing them together.</em></dd>
+                  <li>Increases test coverage and reliability.</li>
+                </ul>
+              </div>
+
+              {/* Example */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-lg text-purple-700 dark:text-purple-400 mb-2">Example:</h4>
+                <p>Check that after adding items to the cart, the checkout module correctly receives that information and calculates shipping costs.</p>
+              </div>
+
+              {/* Approaches */}
+              <div className="mb-4 p-4 bg-purple-50 dark:bg-gray-700/30 rounded-md border border-purple-200 dark:border-purple-900">
+                <h4 className="font-semibold text-lg text-purple-700 dark:text-purple-400 mb-3">Approaches:</h4>
+                <dl className="space-y-4 pl-4">
+                  <div>
+                    <dt className="font-medium text-purple-600 dark:text-purple-300">Big Bang Approach:</dt>
+                    <dd className="ml-4 mt-1 text-sm">All components are integrated at once and tested as a single unit. Requires all components to be ready. <br /><em className="text-gray-500 dark:text-gray-400">Example: Waiting for the Login, User Profile, and Order History modules to be complete before testing them together.</em></dd>
                 </div>
                 <div>
-                  <dt className="font-medium">Bottom-Up Approach:</dt>
-                  <dd className="ml-4">Lower-level modules are tested first, then used to facilitate testing of higher-level modules, progressing upwards. <br /><em>Example: Testing the database connection module first, then the data retrieval module that uses it, and finally the UI display module that shows the data.</em></dd>
-                </div>
-                <div>
-                  <dt className="font-medium">Top-Down Approach:</dt>
-                  <dd className="ml-4">Higher-level modules are tested first, often using 'stubs' (dummy modules) for lower-level dependencies. Testing progresses downwards. <br /><em>Example: Testing the main application UI first, using stubs for the payment processing and inventory modules, then replacing the stubs as the actual modules become available.</em></dd>
-                </div>
-                <div>
-                  <dt className="font-medium">Sandwich Testing (Hybrid):</dt>
-                  <dd className="ml-4">Combines Top-Down and Bottom-Up. Top-level modules are tested with lower-level modules, while lower modules are integrated with top modules simultaneously. Uses both stubs and drivers. <br /><em>Example: Testing the UI layer (top) with stubs for business logic, while simultaneously testing the data access layer (bottom) with drivers, and then integrating the middle business logic layer.</em></dd>
-                </div>
-              </dl>
-              {/* Integration test example diagram description can be added here if needed */}
+                  </div>
+                  <div>
+                    <dt className="font-medium text-purple-600 dark:text-purple-300">Bottom-Up Approach:</dt>
+                    <dd className="ml-4 mt-1 text-sm">Lower-level modules are tested first, then used to facilitate testing of higher-level modules, progressing upwards. <br /><em className="text-gray-500 dark:text-gray-400">Example: Testing the database connection module first, then the data retrieval module that uses it, and finally the UI display module that shows the data.</em></dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium text-purple-600 dark:text-purple-300">Top-Down Approach:</dt>
+                    <dd className="ml-4 mt-1 text-sm">Higher-level modules are tested first, often using 'stubs' (dummy modules) for lower-level dependencies. Testing progresses downwards. <br /><em className="text-gray-500 dark:text-gray-400">Example: Testing the main application UI first, using stubs for the payment processing and inventory modules, then replacing the stubs as the actual modules become available.</em></dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium text-purple-600 dark:text-purple-300">Sandwich Testing (Hybrid):</dt>
+                    <dd className="ml-4 mt-1 text-sm">Combines Top-Down and Bottom-Up. Top-level modules are tested with lower-level modules, while lower modules are integrated with top modules simultaneously. Uses both stubs and drivers. <br /><em className="text-gray-500 dark:text-gray-400">Example: Testing the UI layer (top) with stubs for business logic, while simultaneously testing the data access layer (bottom) with drivers, and then integrating the middle business logic layer.</em></dd>
+                  </div>
+                </dl>
+                {/* Integration test example diagram description can be added here if needed */}
+              </div>
             </AccordionContent>
           </AccordionItem>
 
-          {/* System Testing */}
+           {/* System Testing */}
           <AccordionItem value="system" className="border border-teal-300 dark:border-teal-700 rounded-lg shadow-md overflow-hidden">
-            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-teal-100 dark:bg-teal-900 hover:bg-teal-200 dark:hover:bg-teal-800 text-teal-800 dark:text-teal-200 transition-colors duration-200">
-              3. System Testing
+            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-teal-100 dark:bg-teal-900 hover:bg-teal-200 dark:hover:bg-teal-800 text-teal-800 dark:text-teal-200 transition-colors duration-200 flex items-center justify-between w-full">
+               <span className="flex items-center">
+                 <Monitor className="mr-3 h-6 w-6 text-teal-600 dark:text-teal-400" />
+                 3. System Testing
+               </span>
             </AccordionTrigger>
-            <AccordionContent className="p-6 bg-white dark:bg-gray-800 space-y-4 text-gray-700 dark:text-gray-300">
-              <p><strong>Definition:</strong> System testing validates the complete and fully integrated software product against its specified requirements. It evaluates the end-to-end system behavior.</p>
-              <p><strong>Performed By:</strong> Independent QA/Testers.</p>
-              <h4 className="font-semibold text-lg text-teal-700 dark:text-teal-400">Advantages:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>Testers don't need deep programming knowledge (Black Box).</li>
+            <AccordionContent className="p-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              {/* Core Info */}
+              <div className="mb-6 space-y-3">
+                <p><strong className="text-teal-700 dark:text-teal-300 font-semibold">Definition:</strong> System testing validates the complete and fully integrated software product against its specified requirements. It evaluates the end-to-end system behavior.</p>
+                <p><strong className="font-semibold">Performed By:</strong> Independent QA/Testers.</p>
+              </div>
+
+              {/* Advantages */}
+              <div className="mb-6 p-4 bg-green-50 dark:bg-gray-700/30 rounded-md border border-green-200 dark:border-green-900">
+                <h4 className="font-semibold text-lg text-green-700 dark:text-green-400 mb-2">Advantages:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>Testers don't need deep programming knowledge (Black Box).</li>
                 <li>Tests the entire product, finding errors missed in earlier stages.</li>
                 <li>Uses a testing environment similar to production.</li>
                 <li>Checks overall functionality against business and technical requirements.</li>
-                <li>Increases confidence before moving to acceptance testing.</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-teal-700 dark:text-teal-400">Disadvantages:</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                <li>More time-consuming than unit or integration testing.</li>
+                  <li>Increases confidence before moving to acceptance testing.</li>
+                </ul>
+              </div>
+
+              {/* Disadvantages */}
+              <div className="mb-6 p-4 bg-red-50 dark:bg-gray-700/30 rounded-md border border-red-200 dark:border-red-900">
+                <h4 className="font-semibold text-lg text-red-700 dark:text-red-400 mb-2">Disadvantages:</h4>
+                <ul className="list-disc list-inside space-y-1 pl-4">
+                  <li>More time-consuming than unit or integration testing.</li>
                 <li>Can be expensive as it tests the entire system.</li>
-                <li>Requires good debugging tools to find hidden errors.</li>
-              </ul>
-              <h4 className="font-semibold text-lg text-teal-700 dark:text-teal-400">Example:</h4>
-              <p>Simulate a full customer journey—searching for products, adding them to the cart, checking out, and receiving an order confirmation email—to ensure the entire system works seamlessly.</p>
+                  <li>Requires good debugging tools to find hidden errors.</li>
+                </ul>
+              </div>
+
+              {/* Example */}
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg text-teal-700 dark:text-teal-400 mb-2">Example:</h4>
+                <p>Simulate a full customer journey—searching for products, adding them to the cart, checking out, and receiving an order confirmation email—to ensure the entire system works seamlessly.</p>
+              </div>
             </AccordionContent>
           </AccordionItem>
 
-          {/* Acceptance Testing */}
+           {/* Acceptance Testing */}
           <AccordionItem value="acceptance" className="border border-pink-300 dark:border-pink-700 rounded-lg shadow-md overflow-hidden">
-            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-pink-100 dark:bg-pink-900 hover:bg-pink-200 dark:hover:bg-pink-800 text-pink-800 dark:text-pink-200 transition-colors duration-200">
-              4. Acceptance Testing
+            <AccordionTrigger className="text-xl font-semibold px-6 py-4 bg-pink-100 dark:bg-pink-900 hover:bg-pink-200 dark:hover:bg-pink-800 text-pink-800 dark:text-pink-200 transition-colors duration-200 flex items-center justify-between w-full">
+               <span className="flex items-center">
+                 <UserCheck className="mr-3 h-6 w-6 text-pink-600 dark:text-pink-400" />
+                 4. Acceptance Testing
+               </span>
             </AccordionTrigger>
-            <AccordionContent className="p-6 bg-white dark:bg-gray-800 space-y-4 text-gray-700 dark:text-gray-300">
-              <p><strong>Definition:</strong> Acceptance testing is performed by end-users or clients to verify/accept the software system against their business requirements before it moves to production.</p>
-              <p><strong>Performed By:</strong> Clients, End-users.</p>
-              <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400">Common Types:</h4>
-              <dl className="space-y-2 pl-4">
-                <div>
-                  <dt className="font-medium">User Acceptance Testing (UAT):</dt>
-                  <dd className="ml-4">Assesses if the product works correctly for user usage, focusing on frequently used requirements. Also called End-User Testing.</dd>
-                </div>
-                <div>
-                  <dt className="font-medium">Alpha Testing:</dt>
-                  <dd className="ml-4">Performed by internal teams (e.g., QA, product owners) in a controlled environment near the end of development. Feedback helps improve the product.</dd>
-                </div>
-                <div>
-                  <dt className="font-medium">Beta Testing:</dt>
-                  <dd className="ml-4">Performed by a limited set of actual end-users (beta testers) in their real environment before official release. Feedback is collected to fix issues and enhance user experience.</dd>
-                </div>
-              </dl>
-              <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400">Other Types:</h4>
-              <p>Business Acceptance Testing (BAT), Contract Acceptance Testing (CAT), Regulations/Compliance Acceptance Testing (RAT), Operational Acceptance Testing (OAT).</p>
-              <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400">Example:</h4>
-              <p>Have a selected group of customers or stakeholders use the e-commerce site’s new feature (e.g., “Buy Now” button) in a staging environment and give feedback on usability and correctness before it goes live.</p>
+            <AccordionContent className="p-6 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+              {/* Core Info */}
+              <div className="mb-6 space-y-3">
+                <p><strong className="text-pink-700 dark:text-pink-300 font-semibold">Definition:</strong> Acceptance testing is performed by end-users or clients to verify/accept the software system against their business requirements before it moves to production.</p>
+                <p><strong className="font-semibold">Performed By:</strong> Clients, End-users.</p>
+              </div>
+
+              {/* Common Types */}
+              <div className="mb-6 p-4 bg-pink-50 dark:bg-gray-700/30 rounded-md border border-pink-200 dark:border-pink-900">
+                <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400 mb-3">Common Types:</h4>
+                <TooltipProvider> {/* Wrap sections needing tooltips */}
+                  <dl className="space-y-4 pl-4">
+                    <div>
+                      <dt className="font-medium text-pink-600 dark:text-pink-300">
+                      <Tooltip>
+                        <TooltipTrigger className="underline decoration-dotted cursor-help">User Acceptance Testing (UAT)</TooltipTrigger>
+                        <TooltipContent>
+                            <p>Verifies the software meets user needs in real-world scenarios.</p>
+                          </TooltipContent>
+                        </Tooltip>:
+                      </dt>
+                      <dd className="ml-4 mt-1 text-sm">Assesses if the product works correctly for user usage, focusing on frequently used requirements. Also called End-User Testing.</dd>
+                    </div>
+                    <div>
+                      <dt className="font-medium text-pink-600 dark:text-pink-300">Alpha Testing:</dt>
+                      <dd className="ml-4 mt-1 text-sm">Performed by internal teams (e.g., QA, product owners) in a controlled environment near the end of development. Feedback helps improve the product.</dd>
+                    </div>
+                    <div>
+                      <dt className="font-medium text-pink-600 dark:text-pink-300">Beta Testing:</dt>
+                      <dd className="ml-4 mt-1 text-sm">Performed by a limited set of actual end-users (beta testers) in their real environment before official release. Feedback is collected to fix issues and enhance user experience.</dd>
+                    </div>
+                  </dl>
+                </TooltipProvider>
+              </div>
+
+              {/* Other Types */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400 mb-2">Other Types:</h4>
+                <TooltipProvider>
+                  <p>
+                    <Tooltip>
+                      <TooltipTrigger className="underline decoration-dotted cursor-help">Business Acceptance Testing (BAT)</TooltipTrigger>
+                      <TooltipContent><p>Ensures the software meets business objectives and processes.</p></TooltipContent>
+                    </Tooltip>,{' '}
+                    <Tooltip>
+                      <TooltipTrigger className="underline decoration-dotted cursor-help">Contract Acceptance Testing (CAT)</TooltipTrigger>
+                      <TooltipContent><p>Verifies the software meets criteria specified in a contract.</p></TooltipContent>
+                    </Tooltip>,{' '}
+                    <Tooltip>
+                      <TooltipTrigger className="underline decoration-dotted cursor-help">Regulations/Compliance Acceptance Testing (RAT)</TooltipTrigger>
+                      <TooltipContent><p>Ensures compliance with legal and regulatory standards.</p></TooltipContent>
+                    </Tooltip>,{' '}
+                    <Tooltip>
+                      <TooltipTrigger className="underline decoration-dotted cursor-help">Operational Acceptance Testing (OAT)</TooltipTrigger>
+                      <TooltipContent><p>Checks the system's readiness for operation and maintenance.</p></TooltipContent>
+                    </Tooltip>.
+                  </p>
+                </TooltipProvider>
+              </div>
+
+              {/* Example */}
+              <div className="mb-4">
+                <h4 className="font-semibold text-lg text-pink-700 dark:text-pink-400 mb-2">Example:</h4>
+                <p>Have a selected group of customers or stakeholders use the e-commerce site’s new feature (e.g., “Buy Now” button) in a staging environment and give feedback on usability and correctness before it goes live.</p>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -285,6 +424,20 @@ export default function LevelsOfTesting() {
               </TableBody>
             </Table>
           </div>
+        </section>
+
+        {/* Key Takeaways Section */}
+        <section className="mt-16 p-6 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/30 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+          <h3 className="text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
+            Key Takeaways
+          </h3>
+          <ul className="list-disc list-outside space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+            <li><strong>Layered Approach:</strong> Testing levels provide a structured hierarchy (Unit → Integration → System → Acceptance) for thorough software validation.</li>
+            <li><strong>Early Defect Detection:</strong> Each level aims to catch defects specific to its scope, preventing them from propagating to later stages where they are costlier to fix.</li>
+            <li><strong>Scope Variation:</strong> Testing focus shifts from individual code components (Unit) to interactions (Integration), the entire system (System), and finally user/business requirements (Acceptance).</li>
+            <li><strong>Collaboration:</strong> Different roles (Developers, QA, End Users) are typically involved at different levels.</li>
+            <li><strong>Confidence Building:</strong> Successfully passing each level increases confidence in the software's quality and readiness for release.</li>
+          </ul>
         </section>
 
         {/* Navigation or Footer Elements */}

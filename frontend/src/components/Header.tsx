@@ -40,7 +40,7 @@ const navItems = [
   { label: "Resources", path: "/resources" },
   { label: "Interview Questions", path: "/interview-questions" },
   { label: "Templates", path: "/templates" },
-  { label: "Contact", path: "/contact" },
+  { label: "Creator", path: "/creator" }, // Renamed label and path
 ];
 
 // Default number of items before "More" at the lg breakpoint

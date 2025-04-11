@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"; // Corrected path alias
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Corrected path alias
 import { Mail, Phone, MapPin, Linkedin, User, Calendar, Languages, Briefcase, Award, GraduationCap, Wrench, Code, Users, Presentation, Brain } from 'lucide-react'; // Using lucide-react icons
 
-export default function Contact() {
+export default function Creator() { // Renamed component function
   // Placeholder for potential image URL or use initials
   const avatarImageUrl = ""; // Add an image URL if available
   const initials = "AA"; // Al-Tofail Al-Hiary

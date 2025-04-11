@@ -1,89 +1,118 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "components/ui/card"; // Import Card components
+import { ArrowRightLeft, Code, TestTubeDiagonal, CheckCircle, Rocket, Settings } from "lucide-react"; // Import icons
+import { motion } from "framer-motion"; // Import motion
 
 export default function SdlcStlcIntegration() {
   const integrationPoints = [
     {
       sdlcPhase: "Requirements Analysis",
       stlcPhase: "Test Planning",
-      description: "Test planning begins as soon as requirements are defined. Testers participate in requirements reviews to ensure testability."
+      description: "Test planning begins as requirements are defined. Testers review requirements for testability.",
+      sdlcIcon: <Settings className="w-6 h-6 text-blue-600" />,
+      stlcIcon: <TestTubeDiagonal className="w-6 h-6 text-purple-600" />,
     },
     {
       sdlcPhase: "Design",
       stlcPhase: "Test Design",
-      description: "As system design progresses, testers start creating test cases based on design specifications and requirements."
+      description: "Testers create test cases based on design specifications and requirements.",
+      sdlcIcon: <Code className="w-6 h-6 text-blue-600" />,
+      stlcIcon: <TestTubeDiagonal className="w-6 h-6 text-purple-600" />,
     },
     {
       sdlcPhase: "Implementation",
       stlcPhase: "Test Environment Setup",
-      description: "While developers write code, testers prepare the test environment and finalize test data preparation."
+      description: "While developers code, testers prepare the test environment and finalize test data.",
+      sdlcIcon: <Code className="w-6 h-6 text-blue-600" />,
+      stlcIcon: <Settings className="w-6 h-6 text-purple-600" />,
     },
     {
       sdlcPhase: "Testing",
       stlcPhase: "Test Execution",
-      description: "The primary integration point where formal testing begins, defects are reported, and fixes are verified."
+      description: "Formal testing begins, defects are reported, and fixes are verified.",
+      sdlcIcon: <TestTubeDiagonal className="w-6 h-6 text-blue-600" />, // Testing is central here
+      stlcIcon: <CheckCircle className="w-6 h-6 text-purple-600" />,
     },
     {
       sdlcPhase: "Deployment & Maintenance",
       stlcPhase: "Test Cycle Closure",
-      description: "As the system is deployed, testing activities are evaluated and documented for future improvement."
+      description: "Testing activities are evaluated and documented for future improvement as the system is deployed.",
+      sdlcIcon: <Rocket className="w-6 h-6 text-blue-600" />,
+      stlcIcon: <CheckCircle className="w-6 h-6 text-purple-600" />,
     }
   ];
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
     <PageLayout
-      title="SDLC & STLC Integration Points"
-      subtitle="How the Software Development Life Cycle and Software Testing Life Cycle align and interact throughout the project"
+      title="SDLC & STLC Integration"
+      subtitle="How Development and Testing Lifecycles Align"
     >
-      <div className="max-w-6xl mx-auto py-12">
-        <div className="mb-8 text-center">
-          <p className="text-lg text-gray-700 max-w-4xl mx-auto">
-            SDLC and STLC work together throughout the software development process. Here's how the phases align and interact.
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            The Software Development Life Cycle (SDLC) and Software Testing Life Cycle (STLC) are deeply intertwined. Effective integration ensures quality throughout the development process. Explore the key interaction points below.
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8 overflow-x-auto">
-          <h3 className="text-xl font-bold mb-6 text-center">Integration Points</h3>
-          <div className="min-w-[768px]">
-            {integrationPoints.map((point, index) => (
-              <div key={index} className="relative my-8">
-                <div className="absolute left-0 right-0 h-0.5 top-1/2 transform -translate-y-1/2 bg-gray-200"></div>
-                <div className="flex justify-between items-center relative">
-                  <div className="w-1/3 text-center">
-                    <div className="inline-block bg-blue-50 rounded-lg p-3 border border-blue-100">
-                      <span className="font-medium text-[#00A2FF]">{point.sdlcPhase}</span>
+        {/* Responsive Grid for Integration Points */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {integrationPoints.map((point, index) => (
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              className="flex" // Ensure cards in the same row have equal height if content differs
+            >
+              <Card className="w-full flex flex-col bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg border border-gray-200 dark:border-gray-700">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      {point.sdlcIcon}
+                      <CardTitle className="text-lg font-semibold text-blue-700 dark:text-blue-400">{point.sdlcPhase}</CardTitle>
+                    </div>
+                    <ArrowRightLeft className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+                    <div className="flex items-center space-x-2">
+                      {point.stlcIcon}
+                      <CardTitle className="text-lg font-semibold text-purple-700 dark:text-purple-400">{point.stlcPhase}</CardTitle>
                     </div>
                   </div>
-                  <div className="w-1/3 flex justify-center items-center">
-                    <div className="inline-block bg-gradient-to-r from-blue-50 to-purple-50 rounded-full p-4 shadow-md w-20 h-20 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="w-1/3 text-center">
-                    <div className="inline-block bg-purple-50 rounded-lg p-3 border border-purple-100">
-                      <span className="font-medium text-[#9C27FF]">{point.stlcPhase}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center mt-4">
-                  <div className="bg-gray-50 rounded-lg p-4 max-w-xl">
-                    <p className="text-sm text-gray-600">{point.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <CardDescription className="text-sm text-gray-600 dark:text-gray-300">
+                    {point.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
-        {/* Next Button */}
-        <div className="mt-12 text-center">
+
+        {/* Navigation Button */}
+        <div className="mt-16 text-center">
           <Link
             to="/defect-management"
-            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
+            className="inline-flex items-center px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-base shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Defect Management →
+            Learn about Defect Management
+            <ArrowRightLeft className="ml-2 -mr-1 h-5 w-5" /> {/* Replaced arrow */}
           </Link>
         </div>
       </div>
