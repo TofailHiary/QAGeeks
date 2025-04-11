@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { ConceptCard } from "components/ConceptCard";
 
@@ -717,12 +718,12 @@ export default function Principles() {
       )}
         {/* Next Button */}
         <div className="mt-12 text-center">
-          <a
-            href="/sdlc"
+          <Link
+            to="/sdlc"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
           >
             SDLC →
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

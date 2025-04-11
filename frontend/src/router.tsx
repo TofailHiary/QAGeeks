@@ -27,5 +27,8 @@ export const router = createBrowserRouter(
         </SuspenseWrapper>
       ),
     },
-  ]
+  ],
+  {
+    basename: "/QAGeeks/", // Re-add basename for GitHub Pages subdirectory
+  }
 );

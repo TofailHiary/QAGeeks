@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -499,12 +500,12 @@ export default function TestingTools() {
 
         {/* Next Button */}
         <div className="mt-12 text-center">
-          <a
-            href="/api-testing"
+          <Link
+            to="/api-testing"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
           >
             API Testing →
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

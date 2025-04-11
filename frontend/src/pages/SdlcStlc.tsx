@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 
 export default function SdlcStlcIntegration() {
@@ -78,12 +79,12 @@ export default function SdlcStlcIntegration() {
         </div>
         {/* Next Button */}
         <div className="mt-12 text-center">
-          <a
-            href="/defect-management"
+          <Link
+            to="/defect-management"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
           >
             Defect Management →
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

@@ -65,8 +65,8 @@ const buildVariables = () => {
 };
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/QAGeeks/',
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/QAGeeks/',
 	define: buildVariables(),
 	plugins: [react(), splitVendorChunkPlugin(), tsConfigPaths(), injectHTML()],
 	server: {
@@ -82,4 +82,4 @@ export default defineConfig({
 			"@": path.resolve(__dirname, "./src"),
 		},
 	},
-});
+}));

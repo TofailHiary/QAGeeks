@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"; // Assuming Table components exist
@@ -310,12 +311,12 @@ export default function Stlc() {
 
         {/* Next Button */}
         <div className="mt-16 text-center">
-          <a
-            href="/sdlc-stlc"
+          <Link
+            to="/sdlc-stlc"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
           >
             SDLC & STLC Integration →
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

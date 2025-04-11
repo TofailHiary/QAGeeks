@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -330,13 +331,13 @@ export default function TestingTypes() {
 
         {/* Next Button */}
         <div className="mt-20 text-center">
-          <a
-            href="/testing-methods"
+          <Link
+            to="/testing-methods" // Use Link component
             className="inline-flex items-center px-10 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
           >
             Next: Testing Methods
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

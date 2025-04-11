@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // Store the full path including the subdirectory and query params/hash
+      // Adjust '/QAGeeks/' if your repository name changes
+      const repoName = '/QAGeeks/'; 
+      const path = location.pathname.substring(location.pathname.indexOf(repoName));
+      const search = location.search;
+      const hash = location.hash;
+
+      // Use sessionStorage to store the path temporarily
+      sessionStorage.redirect = path + search + hash;
+
+      // Redirect to the base index.html within the subdirectory
+      location.replace(repoName); 
+    </script>
+  </head>
+  <body>
+    If you are not redirected automatically, follow this <a id="redirect-link" href="/QAGeeks/">link</a>.
+    <script>
+      // Update the link href just in case JS fails initially
+      document.getElementById('redirect-link').href = '/QAGeeks/';
+    </script>
+  </body>
+</html>

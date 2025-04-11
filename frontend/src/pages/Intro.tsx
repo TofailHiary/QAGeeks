@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent } from "@/components/ui/card"; // Assuming Card component exists
 
@@ -113,12 +114,12 @@ export default function SiteContent() {
 
         {/* Next Button */}
         <div className="mt-16 text-center">
-          <a
-            href="/principles"
+          <Link
+            to="/principles"
             className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform"
           >
             Principles & Concepts →
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

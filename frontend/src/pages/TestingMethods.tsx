@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -351,13 +352,13 @@ export default function TestingMethods() {
 
         {/* Next Button */}
         <div className="mt-20 text-center"> {/* Increased margin */}
-          <a
-            href="/testing-tools"
+          <Link
+            to="/testing-tools"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out" // Added flex, gap, adjusted padding/shadow/transition
           >
             <span>Testing Tools</span>
             <ArrowRight className="w-5 h-5" /> {/* Added icon */}
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>

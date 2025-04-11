@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -166,13 +167,13 @@ export default function DefectManagement() {
 
         {/* Next Button */}
         <div className="mt-16 text-center">
-          <a
-            href="/levels-of-testing"
+          <Link
+            to="/levels-of-testing" // Use Link component
             className="inline-flex items-center px-10 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
           >
             Next: Levels of Testing
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </PageLayout>
