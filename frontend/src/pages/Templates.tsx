@@ -24,7 +24,7 @@ const templateFiles: TemplateItem[] = [
   { title: "Defect Report", description: "Template for logging and tracking software defects.", filePath: "Bug report/Defects Report.docx", category: "Defects" },
   { title: "Functional Requirements (FRS)", description: "Document detailing functional specifications.", filePath: "FRS/func_req_doc.doc", category: "Requirements" },
   { title: "Software Requirements (SRS)", description: "Comprehensive description of software requirements.", filePath: "SRS/srs_template.doc", category: "Requirements" },
-  { title: "Test Cases Template", description: "Spreadsheet for designing and documenting test cases.", filePath: "Test Case/Test Cases Template.xlsx", category: "Testing" },
+  { title: "Test Cases Template", description: "Spreadsheet for designing and documenting test cases.", filePath: "Test case/Test Cases Template.xlsx", category: "Testing" }, // Corrected folder case
   { title: "Test Closure Report", description: "Template for summarizing testing activities and results.", filePath: "Test closure/Test Closure report_TEMPLATE_v 2.docx", category: "Reporting" },
   { title: "Test Metrics", description: "Spreadsheet for tracking key testing metrics.", filePath: "Test Metrics/Test Metrics Template.xls", category: "Reporting" },
   { title: "Test Plan (Alt. DOCX)", description: "Alternative test plan format (DOCX).", filePath: "Test plan/Test plan example 2.docx", category: "Planning" },
@@ -89,10 +89,10 @@ const getFileIcon = (filePath: string) => {
 
 // --- Reusable Card Component ---
 const TemplateCard: React.FC<{ item: TemplateItem; baseUrl: string }> = ({ item, baseUrl }) => {
-  // Conditionally set path based on environment
-  const downloadPath = import.meta.env.PROD
-    ? `${baseUrl.substring(1)}/${item.filePath}` // Relative path for production (works with /QAGeeks/ base)
-    : `${baseUrl}/${item.filePath}`;             // Absolute path for development (as it was working before)
+  // Construct the full base URL using origin and Vite's base path
+  const fullBaseUrl = `${window.location.origin}${import.meta.env.BASE_URL}`;
+  // Resolve the relative path against the full base URL
+  const downloadPath = new URL(`${baseUrl}/${item.filePath}`, fullBaseUrl).pathname;
 
   return (
   // Added animation classes: opacity-0 animate-fade-in
@@ -119,7 +119,7 @@ const TemplateCard: React.FC<{ item: TemplateItem; baseUrl: string }> = ({ item,
       <Tooltip>
         <TooltipTrigger asChild>
           <Button asChild variant="default" size="sm" className="w-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white hover:brightness-110 transition-all">
-            {/* Use conditionally generated path */}
+            {/* Use the constructed absolute path */}
             <a href={downloadPath} download={item.filePath.split('/').pop()}>
               <Download className="mr-2 h-4 w-4" /> Download
             </a>
@@ -195,7 +195,7 @@ export default function Templates() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredTemplates.length > 0 ? (
               filteredTemplates.map((item) => (
-                <TemplateCard key={item.filePath} item={item} baseUrl="/templates" />
+                <TemplateCard key={item.filePath} item={item} baseUrl="templates" />
               ))
             ) : (
               <p className="text-gray-500 text-center col-span-full">No templates found for this category.</p>
@@ -228,7 +228,7 @@ export default function Templates() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
              {filteredExamples.length > 0 ? (
                filteredExamples.map((item) => (
-                <TemplateCard key={item.filePath} item={item} baseUrl="/examples" />
+                <TemplateCard key={item.filePath} item={item} baseUrl="Examples" />
               ))
             ) : (
               <p className="text-gray-500 text-center col-span-full">No examples found for this category.</p>
