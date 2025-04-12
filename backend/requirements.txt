@@ -1,5 +1,5 @@
 # Workspace version: 1.44.5
-databutton==0.38.34
+# databutton # Removed databutton entirely due to fastapi version conflict
 ipykernel==6.29.5
 fastapi==0.111.0
 python-multipart==0.0.9
@@ -8,3 +8,4 @@ uvicorn[standard]==0.29.0
 openai
 beautifulsoup4
 requests
+httpx # Added for making HTTP requests from backend

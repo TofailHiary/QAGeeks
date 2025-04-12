@@ -3,6 +3,7 @@ import pathlib
 import json
 import dotenv
 from fastapi import FastAPI, APIRouter, Depends
+from fastapi.middleware.cors import CORSMiddleware # Import CORS Middleware
 
 dotenv.load_dotenv()
 
@@ -77,6 +78,26 @@ def get_firebase_config() -> dict | None:
 def create_app() -> FastAPI:
     """Create the app. This is called by uvicorn with the factory option to construct the app object."""
     app = FastAPI()
+
+    # --- CORS Middleware Configuration ---
+    # Allow requests from your frontend development server
+    origins = [
+        "http://localhost:5173", # Vite default port
+        "http://localhost:3000", # Common React dev port
+        # Add your deployed frontend URL here later if needed
+        # e.g., "https://tofailhiary.github.io"
+    ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"], # Allow all methods (GET, POST, OPTIONS, etc.)
+        allow_headers=["*"], # Allow all headers
+    )
+    # --- End CORS Configuration ---
+
+
     app.include_router(import_api_routers())
 
     for route in app.routes:
