@@ -3,7 +3,10 @@ import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Corrected path alias
 import { Button } from "@/components/ui/button"; // Corrected path alias
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Corrected path alias
-import { Mail, Phone, MapPin, Linkedin, User, Calendar, Languages, Briefcase, Award, GraduationCap, Wrench, Code, Users, Presentation, Brain } from 'lucide-react'; // Using lucide-react icons
+import { Input } from "@/components/ui/input"; // Added Input
+import { Textarea } from "@/components/ui/textarea"; // Added Textarea
+import { Label } from "@/components/ui/label"; // Added Label
+import { Mail, Phone, MapPin, Linkedin, User, Calendar, Languages, Briefcase, Award, GraduationCap, Wrench, Code, Users, Presentation, Brain, Sparkles, Bot, Lightbulb, Send } from 'lucide-react'; // Added Sparkles, Bot, Lightbulb, Send
 
 export default function Creator() { // Renamed component function
   // Placeholder for potential image URL or use initials
@@ -87,131 +90,94 @@ export default function Creator() { // Renamed component function
           <Card className="hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-center text-primary">
-                <User className="mr-2 h-5 w-5" /> Profile Summary
+                <User className="mr-2 h-5 w-5" /> About the Creator
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Highly motivated Lead Quality Assurance Engineer with extensive experience spanning manual and automation testing, team leadership, and a robust foundation in software engineering principles. Proven ability to enhance software quality through meticulous testing strategies and effective team collaboration.
+                Hi, I'm Al-Tofail Al-Hiary, a Lead Quality Assurance Engineer with a deep passion for software quality and continuous learning. Holding advanced ISTQB certifications (CTFL, CTAL-TA, CTAL-TTA), I've dedicated my career to mastering the art and science of QA.
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                I created QAGeeks as a dedicated resource hub for fellow QA professionals and aspiring engineers. My goal is to share practical knowledge, insights from real-world experience, and helpful resources covering everything from fundamental principles to advanced testing techniques and tools. I believe in empowering the QA community through accessible, high-quality information. Welcome, and I hope you find this site valuable!
               </p>
             </CardContent>
           </Card>
 
-          {/* General Skills Card */}
+          {/* General Skills & AI Interests Card */}
           <Card className="hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-center text-primary">
-                <Brain className="mr-2 h-5 w-5" /> Core Skills
+                <Brain className="mr-2 h-5 w-5" /> Core Skills & AI Interests
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
+              {/* Existing Skills */}
               <div className="flex items-center gap-2"><Users className="h-4 w-4 text-muted-foreground" /><span>Leadership & Teamwork</span></div>
               <div className="flex items-center gap-2"><Presentation className="h-4 w-4 text-muted-foreground" /><span>Communication & Presentation</span></div>
               <div className="flex items-center gap-2"><GraduationCap className="h-4 w-4 text-muted-foreground" /><span>Quick Learner & Adaptable</span></div>
               <div className="flex items-center gap-2"><Wrench className="h-4 w-4 text-muted-foreground" /><span>Problem Solving & Pressure Handling</span></div>
               <div className="flex items-center gap-2"><Code className="h-4 w-4 text-muted-foreground" /><span>Strong CS & Networking Background</span></div>
-            </CardContent>
-          </Card>
-
-          {/* Technical Skills Card */}
-          <Card className="md:col-span-2 lg:col-span-3 hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-primary">
-                <Code className="mr-2 h-5 w-5" /> Technical Expertise
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-              <span>SDLC, QA Lifecycle & Methodologies</span>
-              <span>Manual & Automated Testing</span>
-              <span>Selenium, Appium, JMeter, Postman</span>
-              <span>BDD (Cucumber, JBehave)</span>
-              <span>CI/CD (Jenkins, Azure DevOps)</span>
-              <span>Version Control (Git, SourceTree)</span>
-              <span>API Testing (Postman, Swagger)</span>
-              <span>Mobile Testing (Xcode, Android Studio)</span>
-              <span>Performance Testing (JMeter)</span>
-              <span>Database Testing (MS SQL, MySQL, Oracle)</span>
-              <span>Web Servers (Tomcat, WebSphere, WebLogic)</span>
-              <span>Debugging Tools (Charles Proxy)</span>
-              <span>Analytics (Firebase, Google Analytics)</span>
-              <span>Issue Tracking (Jira, TFS)</span>
-              <span>Framework Development</span>
-              <span>Team Training & Mentoring</span>
-              <span>Computer System Validation (CSV)</span>
-              <span>Risk Assessment Practices</span>
-            </CardContent>
-          </Card>
-
-          {/* Experience Card */}
-          <Card className="md:col-span-2 hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-primary">
-                <Briefcase className="mr-2 h-5 w-5" /> Professional Experience
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                { year: "2022 - Present", role: "Lead/Senior QA & Automation Engineer", company: "Estarta Solutions" },
-                { year: "2021 - 2022", role: "QA & Automation Engineer", company: "Majid Al Futtaim" },
-                { year: "2020 - 2021", role: "QA & Automation Engineer", company: "Mawdoo3.com" },
-                { year: "2019 - 2020", role: "QA & Automation Engineer", company: "Shepherd" },
-                { year: "2018 - 2019", role: "QA & Automation Engineer", company: "Baaz" },
-                { year: "2016 - 2018", role: "Software Testing Engineer", company: "ETQ" },
-              ].map((job, index) => (
-                <div key={index} className="flex flex-col sm:flex-row justify-between sm:items-center border-b pb-2 last:border-b-0">
-                  <div>
-                    <p className="font-semibold">{job.role}</p>
-                    <p className="text-sm text-muted-foreground">{job.company}</p>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1 sm:mt-0">{job.year}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Education & Certs Card */}
-          <Card className="hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-primary">
-                <GraduationCap className="mr-2 h-5 w-5" /> Education & Certifications
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-              <div>
-                <p className="font-semibold">Bachelor’s in Software Engineering</p>
-                <p className="text-muted-foreground">Al Balqa’a Applied University (2008-2013)</p>
-              </div>
-              <div className="space-y-1">
-                <p className="font-semibold">ISTQB Certifications:</p>
-                <ul className="list-disc list-inside pl-4 text-muted-foreground">
-                  <li>Certified Tester Foundation Level (CTFL)</li>
-                  <li>Certified Tester Advanced Level - Test Analyst (CTAL-TA)</li>
-                  <li>Certified Tester Advanced Level - Technical Test Analyst (CTAL-TTA)</li>
-                </ul>
-              </div>
-               <div className="space-y-1">
-                <p className="font-semibold">Language Proficiency:</p>
-                 <p className="text-muted-foreground">English Courses Level 1-3 (Berlitz)</p>
+              {/* AI Related Points */}
+              <div className="flex items-center gap-2 pt-2 border-t mt-2"><Sparkles className="h-4 w-4 text-muted-foreground" /><span>Exploring AI for QA Enhancement</span></div>
+              <div className="flex items-center gap-2"><Bot className="h-4 w-4 text-muted-foreground" /><span>Utilizing AI Tools for Automation & Efficiency</span></div>
+              <div className="flex items-center gap-2"><Lightbulb className="h-4 w-4 text-muted-foreground" /><span>Interested in AI's Role in Software Testing Futures</span></div>
+              {/* Key Tools & Methodologies */}
+              <div className="pt-2 border-t mt-2">
+                 <h4 className="font-medium text-gray-700 mb-1.5 flex items-center gap-2"><Wrench className="h-4 w-4 text-muted-foreground" /> Key Skills, Tools & Methodologies:</h4>
+                 <p className="text-xs text-muted-foreground leading-snug">
+                   SDLC & QA Lifecycles, Manual & Automated Testing, Selenium, Appium, JMeter, Postman, BDD (Cucumber, JBehave), CI/CD (Jenkins, Azure DevOps), Version Control (Git, SourceTree), API Testing (Swagger), Mobile Testing (Xcode, Android Studio), Performance Testing, Database Testing (SQL), Web Servers, Debugging (Charles Proxy), Analytics (Firebase, Google Analytics), Issue Tracking (Jira, TFS), Framework Development, CSV, Risk Assessment, AI Tools for QA.
+                 </p>
               </div>
             </CardContent>
           </Card>
 
-          {/* Trainings Card */}
-          <Card className="hover:shadow-lg transition-shadow duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-primary">
-                <Award className="mr-2 h-5 w-5" /> Trainings & Workshops
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>CCNA & CCNP Switching (Cyber Technical Consulting)</p>
-              <p>Computer System Validation (ETQ)</p>
-              <p>JMeter Training (ETQ)</p>
-              <p>Risk Assessment Practice (ETQ)</p>
-            </CardContent>
-          </Card>
+          {/* Removed Technical Skills, Experience, Education, Trainings Cards */}
 
         </div>
+
+        {/* Contact Form Section */}
+        <section className="pt-8 border-t border-border">
+          <Card className="max-w-2xl mx-auto shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-center text-primary flex items-center justify-center gap-2">
+                <Mail className="w-6 h-6" /> Get In Touch
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form
+                action="https://formspree.io/f/mgvadeje"
+                method="POST"
+                className="space-y-4"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="name">Name</Label>
+                    <Input id="name" name="name" type="text" placeholder="Your Name" required />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email">Email Address</Label>
+                    {/* Formspree uses the 'name="_replyto"' to set the reply-to address */}
+                    <Input id="email" name="_replyto" type="email" placeholder="your.email@example.com" required />
+                  </div>
+                </div>
+                 <div className="space-y-1.5">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input id="subject" name="subject" type="text" placeholder="Subject of your message" />
+                  </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea id="message" name="message" placeholder="Your message..." required rows={5} />
+                </div>
+                <div className="text-center pt-2">
+                  <Button type="submit" size="lg">
+                    <Send className="mr-2 h-4 w-4" /> Send Message
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </section>
+
       </div>
     </PageLayout>
   );
