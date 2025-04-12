@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // Import motion
 import { PageLayout } from "components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Assuming Card components exist
 import { ArrowRight, BookOpen, Code, Settings, TestTubeDiagonal, Network, Wrench, HelpCircle, FileText, MessageSquare } from 'lucide-react'; // Import relevant icons
@@ -59,10 +60,34 @@ const keyTopics = [
     title: "Contact Us",
     description: "Get in touch with questions or feedback.",
     icon: <MessageSquare size={32} className="text-teal-600" />,
-    path: "/contact",
+    path: "/creator", // Corrected path to Creator page
     color: "border-teal-500",
   },
 ];
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Stagger the animation of children
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+};
+
 
 export default function IntroPage() {
   return (
@@ -78,13 +103,13 @@ export default function IntroPage() {
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 px-4">
-          Comprehensive guid for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools.
+          Your comprehensive guide for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools.
         </p>
         <Link
           to="/principles" // Link to the first logical step
           className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white font-semibold text-lg shadow-lg hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-          Get Started
+          Dive In
           <ArrowRight size={20} />
         </Link>
       </div>
@@ -92,21 +117,28 @@ export default function IntroPage() {
       {/* Key Topics Section */}
       <div className="mb-16">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Explore Key Areas</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible" // Animate when component mounts
+        >
           {keyTopics.map((topic) => (
-            <Link to={topic.path} key={topic.title} className="group block">
-              <Card className={`h-full transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 border-l-4 ${topic.color}`}>
-                <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                  {topic.icon}
-                  <CardTitle className="text-xl font-semibold text-gray-800">{topic.title}</CardTitle>
+            <motion.div key={topic.title} variants={itemVariants} className="h-full"> {/* Wrap Link with motion.div */}
+              <Link to={topic.path} className="group block h-full rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <Card className={`h-full transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1.5 group-hover:scale-[1.03] border-l-4 ${topic.color} rounded-lg overflow-hidden`}>
+                  <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                    {React.cloneElement(topic.icon, { "aria-hidden": "true" })} {/* Add aria-hidden */}
+                  <CardTitle className="text-xl font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">{topic.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600">{topic.description}</p>
                 </CardContent>
               </Card>
             </Link>
+          </motion.div> // Close motion.div
           ))}
-        </div>
+        </motion.div> 
       </div>
 
       {/* Optional: Add a small section about the site's goal or target audience */}

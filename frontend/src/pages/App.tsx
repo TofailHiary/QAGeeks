@@ -1,8 +1,25 @@
 import React, { useEffect } from "react"; // Import useEffect
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import {
+  CheckCircle,
+  Workflow,
+  TerminalSquare,
+  Users,
+  Bug,
+  Lightbulb,
+  FileText, // Added for Resources
+  HelpCircle, // Added for Resources
+  ListChecks, // Added for How it Works
+  GraduationCap, // Added for How it Works
+  Rocket, // Added for How it Works
+  // Add other icons if needed later
+} from 'lucide-react';
+import { Link } from "react-router-dom"; // Import Link
+import { motion } from "framer-motion"; // Import motion
 import { Header } from "components/Header";
 import { HeroSection } from "components/HeroSection";
-import { FeatureSection } from "components/FeatureSection";
+// Removed FeatureSection import
+import { ConceptCard } from "components/ConceptCard"; // Import ConceptCard
 import { PrinciplesSection } from "components/PrinciplesSection";
 import { router } from "../router"; // Import router to access basename
 
@@ -72,54 +89,207 @@ export default function App() {
       {/* Hero Section */}
       <HeroSection 
         title="Elevate Your QA Engineering Skills"
-        subtitle="Comprehensive training for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools."
+        subtitle="Comprehensive tutorial for aspiring and professional Quality Assurance engineers, covering modern testing principles, methodologies, and tools."
         ctaText="Get Started"
         ctaLink="/intro"
       />
-      
-      {/* Feature Section */}
-      <FeatureSection 
-        title="Explore the QA Knowledge Hub"
-        subtitle="This platform provides a complete journey through modern QA concepts, methodologies, tools, and real-world practices to help you become a highly effective quality assurance professional."
-        features={[
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-            title: "Quality Assurance Fundamentals",
-            description: "Master the principles of software testing and learn to identify, report, and track defects effectively."
-          },
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>,
-            title: "Industry-Standard Methodologies",
-            description: "Learn SDLC, STLC, and various testing methods including Black Box, White Box, and API Testing."
-          },
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>,
-            title: "Practical Testing Tools",
-            description: "Gain hands-on experience with industry-leading tools like Postman, Selenium, JMeter and more."
-          },
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>,
-            title: "Team Communication",
-            description: "Develop essential communication skills needed to work effectively in cross-functional development teams."
-          },
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2v-2a2 2 0 00-2-2H9a2 2 0 00-2 2v2a2 2 0 002 2z" /></svg>,
-            title: "Defect Management & Reporting",
-            description: "Learn how to manage, triage, and report defects using real-world tools and workflows."
-          },
-          {
-            icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>,
-            title: "Real-World QA Scenarios",
-            description: "Explore real QA scenarios, test case design, traceability, and best practices for modern software projects."
-          }
-        ]}
-      />
-      
-      
-      {/* Footer Section */}
-      <footer className="bg-gray-800 text-white py-8">
+
+      {/* Introductory Text Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Your Journey to QA Mastery Starts Here</h2>
+          <p className="text-lg text-gray-600">
+            Whether you're starting your career or looking to level up your skills, this platform offers structured learning paths, practical examples, and essential tools covering the entire spectrum of Quality Assurance. Explore the key areas below to begin.
+          </p>
+        </div>
+      </section>
+
+      {/* What You'll Learn Section */}
+      <motion.section
+        className="py-16 bg-gradient-to-r from-blue-50 to-purple-50" // Subtle gradient background
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Transform Your QA Career</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h3 className="text-xl font-semibold mb-3 text-primary">Master Core Concepts</h3>
+              <p className="text-gray-600">Build a rock-solid foundation in testing principles, lifecycles, and methodologies.</p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h3 className="text-xl font-semibold mb-3 text-green-600">Gain Practical Skills</h3>
+              <p className="text-gray-600">Get hands-on experience with essential QA tools and real-world testing scenarios.</p>
+            </div>
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h3 className="text-xl font-semibold mb-3 text-orange-600">Boost Your Employability</h3>
+              <p className="text-gray-600">Learn effective communication, defect management, and interview preparation techniques.</p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* How It Works Section */}
+      <motion.section
+        className="py-16 bg-white" // Alternating background color
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Your Learning Path</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center relative">
+            {/* Dashed line connector for larger screens */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 border-t-2 border-dashed border-gray-300 -translate-y-1/2"></div>
+
+            {/* Step 1 */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="bg-primary text-white rounded-full h-16 w-16 flex items-center justify-center mb-4 shadow-lg">
+                <ListChecks className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">1. Explore Fundamentals</h3>
+              <p className="text-gray-600 px-4">Start with the basics of QA, testing types, and core principles.</p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="bg-green-600 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4 shadow-lg">
+                <GraduationCap className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">2. Master Techniques</h3>
+              <p className="text-gray-600 px-4">Dive into methodologies, tools, defect management, and practical application.</p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="bg-orange-600 text-white rounded-full h-16 w-16 flex items-center justify-center mb-4 shadow-lg">
+                <Rocket className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">3. Advance Your Career</h3>
+              <p className="text-gray-600 px-4">Utilize resources, templates, and interview prep to land your ideal QA role.</p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+
+      {/* Enhanced Feature Section using ConceptCard with Animation */}
+      <motion.section
+        className="py-20 bg-gray-50" // Keep original background for contrast
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% is visible
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore the QA Knowledge Hub</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              This platform provides a complete journey through modern QA concepts, methodologies, tools, and real-world practices to help you become a highly effective quality assurance professional.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <CheckCircle className="h-8 w-8" />, // Removed text-primary, ConceptCard handles color
+                title: "Quality Assurance Fundamentals",
+                description: "Master the principles of software testing and learn to identify, report, and track defects effectively.",
+                link: "/principles",
+                detailsText: "Dive into the core concepts that form the foundation of quality assurance."
+              },
+              {
+                icon: <Workflow className="h-8 w-8" />,
+                title: "Industry-Standard Methodologies",
+                description: "Learn SDLC, STLC, and various testing methods including Black Box, White Box, and API Testing.",
+                link: "/sdlc-stlc",
+                detailsText: "Understand the processes and frameworks used in professional software development and testing."
+              },
+              {
+                icon: <TerminalSquare className="h-8 w-8" />,
+                title: "Practical Testing Tools",
+                description: "Gain hands-on experience with industry-leading tools like Postman, Selenium, JMeter and more.",
+                link: "/testing-tools",
+                detailsText: "Get familiar with the tools essential for modern QA automation and manual testing."
+              },
+              {
+                icon: <Users className="h-8 w-8" />,
+                title: "Team Communication",
+                description: "Develop essential communication skills needed to work effectively in cross-functional development teams.",
+                link: null, // No specific page yet
+                detailsText: "Effective collaboration is key. Learn how to communicate clearly with developers, PMs, and stakeholders."
+              },
+              {
+                icon: <Bug className="h-8 w-8" />,
+                title: "Defect Management & Reporting",
+                description: "Learn how to manage, triage, and report defects using real-world tools and workflows.",
+                link: "/defect-management",
+                detailsText: "Master the process of identifying, documenting, and tracking bugs through their lifecycle."
+              },
+              {
+                icon: <Lightbulb className="h-8 w-8" />,
+                title: "Real-World QA Scenarios",
+                description: "Explore real QA scenarios, test case design, traceability, and best practices for modern software projects.",
+                link: null, // No specific page yet
+                detailsText: "Apply your knowledge to practical examples and learn best practices for various project types."
+              }
+            ].map((feature, index) => (
+              <ConceptCard
+                key={index}
+                icon={feature.icon}
+                title={feature.title}
+                summary={feature.description}
+                // Removed Link, just show the details text
+                details={
+                  <p>{feature.detailsText}</p>
+                }
+                // Cycle through accent colors
+                accentColor={['#00A2FF', '#34D399', '#F97316'][index % 3]} // Example colors: Blue, Green, Orange
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Key Resources Section */}
+      <motion.section
+        className="py-16 bg-white"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Unlock Essential Resources</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Templates Card */}
+            <Link to="/templates" className="block p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-gray-200 hover:border-primary">
+              <div className="flex items-center mb-3">
+                <FileText className="h-8 w-8 mr-4 text-primary group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-semibold text-gray-800">QA Templates</h3>
+              </div>
+              <p className="text-gray-600">Access ready-to-use templates for test plans, cases, bug reports, and more to streamline your workflow.</p>
+            </Link>
+            {/* Interview Questions Card */}
+            <Link to="/interview-questions" className="block p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-gray-200 hover:border-green-600">
+              <div className="flex items-center mb-3">
+                <HelpCircle className="h-8 w-8 mr-4 text-green-600 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-semibold text-gray-800">Interview Prep</h3>
+              </div>
+              <p className="text-gray-600">Prepare for your next QA role with a curated list of common interview questions and topics.</p>
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+
+      {/* Footer Section - Reverted to standard style */}
+      <footer className="bg-gray-800 text-white py-8 mt-auto"> {/* Reverted classes */}
         <div className="container mx-auto px-4 text-center">
-          <p>© {new Date().getFullYear()} Al-Tofail Al-Hiary. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Al-Tofail Al-Hiary. All rights reserved.</p>
         </div>
       </footer>
     </div>

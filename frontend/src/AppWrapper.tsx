@@ -13,7 +13,7 @@ import { MessageSquare } from "lucide-react"; // Import icon for toggle button
 // RedirectHandler component moved to App.tsx
 
 export const AppWrapper = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false); // State for chatbot visibility
+  const [isChatOpen, setIsChatOpen] = useState(true); // Set initial state to true to open by default
 
   const toggleChat = () => setIsChatOpen(!isChatOpen);
 
