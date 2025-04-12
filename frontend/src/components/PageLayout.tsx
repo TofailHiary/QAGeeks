@@ -1,7 +1,8 @@
-import React, { ReactNode, useEffect } from "react"; // Import useEffect
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { ReactNode, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "components/Header";
-import { router } from "../router"; // Import router instance
+import { Head } from "../internal-components/Head"; // Corrected import path
+import { router } from "../router";
 
 // Component to handle the redirect logic (copied from AppWrapper)
 const RedirectHandler = () => {
@@ -33,15 +34,18 @@ export interface Props {
   children: ReactNode;
   title: string;
   subtitle?: string;
+  description?: string; // Add description prop
   transparentHeader?: boolean;
 }
 
-export const PageLayout = ({ children, title, subtitle, transparentHeader = false }: Props) => {
+export const PageLayout = ({ children, title, subtitle, description, transparentHeader = false }: Props) => {
   return (
     <div className="min-h-screen pt-16">
-      <RedirectHandler /> {/* Add the handler here */}
+      <Head title={title} description={description} /> {/* Use Head component */}
+      <RedirectHandler />
       <Header transparent={transparentHeader} />
       <main className="container mx-auto px-4 py-12">
+        {/* Keep the H1 for visual page title, Head handles the <title> tag */}
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">{title}</h1>
         {subtitle && <p className="text-center text-xl text-gray-600 mb-12">{subtitle}</p>}
         {children}

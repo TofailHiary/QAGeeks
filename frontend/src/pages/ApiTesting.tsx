@@ -60,6 +60,7 @@ export default function ApiTesting() {
     <PageLayout
       title="API Testing Fundamentals"
       subtitle="Explore the core concepts, types, protocols, tools, and best practices of API Testing"
+      description="Learn API testing essentials: What APIs are, types (Web, Library), architectures (REST, SOAP, GraphQL), HTTP methods/status codes, authentication (OAuth, JWT), tools (Postman, Swagger), and best practices."
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"> {/* Increased py */}
 

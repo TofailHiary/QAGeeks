@@ -16,6 +16,7 @@ export default function LevelsOfTesting() {
     <PageLayout
       title="Levels of Software Testing"
       subtitle="Understanding the Hierarchy of Testing"
+      description="Explore the different levels of software testing: Unit Testing (code modules), Integration Testing (module interactions), System Testing (end-to-end validation), and Acceptance Testing (UAT, Alpha, Beta)."
     >
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-16 text-gray-800 dark:text-gray-200">
         {/* Introduction Section */}

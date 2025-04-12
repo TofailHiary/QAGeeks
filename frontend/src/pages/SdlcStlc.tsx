@@ -61,6 +61,7 @@ export default function SdlcStlcIntegration() {
     <PageLayout
       title="SDLC & STLC Integration"
       subtitle="How Development and Testing Lifecycles Align"
+      description="Discover how the Software Development Life Cycle (SDLC) and Software Testing Life Cycle (STLC) integrate, aligning phases like requirements analysis with test planning, design with test design, and implementation with test execution."
     >
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">

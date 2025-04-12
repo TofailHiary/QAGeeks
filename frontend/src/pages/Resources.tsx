@@ -258,6 +258,7 @@ export default function Resources() {
     <PageLayout
       title="QA Learning & Practice Hub"
       subtitle="Explore curated resources and sites to enhance your QA skills"
+      description="Find curated QA resources: tutorials (Guru99, GeeksforGeeks), communities (Ministry of Testing), tools (Jira, Postman), certifications (ISTQB), API testing info, and practice websites (OpenCart Demo, Sauce Demo)."
     >
       <div className="container mx-auto px-4 py-12 space-y-16">
         <motion.p

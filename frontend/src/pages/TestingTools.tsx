@@ -289,6 +289,7 @@ export default function TestingTools() {
     <PageLayout 
       title="Common Testing Tools" 
       subtitle="Discover the most popular tools used by QA engineers for different testing needs"
+      description="Explore essential QA testing tools like Postman (API), Selenium (Browser Automation), JMeter (Performance), Jira (Defect Tracking), TestRail (Management), Appium (Mobile), Jenkins (CI/CD), Cypress, and OWASP ZAP (Security)."
     >
       <div className="max-w-6xl mx-auto">
         {/* Introduction */}

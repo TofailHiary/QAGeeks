@@ -14,6 +14,7 @@ export default function Contact() {
     <PageLayout
       title="Al-Tofail Al-Hiary"
       subtitle="Lead Quality Assurance Engineer | ISTQB® CTFL/CTAL-TA/CTAL-TTA"
+      description="Contact Al-Tofail Al-Hiary, Lead QA Engineer with expertise in manual/automation testing, Selenium, Appium, JMeter, API testing, CI/CD, and ISTQB certifications (CTFL, CTAL-TA, CTAL-TTA)."
     >
       <div className="max-w-6xl mx-auto space-y-8 py-12 px-4 md:px-6">
 

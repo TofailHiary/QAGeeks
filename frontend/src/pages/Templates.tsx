@@ -164,7 +164,11 @@ export default function Templates() {
 
 
   return (
-    <PageLayout title="QA Templates & Examples" subtitle="Download ready-made templates and example documents for QA activities">
+    <PageLayout 
+      title="QA Templates & Examples" 
+      subtitle="Download ready-made templates and example documents for QA activities"
+      description="Download essential QA templates (BRD, FRS, SRS, Test Plan, Test Cases, RTM, Defect Report, Test Closure) and view real-world examples to streamline your testing workflow."
+    >
       <TooltipProvider delayDuration={200}> {/* Wrap content in TooltipProvider */}
         <div className="max-w-7xl mx-auto space-y-16 py-12 px-4 sm:px-6 lg:px-8">
           <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">

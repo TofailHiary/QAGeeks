@@ -112,7 +112,11 @@ export default function InterviewQuestions() {
 
 
   return (
-    <PageLayout title="QA Interview Questions" subtitle="Common interview questions for Quality Assurance roles">
+    <PageLayout 
+      title="QA Interview Questions" 
+      subtitle="Common interview questions for Quality Assurance roles"
+      description="Prepare for your QA interview with categorized questions covering general concepts, SDLC/STLC, testing principles, levels, methods (Black Box, White Box), API testing, automation, and more."
+    >
       <div className="max-w-6xl mx-auto py-12 px-4 space-y-12">
         <p className="text-gray-700 leading-relaxed text-lg text-center max-w-3xl mx-auto mb-8"> {/* Reduced bottom margin */}
           Explore a comprehensive list of categorized QA interview questions. Use the search below to filter by keyword.

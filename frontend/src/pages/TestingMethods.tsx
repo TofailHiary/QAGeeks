@@ -390,6 +390,7 @@ export default function TestingMethods() {
     <PageLayout
       title="Software Testing Methods"
       subtitle="Explore Black Box, White Box, Gray Box, and Experience-Based techniques"
+      description="Learn about software testing methods: Black Box (functional, non-functional), White Box (code-based, statement/branch coverage), Gray Box (partial knowledge), and Experience-Based (error guessing, exploratory)."
     >
       {/* Increased vertical padding, adjusted horizontal padding for different screen sizes */}
       <div className="max-w-7xl mx-auto space-y-16 py-16 px-4 sm:px-6 lg:px-8">

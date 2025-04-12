@@ -1,0 +1,6 @@
+# Allow all crawlers access to all content
+User-agent: *
+Allow: /
+
+# Sitemap link
+Sitemap: https://tofailhiary.github.io/QAGeeks/sitemap.xml

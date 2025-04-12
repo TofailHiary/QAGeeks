@@ -122,6 +122,7 @@ export default function Sdlc() {
     <PageLayout
       title="Software Development Life Cycle (SDLC)"
       subtitle="A comprehensive guide to software development methodologies, phases, and models"
+      description="Learn about the Software Development Life Cycle (SDLC), its phases (Planning, Requirements, Design, Development, Testing, Deployment), and compare models like Waterfall, V-Model, and Agile (Scrum, Kanban)."
     >
       <div className="max-w-6xl mx-auto space-y-16 py-12">
         {/* What is SDLC? */}

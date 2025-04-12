@@ -70,6 +70,7 @@ export default function DefectManagement() {
     <PageLayout
       title="Mastering Defect Management"
       subtitle="Identify, Report, Track, and Resolve Software Defects Effectively"
+      description="Learn effective defect management in QA, including bug terminology, common causes, bug reporting best practices, tracking tools (Jira, Bugzilla), and the complete bug life cycle from New to Closed."
     >
       <div className="max-w-7xl mx-auto space-y-20 py-16 px-4 sm:px-6 lg:px-8">
 

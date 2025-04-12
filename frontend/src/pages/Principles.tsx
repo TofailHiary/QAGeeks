@@ -163,6 +163,7 @@ export default function Principles() {
     <PageLayout
       title="Principles & Concepts"
       subtitle="Learn the core principles and concepts that guide effective quality assurance"
+      description="Explore the 7 fundamental principles of software testing, key QA concepts like QA vs QC, Verification vs Validation, Static vs Dynamic testing, and Manual vs Automation testing."
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> {/* Added padding */}
         {/* Tabs - Adjusted padding, border, hover */}

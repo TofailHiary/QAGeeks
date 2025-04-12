@@ -175,6 +175,7 @@ export default function Stlc() {
     <PageLayout
       title="Software Testing Life Cycle (STLC)"
       subtitle="A systematic approach to software testing activities"
+      description="Understand the Software Testing Life Cycle (STLC) phases: Requirement Analysis, Test Planning, Test Case Development, Environment Setup, Test Execution, and Cycle Closure. Learn about BRS, FRS, SRS, test plans, and test case design."
     >
       <div className="max-w-6xl mx-auto space-y-16 py-12 px-4 sm:px-6 lg:px-8"> {/* Added padding */}
 
