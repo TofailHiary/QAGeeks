@@ -88,9 +88,17 @@ const getFileIcon = (filePath: string) => {
 
 
 // --- Reusable Card Component ---
-const TemplateCard: React.FC<{ item: TemplateItem; baseUrl: string }> = ({ item, baseUrl }) => (
+const TemplateCard: React.FC<{ item: TemplateItem; baseUrl: string }> = ({ item, baseUrl }) => {
+  // Conditionally set path based on environment
+  const downloadPath = import.meta.env.PROD
+    ? `${baseUrl.substring(1)}/${item.filePath}` // Relative path for production (works with /QAGeeks/ base)
+    : `${baseUrl}/${item.filePath}`;             // Absolute path for development (as it was working before)
+
+  return (
   // Added animation classes: opacity-0 animate-fade-in
-  <Card className="flex flex-col justify-between hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden opacity-0 animate-fade-in">
+  // Removed overflow-hidden to prevent tooltip clipping
+  // Removed transform classes to potentially fix tooltip stacking issue
+  <Card className="flex flex-col justify-between hover:shadow-lg transition-all duration-300 ease-in-out opacity-0 animate-fade-in">
     <CardHeader className="pb-2 flex flex-row items-start space-x-3">
       <div className="pt-1">
          {getFileIcon(item.filePath)}
@@ -106,22 +114,29 @@ const TemplateCard: React.FC<{ item: TemplateItem; baseUrl: string }> = ({ item,
         {item.description}
       </CardDescription>
     </CardContent>
-    <CardFooter>
+    {/* Add relative positioning and z-index to the footer to help with tooltip stacking */}
+    <CardFooter className="relative z-10">
       <Tooltip>
         <TooltipTrigger asChild>
           <Button asChild variant="default" size="sm" className="w-full bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white hover:brightness-110 transition-all">
-            <a href={`${baseUrl}/${item.filePath}`} download={item.filePath.split('/').pop()}>
+            {/* Use conditionally generated path */}
+            <a href={downloadPath} download={item.filePath.split('/').pop()}>
               <Download className="mr-2 h-4 w-4" /> Download
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent>
-          <p>Download: {item.filePath.split('/').pop()}</p>
+        {/* Add z-index to ensure tooltip appears above card content */}
+        <TooltipContent className="z-50">
+          {/* Add styling for better handling of long filenames */}
+          <p className="max-w-xs break-words">
+            Download: {item.filePath.split('/').pop()}
+          </p>
         </TooltipContent>
       </Tooltip>
     </CardFooter>
   </Card>
-);
+  );
+};
 
 
 export default function Templates() {

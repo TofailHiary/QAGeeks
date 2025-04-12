@@ -70,8 +70,13 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Add padding-right to compensate for scrollbar width */
+    @apply bg-background text-foreground pr-4;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    /* Always show vertical scrollbar to prevent layout shift */
+    @apply overflow-y-scroll;
   }
 }
 
