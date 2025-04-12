@@ -80,12 +80,11 @@ def create_app() -> FastAPI:
     app = FastAPI()
 
     # --- CORS Middleware Configuration ---
-    # Allow requests from your frontend development server
+    # Allow requests from your frontend development server and deployed site
     origins = [
         "http://localhost:5173", # Vite default port
         "http://localhost:3000", # Common React dev port
-        # Add your deployed frontend URL here later if needed
-        # e.g., "https://tofailhiary.github.io"
+        "https://tofailhiary.github.io", # Your deployed GitHub Pages URL
     ]
 
     app.add_middleware(
