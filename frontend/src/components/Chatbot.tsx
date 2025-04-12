@@ -49,7 +49,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
 
     try {
       // --- Call to YOUR backend proxy endpoint via ngrok ---
-      const backendUrl = 'https://b8ec-2a01-9700-3fc6-4900-3d0c-1540-f268-dd9e.ngrok-free.app/routes/chat'; // Using ngrok URL
+      const backendUrl = 'https://85a7-2a01-9700-3fc6-4900-51a7-570-ff70-ca9b.ngrok-free.app/routes/chat'; // Updated ngrok URL
       const response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
