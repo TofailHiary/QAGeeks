@@ -95,10 +95,10 @@ export default function App() {
       />
 
       {/* Introductory Text Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background dark:bg-secondary">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Your Journey to QA Mastery Starts Here</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-2xl font-semibold mb-4 text-foreground">Your Journey to QA Mastery Starts Here</h2>
+          <p className="text-lg text-muted-foreground">
             Whether you're starting your career or looking to level up your skills, this platform offers structured learning paths, practical examples, and essential tools covering the entire spectrum of Quality Assurance. Explore the key areas below to begin.
           </p>
         </div>
@@ -106,26 +106,27 @@ export default function App() {
 
       {/* What You'll Learn Section */}
       <motion.section
-        className="py-16 bg-gradient-to-r from-blue-50 to-purple-50" // Subtle gradient background
+        className="py-16 bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-background dark:bg-none"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Transform Your QA Career</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Transform Your QA Career</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            {/* Inner cards use bg-background in light, dark:bg-accent in dark */}
+            <div className="p-6 bg-background dark:bg-accent rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold mb-3 text-primary">Master Core Concepts</h3>
-              <p className="text-gray-600">Build a rock-solid foundation in testing principles, lifecycles, and methodologies.</p>
+              <p className="text-muted-foreground">Build a rock-solid foundation in testing principles, lifecycles, and methodologies.</p>
             </div>
-            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="p-6 bg-background dark:bg-accent rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold mb-3 text-green-600">Gain Practical Skills</h3>
-              <p className="text-gray-600">Get hands-on experience with essential QA tools and real-world testing scenarios.</p>
+              <p className="text-muted-foreground">Get hands-on experience with essential QA tools and real-world testing scenarios.</p>
             </div>
-            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="p-6 bg-background dark:bg-accent rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold mb-3 text-orange-600">Boost Your Employability</h3>
-              <p className="text-gray-600">Learn effective communication, defect management, and interview preparation techniques.</p>
+              <p className="text-muted-foreground">Learn effective communication, defect management, and interview preparation techniques.</p>
             </div>
           </div>
         </div>
@@ -133,25 +134,25 @@ export default function App() {
 
       {/* How It Works Section */}
       <motion.section
-        className="py-16 bg-white" // Alternating background color
+        className="py-16 bg-background dark:bg-secondary"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Your Learning Path</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Your Learning Path</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center relative">
             {/* Dashed line connector for larger screens */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 border-t-2 border-dashed border-gray-300 -translate-y-1/2"></div>
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 border-t-2 border-dashed border-border -translate-y-1/2"></div>
 
             {/* Step 1 */}
             <div className="relative z-10 flex flex-col items-center">
-              <div className="bg-primary text-white rounded-full h-16 w-16 flex items-center justify-center mb-4 shadow-lg">
+              <div className="bg-primary text-primary-foreground rounded-full h-16 w-16 flex items-center justify-center mb-4 shadow-lg"> {/* Changed text-white to text-primary-foreground */}
                 <ListChecks className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">1. Explore Fundamentals</h3>
-              <p className="text-gray-600 px-4">Start with the basics of QA, testing types, and core principles.</p>
+              <p className="text-muted-foreground px-4">Start with the basics of QA, testing types, and core principles.</p>
             </div>
 
             {/* Step 2 */}
@@ -160,7 +161,7 @@ export default function App() {
                 <GraduationCap className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">2. Master Techniques</h3>
-              <p className="text-gray-600 px-4">Dive into methodologies, tools, defect management, and practical application.</p>
+              <p className="text-muted-foreground px-4">Dive into methodologies, tools, defect management, and practical application.</p>
             </div>
 
             {/* Step 3 */}
@@ -169,7 +170,7 @@ export default function App() {
                 <Rocket className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">3. Advance Your Career</h3>
-              <p className="text-gray-600 px-4">Utilize resources, templates, and interview prep to land your ideal QA role.</p>
+              <p className="text-muted-foreground px-4">Utilize resources, templates, and interview prep to land your ideal QA role.</p>
             </div>
           </div>
         </div>
@@ -178,7 +179,7 @@ export default function App() {
 
       {/* Enhanced Feature Section using ConceptCard with Animation */}
       <motion.section
-        className="py-20 bg-gray-50" // Keep original background for contrast
+        className="py-20 bg-secondary"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% is visible
@@ -186,8 +187,8 @@ export default function App() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore the QA Knowledge Hub</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Explore the QA Knowledge Hub</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               This platform provides a complete journey through modern QA concepts, methodologies, tools, and real-world practices to help you become a highly effective quality assurance professional.
             </p>
           </div>
@@ -256,38 +257,38 @@ export default function App() {
 
       {/* Key Resources Section */}
       <motion.section
-        className="py-16 bg-white"
+        className="py-16 bg-background dark:bg-secondary"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Unlock Essential Resources</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Unlock Essential Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Templates Card */}
-            <Link to="/templates" className="block p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-gray-200 hover:border-primary">
+            {/* Templates Card - Restored light bg, added dark bg */}
+            <Link to="/templates" className="block p-6 bg-gray-50 dark:bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-border hover:border-primary">
               <div className="flex items-center mb-3">
                 <FileText className="h-8 w-8 mr-4 text-primary group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold text-gray-800">QA Templates</h3>
+                <h3 className="text-xl font-semibold text-foreground">QA Templates</h3>
               </div>
-              <p className="text-gray-600">Access ready-to-use templates for test plans, cases, bug reports, and more to streamline your workflow.</p>
+              <p className="text-muted-foreground">Access ready-to-use templates for test plans, cases, bug reports, and more to streamline your workflow.</p>
             </Link>
-            {/* Interview Questions Card */}
-            <Link to="/interview-questions" className="block p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-gray-200 hover:border-green-600">
+            {/* Interview Questions Card - Restored light bg, added dark bg */}
+            <Link to="/interview-questions" className="block p-6 bg-gray-50 dark:bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow group border border-border hover:border-green-600">
               <div className="flex items-center mb-3">
                 <HelpCircle className="h-8 w-8 mr-4 text-green-600 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold text-gray-800">Interview Prep</h3>
+                <h3 className="text-xl font-semibold text-foreground">Interview Prep</h3>
               </div>
-              <p className="text-gray-600">Prepare for your next QA role with a curated list of common interview questions and topics.</p>
+              <p className="text-muted-foreground">Prepare for your next QA role with a curated list of common interview questions and topics.</p>
             </Link>
           </div>
         </div>
       </motion.section>
 
 
-      {/* Footer Section - Reverted to standard style */}
-      <footer className="bg-gray-800 text-white py-8 mt-auto"> {/* Reverted classes */}
+      {/* Footer Section - Themed */}
+      <footer className="bg-secondary text-secondary-foreground py-8 mt-auto">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; {new Date().getFullYear()} Al-Tofail Al-Hiary. All rights reserved.</p>
         </div>

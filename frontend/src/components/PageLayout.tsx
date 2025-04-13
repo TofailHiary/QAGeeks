@@ -47,10 +47,12 @@ export const PageLayout = ({ children, title, subtitle, description, transparent
       <main className="container mx-auto px-4 py-12">
         {/* Keep the H1 for visual page title, Head handles the <title> tag */}
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">{title}</h1>
-        {subtitle && <p className="text-center text-xl text-gray-600 mb-12">{subtitle}</p>}
+         {/* Use theme variable for subtitle color */}
+        {subtitle && <p className="text-center text-xl text-muted-foreground mb-12">{subtitle}</p>}
         {children}
       </main>
-      <footer className="bg-gray-800 text-white py-8 mt-auto">
+       {/* Use theme variables for footer background and text */}
+      <footer className="bg-secondary text-secondary-foreground py-8 mt-auto">
         <div className="container mx-auto px-4 text-center">
           <p>© {new Date().getFullYear()} Al-Tofail Al-Hiary. All rights reserved.</p>
         </div>

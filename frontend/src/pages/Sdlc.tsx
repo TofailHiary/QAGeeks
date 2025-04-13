@@ -288,26 +288,26 @@ export default function Sdlc() {
                </AccordionContent>
              </AccordionItem>
 
-            {/* Iterative & Incremental (Keep as separate card for context before Agile) */}
-             <Card className="shadow-md bg-gradient-to-r from-red-50 to-orange-50 border border-red-100">
+            {/* Iterative & Incremental - Added dark mode classes */}
+             <Card className="shadow-md bg-gradient-to-r from-red-50 to-orange-50 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-700 border border-red-100 dark:border-gray-600">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#00A2FF]">Iterative & Incremental Model</CardTitle>
+                <CardTitle className="text-2xl font-bold text-[#00A2FF] dark:text-sky-400">Iterative & Incremental Model</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-gray-700">Breaks the project into smaller parts. Each part is developed, tested, and added incrementally. Great for projects where requirements might change or aren't clear initially.</p>
-                <p><strong className="text-gray-800">Iterative Development:</strong> Repeating the development cycle, adding/refining features each time based on feedback.</p>
-                <p><strong className="text-gray-800">Incremental Development:</strong> Delivering software in small, usable releases, allowing early testing and feedback.</p>
+                <p className="text-gray-700 dark:text-gray-300">Breaks the project into smaller parts. Each part is developed, tested, and added incrementally. Great for projects where requirements might change or aren't clear initially.</p>
+                <p className="dark:text-gray-300"><strong className="text-gray-800 dark:text-gray-100">Iterative Development:</strong> Repeating the development cycle, adding/refining features each time based on feedback.</p>
+                <p className="dark:text-gray-300"><strong className="text-gray-800 dark:text-gray-100">Incremental Development:</strong> Delivering software in small, usable releases, allowing early testing and feedback.</p>
                  <div>
-                  <h4 className="font-semibold mb-1 text-gray-800">Examples of Models using this approach:</h4>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <h4 className="font-semibold mb-1 text-gray-800 dark:text-gray-100">Examples of Models using this approach:</h4>
+                  <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
                     <li>Agile (Scrum, Kanban, XP, FDD, RAD, DSDM, Lean, Crystal)</li>
                     <li>DevOps</li>
                     <li>Scaled Agile Framework (SAFe)</li>
                   </ul>
                 </div>
                  <div>
-                  <h4 className="font-semibold mb-1 text-gray-800">Real-World Examples:</h4>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <h4 className="font-semibold mb-1 text-gray-800 dark:text-gray-100">Real-World Examples:</h4>
+                  <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-1">
                     <li>Microsoft Windows OS</li>
                     <li>Agile Software Development Projects</li>
                     <li>Amazon Web Services (AWS)</li>

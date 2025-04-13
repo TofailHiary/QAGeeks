@@ -42,6 +42,16 @@ export const AppWrapper = () => {
           )}
         </ThemeProvider>
       </OuterErrorBoundary>
+      {/* Quick fix for dark mode tooltips */}
+      <style>
+        {`
+          .dark [data-radix-popper-content-wrapper] [data-state='delayed-open'] {
+            color: white !important;
+            background-color: #1f1f1f !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+          }
+        `}
+      </style>
     </HelmetProvider>
   );
 };

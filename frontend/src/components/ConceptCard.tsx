@@ -19,14 +19,13 @@ export const ConceptCard = ({
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'ring-2' : ''}`}
+      className={`bg-card dark:bg-accent text-card-foreground dark:text-accent-foreground rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${isExpanded ? 'ring-2' : ''}`} // Use bg-card (light) / dark:bg-accent (dark)
       style={{ '--tw-ring-color': accentColor } as React.CSSProperties} // Set Tailwind's ring color variable
     >
       {/* Card Header - Made accessible */}
       <div
         className="p-6 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
-        role="button" // Added role
         aria-expanded={isExpanded} // Added aria-expanded
         // aria-controls="concept-details" // Ideally, add an ID to the details section and link it
         tabIndex={0} // Make it focusable
@@ -43,12 +42,12 @@ export const ConceptCard = ({
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold mb-2">{title}</h3>
-            <p className="text-gray-600">{summary}</p>
+            <p className="text-muted-foreground">{summary}</p> {/* Use text-muted-foreground */}
           </div>
           {/* Chevron Icon - Added aria-hidden */}
           <div className="ml-4">
             <svg
-              className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+              className={`w-6 h-6 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -66,8 +65,8 @@ export const ConceptCard = ({
         // id="concept-details" // Add ID here if using aria-controls
         className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[2000px]' : 'max-h-0'}`}
       >
-        <div className="p-6 pt-0 border-t border-gray-100">
-          <div className="prose max-w-none text-gray-700">
+        <div className="p-6 pt-0 border-t border-border"> {/* Use border-border */}
+          <div className="prose max-w-none text-foreground"> {/* Use text-foreground (prose might override, but set base) */}
             {details}
           </div>
         </div>

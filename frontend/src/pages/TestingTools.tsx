@@ -148,8 +148,9 @@ export default function TestingTools() {
         "Integration with defect tracking tools"
       ],
       logo: (
+        // Removed duplicated name from logo placeholder
         <div className="w-12 h-12 flex justify-center items-center bg-[#65C178] text-white rounded-lg p-2">
-          <span className="text-lg font-bold leading-none">TestRail</span> {/* Adjusted size */}
+          {/* Placeholder - Name removed */}
         </div>
       ),
       websiteUrl: "https://www.gurock.com/testrail/",
@@ -195,8 +196,9 @@ export default function TestingTools() {
         "Data-driven API testing"
       ],
       logo: (
+        // Removed duplicated name from logo placeholder
         <div className="w-12 h-12 flex justify-center items-center bg-[#68B631] text-white rounded-lg p-2">
-          <span className="text-lg font-bold leading-none">SoapUI</span> {/* Adjusted size */}
+           {/* Placeholder - Name removed */}
         </div>
       ),
       websiteUrl: "https://www.soapui.org/",
@@ -294,13 +296,13 @@ export default function TestingTools() {
       <div className="max-w-6xl mx-auto">
         {/* Introduction */}
         <div className="mb-12">
-          <Card className="bg-gradient-to-br from-blue-50 to-purple-50">
+          <Card className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border dark:border-gray-700">
             <CardContent className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Essential Testing Tools for QA Engineers</h2>
-              <p className="text-gray-700 mb-4">
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Essential Testing Tools for QA Engineers</h2>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
                 Having the right tools is crucial for effective software testing. This guide highlights industry-standard tools that QA engineers use for different types of testing, from API and browser automation to performance and security testing.
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 Each tool has its own strengths and specialties. Understanding when and how to use each tool will make you a more effective QA professional, capable of addressing diverse testing challenges across the software development lifecycle. Choosing the appropriate toolset can significantly impact testing efficiency and coverage.
               </p>
             </CardContent>
@@ -343,12 +345,13 @@ export default function TestingTools() {
                   </div>
                   {/* Tool Name and Categories */}
                   <div className="flex-grow">
-                    <CardTitle className="text-lg font-bold mb-1">{tool.name}</CardTitle>
+                    <CardTitle className="text-lg font-bold mb-1 text-gray-900 dark:text-white">{tool.name}</CardTitle>
                     <div className="flex flex-wrap gap-1">
                       {tool.category.map((cat) => {
                         const categoryInfo = categories.find(c => c.id === cat);
+                        // Adjusted badge styling for dark mode
                         return (
-                          <Badge key={cat} variant="outline" className={`${categoryInfo?.color} bg-opacity-10 text-xs px-1.5 py-0.5`}>
+                          <Badge key={cat} variant="outline" className={`${categoryInfo?.color} bg-opacity-10 dark:bg-opacity-20 text-xs px-1.5 py-0.5 border ${categoryInfo?.color.replace('bg-', 'border-')} border-opacity-30 dark:border-opacity-40 dark:text-gray-300`}>
                             {categoryInfo?.name}
                           </Badge>
                         );
@@ -356,25 +359,25 @@ export default function TestingTools() {
                     </div>
                   </div>
                   {/* External Link Icon */}
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 transition-colors" />
+                  <ExternalLink className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
                 </CardHeader>
                 <CardContent className="p-4 pt-0 flex-grow">
                   {/* Description */}
-                  <CardDescription className="text-sm text-gray-600 mb-3">{tool.description}</CardDescription>
-                  
+                  <CardDescription className="text-sm text-gray-600 dark:text-gray-300 mb-3">{tool.description}</CardDescription>
+
                   {/* Optional Benefit */}
                   {tool.benefit && (
-                    <p className="text-xs text-gray-500 italic mb-3">{tool.benefit}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 italic mb-3">{tool.benefit}</p>
                   )}
 
                   {/* Use Cases */}
                   <div>
-                    <h4 className="text-xs font-semibold mb-1 text-gray-500 uppercase tracking-wider">Key Use Cases:</h4>
-                    <ul className="list-disc list-inside text-xs text-gray-600 space-y-0.5">
+                    <h4 className="text-xs font-semibold mb-1 text-gray-500 dark:text-gray-400 uppercase tracking-wider">Key Use Cases:</h4>
+                    <ul className="list-disc list-inside text-xs text-gray-600 dark:text-gray-300 space-y-0.5">
                       {tool.useCases.slice(0, 3).map((useCase, index) => (
                         <li key={index}>{useCase}</li>
                       ))}
-                      {tool.useCases.length > 3 && <li className="text-gray-400">...and more</li>}
+                      {tool.useCases.length > 3 && <li className="text-gray-400 dark:text-gray-500">...and more</li>}
                     </ul>
                   </div>
                 </CardContent>
@@ -388,119 +391,120 @@ export default function TestingTools() {
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-6 text-center">Choosing the Right Tool for Your Testing Needs</h2>
           
-          <div className="overflow-x-auto rounded-lg shadow">
+          <div className="overflow-x-auto rounded-lg shadow border dark:border-gray-700">
             <table className="w-full text-sm">
-              <thead className="bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] text-white">
+              <thead className="bg-gradient-to-r from-[#00A2FF] to-[#9C27FF] dark:from-gray-700 dark:to-gray-800 text-white">
                 <tr>
                   <th className="px-6 py-3 text-left">Testing Type</th>
                   <th className="px-6 py-3 text-left">Recommended Tools</th>
                   <th className="px-6 py-3 text-left">Key Considerations</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                {/* Added alternating row colors */}
-                <tr className="bg-white hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">API Testing</td>
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {/* Added dark mode styles */}
+                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">API Testing</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col space-y-1">
-                      <span className="font-medium text-[#FF6C37]">Postman</span>
-                      <span className="font-medium text-[#68B631]">SoapUI</span>
+                      {/* Tool name colors might need adjustment if contrast is poor */}
+                      <span className="font-medium text-[#FF6C37] dark:text-orange-400">Postman</span>
+                      <span className="font-medium text-[#68B631] dark:text-lime-400">SoapUI</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <ul className="list-disc list-inside text-sm">
+                    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                       <li>Ease of use vs advanced features</li>
                       <li>Support for your specific API types</li>
                       <li>Integration with CI/CD pipelines</li>
                     </ul>
                   </td>
                 </tr>
-                <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">Browser Automation</td>
+                <tr className="bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Browser Automation</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col space-y-1">
-                      <span className="font-medium text-[#43B02A]">Selenium</span>
-                      <span className="font-medium text-[#24262E]">Cypress</span>
+                      <span className="font-medium text-[#43B02A] dark:text-green-400">Selenium</span>
+                      <span className="font-medium text-[#24262E] dark:text-gray-300">Cypress</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <ul className="list-disc list-inside text-sm">
+                    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                       <li>Cross-browser testing needs</li>
                       <li>Speed vs flexibility</li>
                       <li>Debugging capabilities</li>
                     </ul>
                   </td>
                 </tr>
-                <tr className="bg-white hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">Performance Testing</td>
+                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Performance Testing</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col space-y-1">
-                      <span className="font-medium text-[#D22128]">JMeter</span>
+                      <span className="font-medium text-[#D22128] dark:text-red-400">JMeter</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <ul className="list-disc list-inside text-sm">
+                    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                       <li>Types of performance metrics needed</li>
                       <li>Scale of load simulation required</li>
                       <li>Resource monitoring capabilities</li>
                     </ul>
                   </td>
                 </tr>
-                <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">Mobile Testing</td>
+                <tr className="bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Mobile Testing</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col space-y-1">
-                      <span className="font-medium text-[#662D91]">Appium</span>
+                      <span className="font-medium text-[#662D91] dark:text-purple-400">Appium</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <ul className="list-disc list-inside text-sm">
+                    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                       <li>Native vs hybrid app testing</li>
                       <li>Device coverage required</li>
                       <li>Platform-specific features</li>
                     </ul>
                   </td>
                 </tr>
-                 <tr className="bg-white hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">Defect Tracking</td>
+                 <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Defect Tracking</td>
                    <td className="px-6 py-4">
                      <div className="flex flex-col space-y-1">
-                       <span className="font-medium text-[#0052CC]">Jira</span>
+                       <span className="font-medium text-[#0052CC] dark:text-blue-400">Jira</span>
                      </div>
                    </td>
                    <td className="px-6 py-4">
-                     <ul className="list-disc list-inside text-sm">
+                     <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                        <li>Integration with test management tools</li>
                        <li>Workflow customization needs</li>
                        <li>Team size and collaboration features</li>
                      </ul>
                    </td>
                  </tr>
-                 <tr className="bg-gray-50 hover:bg-gray-100 transition-colors">
-                   <td className="px-6 py-4 font-medium text-gray-900">Test Management</td>
+                 <tr className="bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors">
+                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Test Management</td>
                    <td className="px-6 py-4">
                      <div className="flex flex-col space-y-1">
-                       <span className="font-medium text-[#65C178]">TestRail</span>
-                       <span className="font-medium text-[#0052CC]">Jira (with plugins)</span>
+                       <span className="font-medium text-[#65C178] dark:text-emerald-400">TestRail</span>
+                       <span className="font-medium text-[#0052CC] dark:text-blue-400">Jira (with plugins)</span>
                      </div>
                    </td>
                    <td className="px-6 py-4">
-                     <ul className="list-disc list-inside text-sm">
+                     <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                        <li>Reporting and metrics requirements</li>
                        <li>Need for dedicated test case repository</li>
                        <li>Budget and licensing</li>
                      </ul>
                    </td>
                  </tr>
-                <tr className="bg-white hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">Security Testing</td>
+                <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-gray-200">Security Testing</td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col space-y-1">
-                      <span className="font-medium text-[#4389FF]">OWASP ZAP</span>
+                      <span className="font-medium text-[#4389FF] dark:text-sky-400">OWASP ZAP</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <ul className="list-disc list-inside text-sm">
+                    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300">
                       <li>Types of vulnerabilities to detect</li>
                       <li>Integration with development workflow</li>
                       <li>Compliance requirements</li>
@@ -518,38 +522,38 @@ export default function TestingTools() {
           
           {/* Adjusted grid to lg:grid-cols-3 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Added hover effects */}
-            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out">
+            {/* Added dark mode styles */}
+            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border dark:border-gray-700">
               <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                   <Lightbulb className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Start Small</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Start Small</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Begin with simple test cases before tackling complex scenarios. Master the basics first.
                 </p>
               </CardContent>
             </Card>
-            
-            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out">
+
+            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border dark:border-gray-700">
               <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                    <Video className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Leverage Tutorials</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Leverage Tutorials</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Watch video tutorials and follow step-by-step guides to grasp practical implementation quickly.
                 </p>
               </CardContent>
             </Card>
-            
-            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out">
+
+            <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 border dark:border-gray-700">
               <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                   <BookOpen className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Consult Documentation</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Consult Documentation</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Don't skip the official docs! They hold key details, configurations, and advanced usage tips.
                 </p>
               </CardContent>

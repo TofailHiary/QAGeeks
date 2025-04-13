@@ -70,14 +70,14 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {howTo && (
             <AccordionItem value="how-to">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                 <div className="flex items-center gap-2">
-                  <ListChecks className="w-5 h-5 text-gray-600" />
+                  <ListChecks className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   <span>How to Perform</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
-                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
+                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                   {howTo.map((step, i) => <li key={i}>{step}</li>)}
                 </ol>
               </AccordionContent>
@@ -86,14 +86,14 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {verificationPoints && (
             <AccordionItem value="verify">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
+                  <CheckCircle className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   <span>What to Verify</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
-                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
+                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                   {verificationPoints.map((point, i) => <li key={i}>{point}</li>)}
                 </ul>
               </AccordionContent>
@@ -102,18 +102,18 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {types && (
             <AccordionItem value="types">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                 <div className="flex items-center gap-2">
-                  <Layers3 className="w-5 h-5 text-gray-600" />
+                  <Layers3 className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   <span>Types</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
                 <div className="space-y-3">
                   {types.map((type, i) => (
-                    <Card key={i} className="p-3 bg-gray-50/70 rounded shadow-sm border border-gray-200">
-                      <p className="font-medium text-gray-800">{type.name}</p>
-                      <p className="text-sm text-gray-600 mt-1">{type.description}</p>
+                    <Card key={i} className="p-3 bg-gray-50/70 dark:bg-gray-800 rounded shadow-sm border border-gray-200 dark:border-gray-700">
+                      <p className="font-medium text-gray-800 dark:text-gray-200">{type.name}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{type.description}</p>
                     </Card>
                   ))}
                 </div>
@@ -123,26 +123,26 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {techniques && (
             <AccordionItem value="techniques">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                 <div className="flex items-center gap-2">
-                  <Puzzle className="w-5 h-5 text-gray-600" />
+                  <Puzzle className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   <span>Common Techniques</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {techniques.map((tech, i) => (
-                    <Card key={i} className="bg-white shadow-sm border border-gray-200 hover:border-gray-300 transition-colors">
+                    <Card key={i} className="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
                       <CardHeader className="pb-2 pt-4 px-4">
-                        <CardTitle className={`text-md font-semibold text-gray-800`}>{tech.name}</CardTitle>
+                        <CardTitle className={`text-md font-semibold text-gray-800 dark:text-gray-200`}>{tech.name}</CardTitle>
                       </CardHeader>
                       <CardContent className="px-4 pb-4">
-                        <p className="text-sm text-gray-600 mb-2 leading-snug">{tech.description}</p>
-                        {tech.example && <div className="text-xs italic text-gray-500 bg-gray-100 p-2 rounded border border-gray-200">{tech.example}</div>}
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2 leading-snug">{tech.description}</p>
+                        {tech.example && <div className="text-xs italic text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600">{tech.example}</div>}
                         {tech.importance && (
                           <div className="mt-3">
-                            <p className="text-xs font-semibold text-gray-600 mb-1">Importance:</p>
-                            <ul className="list-disc list-inside space-y-1 text-xs text-gray-500 pl-2">
+                            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Importance:</p>
+                            <ul className="list-disc list-inside space-y-1 text-xs text-gray-500 dark:text-gray-400 pl-2">
                               {tech.importance.map((imp, idx) => <li key={idx}>{imp}</li>)}
                             </ul>
                           </div>
@@ -157,14 +157,14 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {steps && (
              <AccordionItem value="steps">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                 <div className="flex items-center gap-2">
-                  <Workflow className="w-5 h-5 text-gray-600" />
+                  <Workflow className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   <span>Generic Steps</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
-                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
+                <ol className="list-decimal list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                   {steps.map((step, i) => <li key={i}>{step}</li>)}
                 </ol>
               </AccordionContent>
@@ -173,26 +173,26 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {(advantages || disadvantages) && (
             <AccordionItem value="pros-cons">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                  <div className="flex items-center gap-2">
-                   <Sparkles className="w-5 h-5 text-green-600" /> / <AlertTriangle className="w-5 h-5 text-red-600" />
+                   <Sparkles className="w-5 h-5 text-green-600 dark:text-green-500" /> / <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-500" />
                    <span>Advantages & Disadvantages</span>
                  </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {advantages && (
                     <div>
-                      <h4 className="font-semibold text-lg mb-2 text-green-700 flex items-center gap-1.5"><Sparkles className="w-4 h-4"/> Advantages:</h4>
-                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                      <h4 className="font-semibold text-lg mb-2 text-green-700 dark:text-green-500 flex items-center gap-1.5"><Sparkles className="w-4 h-4"/> Advantages:</h4>
+                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                         {advantages.map((adv, i) => <li key={i}>{adv}</li>)}
                       </ul>
                     </div>
                   )}
                   {disadvantages && (
                     <div>
-                      <h4 className="font-semibold text-lg mb-2 text-red-700 flex items-center gap-1.5"><AlertTriangle className="w-4 h-4"/> Disadvantages:</h4>
-                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+                      <h4 className="font-semibold text-lg mb-2 text-red-700 dark:text-red-500 flex items-center gap-1.5"><AlertTriangle className="w-4 h-4"/> Disadvantages:</h4>
+                      <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                         {disadvantages.map((dis, i) => <li key={i}>{dis}</li>)}
                       </ul>
                     </div>
@@ -204,14 +204,14 @@ const MethodCard: React.FC<TestingMethodProps> = ({
 
           {whenToUse && (
             <AccordionItem value="when-to-use">
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 transition-colors">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline px-4 py-3 bg-gray-50/50 hover:bg-gray-100/70 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 transition-colors">
                  <div className="flex items-center gap-2">
-                   <Clock className="w-5 h-5 text-gray-600" />
+                   <Clock className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                    <span>When to Use</span>
                  </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pt-3 pb-4 bg-white">
-                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 pl-2">
+              <AccordionContent className="px-4 pt-3 pb-4 bg-white dark:bg-gray-900">
+                <ul className="list-disc list-inside space-y-1.5 text-sm text-gray-600 dark:text-gray-300 pl-2">
                   {whenToUse.map((use, i) => <li key={i}>{use}</li>)}
                 </ul>
               </AccordionContent>
@@ -412,30 +412,31 @@ export default function TestingMethods() {
         {/* Comparison Table */}
         <section>
            <h2 className="text-3xl lg:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">Methods Comparison</h2> {/* Increased size */}
-           <Card className="overflow-hidden shadow-xl rounded-lg border border-gray-200"> {/* Adjusted shadow/rounding */}
+           <Card className="overflow-hidden shadow-xl rounded-lg border border-gray-200 dark:border-gray-700"> {/* Adjusted shadow/rounding & dark border */}
              <CardContent className="p-0">
               <div className="overflow-x-auto">
-                <Table className="min-w-full">{/* Removed whitespace */}
-                  <TableHeader className="bg-gray-100">{/* Removed whitespace */}
-                    <TableRow className="border-b border-gray-300">
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aspect</TableHead>
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Black Box</TableHead>
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">White Box</TableHead>
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Gray Box</TableHead>
+                <Table className="min-w-full">
+                  <TableHeader className="bg-gray-100 dark:bg-gray-700"> {/* Dark header bg */}
+                    <TableRow className="border-b border-gray-300 dark:border-gray-600"> {/* Dark border */}
+                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Aspect</TableHead>
+                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Black Box</TableHead>
+                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">White Box</TableHead>
+                      <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">Gray Box</TableHead>
                     </TableRow>
-                  </TableHeader>{/* Removed whitespace */}
-                  <TableBody className="bg-white divide-y divide-gray-200">
+                  </TableHeader>
+                  <TableBody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700"> {/* Dark bg & divider */}
                     {comparisonData.map((row, idx) => (
                       <TableRow
                         key={row.aspect}
                         className={`transition-colors duration-150 ${
-                          idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/80' // Subtle alternating background
-                        } hover:bg-blue-50/50`} // Subtle hover
+                          // Adjusted dark alternating backgrounds
+                          idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50/80 dark:bg-gray-700/50'
+                        } hover:bg-blue-50/50 dark:hover:bg-blue-900/30`} // Dark hover
                       >
-                        <TableCell className="font-medium px-6 py-4 whitespace-nowrap text-sm text-gray-800">{row.aspect}</TableCell>
-                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{row.black}</TableCell>
-                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{row.white}</TableCell>
-                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{row.gray}</TableCell>
+                        <TableCell className="font-medium px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{row.aspect}</TableCell>
+                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{row.black}</TableCell>
+                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{row.white}</TableCell>
+                        <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">{row.gray}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

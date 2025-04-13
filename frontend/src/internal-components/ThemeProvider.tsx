@@ -45,11 +45,25 @@ export function ThemeProvider({
         : "light";
 
       root.classList.add(systemTheme);
-      return;
+
+      // Add listener for system theme changes
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handleChange = () => {
+        const newSystemTheme = mediaQuery.matches ? "dark" : "light";
+        root.classList.remove("light", "dark");
+        root.classList.add(newSystemTheme);
+        // NOTE: We don't update localStorage here as the user's preference is 'system'
+      };
+      mediaQuery.addEventListener("change", handleChange);
+
+      // Cleanup listener on component unmount or theme change
+      return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+      };
     }
 
     root.classList.add(theme);
-  }, [theme]);
+  }, [theme]); // Rerun effect if theme changes
 
   const value = {
     theme,

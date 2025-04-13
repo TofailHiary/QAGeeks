@@ -90,35 +90,38 @@ export default function Principles() {
   const manualVsAutomationDetails = (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-bold text-lg mb-2 text-[#00A2FF]">Manual Testing</h4>
-          <ul className="list-disc list-inside space-y-2">
+        {/* Manual Testing Block - Added dark mode classes */}
+        <div className="bg-blue-50 dark:bg-[#001a33] p-4 rounded-lg">
+          <h4 className="font-bold text-lg mb-2 text-[#00A2FF] dark:text-blue-400">Manual Testing</h4>
+          <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
             <li>Performed by human testers</li>
             <li>Best for exploratory, usability, and ad-hoc testing</li>
             <li>No scripting knowledge required</li>
             <li>Time-consuming for regression testing</li>
             <li>Great for UX evaluation and visual verification</li>
           </ul>
-          <p className="mt-2 italic">When to use: New features, complex scenarios, infrequently changing features</p>
+          <p className="mt-2 italic text-gray-600 dark:text-gray-400">When to use: New features, complex scenarios, infrequently changing features</p>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <h4 className="font-bold text-lg mb-2 text-[#9C27FF]">Automation Testing</h4>
-          <ul className="list-disc list-inside space-y-2">
+        {/* Automation Testing Block - Added dark mode classes */}
+        <div className="bg-purple-50 dark:bg-[#1a0033] p-4 rounded-lg">
+          <h4 className="font-bold text-lg mb-2 text-[#9C27FF] dark:text-purple-400">Automation Testing</h4>
+          <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
             <li>Executed by tools and scripts</li>
             <li>Ideal for regression, load, and performance testing</li>
             <li>Requires programming or scripting skills</li>
             <li>Time-efficient for repetitive tasks</li>
             <li>Good test coverage with consistent execution</li>
           </ul>
-          <p className="mt-2 italic">When to use: Regression testing, load testing, frequently changing features</p>
+          <p className="mt-2 italic text-gray-600 dark:text-gray-400">When to use: Regression testing, load testing, frequently changing features</p>
         </div>
       </div>
-      <div className="mt-4 bg-gray-50 p-4 rounded-lg">
-        <h4 className="font-bold text-lg mb-2">Best Practices for Testing Strategy</h4>
-        <p>A balanced approach using both manual and automated testing provides optimal results:</p>
-        <ul className="list-disc list-inside mt-2">
-          <li><span className="font-medium">Automate:</span> Repetitive tasks, regression tests, data-driven tests</li>
-          <li><span className="font-medium">Manual:</span> New features, exploratory testing, usability testing</li>
+      {/* Best Practices Block - Added dark mode classes */}
+      <div className="mt-4 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+        <h4 className="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">Best Practices for Testing Strategy</h4>
+        <p className="text-gray-700 dark:text-gray-300">A balanced approach using both manual and automated testing provides optimal results:</p>
+        <ul className="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+          <li><span className="font-medium text-gray-800 dark:text-gray-100">Automate:</span> Repetitive tasks, regression tests, data-driven tests</li>
+          <li><span className="font-medium text-gray-800 dark:text-gray-100">Manual:</span> New features, exploratory testing, usability testing</li>
           <li><span className="font-medium">Hybrid:</span> Use automation to set up test data/environment, then manual testing for verification</li>
         </ul>
       </div>
@@ -128,31 +131,31 @@ export default function Principles() {
   // Verification vs Validation comparison
   const verificationVsValidationDetails = (
     <div>
-      {/* Comparison Section */}
+      {/* Comparison Section - Added dark mode styles */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-bold text-lg mb-2 text-[#00A2FF]">Verification</h4>
-          <p className="mb-2">"Are we building the product right?"</p>
-          <ul className="list-disc list-inside space-y-2">
+        <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg border dark:border-blue-800/50">
+          <h4 className="font-bold text-lg mb-2 text-[#00A2FF] dark:text-blue-400">Verification</h4>
+          <p className="mb-2 dark:text-gray-200">"Are we building the product right?"</p>
+          <ul className="list-disc list-inside space-y-2 dark:text-gray-300">
             <li>Evaluates documents, code, and plans</li>
             <li>Static testing techniques</li>
             <li>Performed without executing code</li>
             <li>Reviews, walkthroughs, inspections</li>
             <li>Ensures compliance with specifications</li>
           </ul>
-          <p className="mt-2 italic">Examples: Requirements reviews, design reviews, code reviews</p>
+          <p className="mt-2 italic dark:text-gray-400">Examples: Requirements reviews, design reviews, code reviews</p>
         </div>
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <h4 className="font-bold text-lg mb-2 text-[#9C27FF]">Validation</h4>
-          <p className="mb-2">"Are we building the right product?"</p>
-          <ul className="list-disc list-inside space-y-2">
+        <div className="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg border dark:border-purple-800/50">
+          <h4 className="font-bold text-lg mb-2 text-[#9C27FF] dark:text-purple-400">Validation</h4>
+          <p className="mb-2 dark:text-gray-200">"Are we building the right product?"</p>
+          <ul className="list-disc list-inside space-y-2 dark:text-gray-300">
             <li>Evaluates the product itself</li>
             <li>Dynamic testing techniques</li>
             <li>Requires executing the software</li>
             <li>Testing against user requirements</li>
             <li>Ensures the product meets user needs</li>
           </ul>
-          <p className="mt-2 italic">Examples: User acceptance testing, system testing, beta testing</p>
+          <p className="mt-2 italic dark:text-gray-400">Examples: User acceptance testing, system testing, beta testing</p>
         </div>
       </div>
       {/* SDLC Integration Section removed from here, now rendered separately below */}
@@ -166,40 +169,40 @@ export default function Principles() {
       description="Explore the 7 fundamental principles of software testing, key QA concepts like QA vs QC, Verification vs Validation, Static vs Dynamic testing, and Manual vs Automation testing."
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> {/* Added padding */}
-        {/* Tabs - Adjusted padding, border, hover */}
-        <div className="flex flex-wrap justify-center mb-12 border-b border-gray-200">
+        {/* Tabs - Added dark mode classes */}
+        <div className="flex flex-wrap justify-center mb-12 border-b border-gray-200 dark:border-gray-700">
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'principles' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'principles' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('principles'))}
           >
             Seven Principles
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'keyConcepts' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'keyConcepts' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('keyConcepts'))}
           >
             Key Concepts
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'staticVsDynamic' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'staticVsDynamic' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('staticVsDynamic'))}
           >
             Static vs Dynamic
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'manualVsAuto' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'manualVsAuto' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('manualVsAuto'))}
           >
             Manual vs Automation
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'qaqc' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'qaqc' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('qaqc'))}
           >
             QA vs QC
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'verificationVsValidation' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-blue-600 hover:border-blue-300'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'verificationVsValidation' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('verificationVsValidation'))}
           >
             Verification vs Validation
@@ -208,7 +211,7 @@ export default function Principles() {
 
         {/* Seven Principles of Testing */}
         {activeTab === 'principles' && (
-          <div className="animate-fade-in"> {/* Added animation class */}
+          <div className="animate-fade-in" data-active-tab="principles"> {/* Added data attribute */}
             <div className="mb-12 text-center max-w-4xl mx-auto"> {/* Adjusted margin */}
               <h2 className="text-3xl font-bold mb-4">The Seven Principles of Testing</h2>
               <p className="text-lg text-gray-600">
@@ -236,10 +239,10 @@ export default function Principles() {
                       {principle.title === "Testing is Context Dependent" && <p>The testing approach depends on the context of the software developed. Different types of software need to perform different types of testing. For example, The testing of the e-commerce site is different from the testing of the Android application.</p>}
                       {principle.title === "Absence of Errors Fallacy" && <p>If a built software is 99% bug-free but does not follow the user requirement then it is unusable. It is not only necessary that software is 99% bug-free but it is also mandatory to fulfill all the customer requirements.</p>}
                     </div>
-                    {/* Example Section */}
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
-                      <p className="font-semibold text-purple-700 mb-2 text-sm uppercase tracking-wide">Example:</p>
-                      <p className="text-gray-700 italic text-sm md:text-base">
+                    {/* Example Section - Added dark mode classes */}
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-gradient-to-r dark:from-[#1a0033] dark:to-[#001a33] p-4 rounded-lg border-l-4 border-purple-400 dark:border-[#9C27FF]">
+                      <p className="font-semibold text-purple-700 dark:text-[#9C27FF] mb-2 text-sm uppercase tracking-wide">Example:</p>
+                      <p className="text-gray-700 dark:text-gray-300 italic text-sm md:text-base">
                         {/* Map examples based on title */}
                         {principle.title === "Testing Shows Presence of Defects" && "Imagine you test a calculator app and find a bug when adding large numbers. This proves there is a defect. However, even after extensive testing, you can’t be absolutely certain that no other defects exist. You’ve shown that problems are present, but you can’t prove that the product is now perfect."}
                         {principle.title === "Exhaustive Testing is Impossible" && "Consider a login form. If you tried every possible combination of usernames, passwords, special characters, and browser/device variations, you’d never finish testing. Instead, you pick the most important and likely scenarios to test, such as common usernames, boundary-length passwords, and popular browsers."}
@@ -255,12 +258,13 @@ export default function Principles() {
               ))}
             </div>
 
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">Why These Principles Matter</h3>
-              <p className="text-gray-700 mb-4">
+            {/* "Why These Principles Matter" block - Added dark mode classes */}
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-gradient-to-r dark:from-[#1a0033] dark:to-[#001a33] p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Why These Principles Matter</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
                 Understanding these principles helps QA professionals establish realistic expectations about testing and build effective test strategies. They guide testing efforts to be more efficient, focused, and valuable to the overall software development process.
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 These principles should influence all testing activities, from test planning and design to execution and reporting. They help balance thoroughness with practicality in the testing approach.
               </p>
             </div>
@@ -345,8 +349,8 @@ export default function Principles() {
               details={
                 <div>
                   <p className="mb-4">SQA incorporates all software development processes, from requirements definition to release, aiming to ensure quality is built-in.</p>
-                  <h4 className="font-bold text-lg mb-2 text-[#00A2FF]">Example:</h4>
-                  <p className="italic bg-blue-50 p-3 rounded">
+                  <h4 className="font-bold text-lg mb-2 text-[#00A2FF] dark:text-blue-400">Example:</h4>
+                  <p className="italic bg-blue-50 dark:bg-[#001a33] dark:text-gray-200 p-3 rounded">
                     For an online banking app, QA activities include establishing coding standards, requiring code reviews, and ensuring all requirements are clear and approved before development starts. This prevents defects proactively.
                   </p>
                 </div>
@@ -367,8 +371,8 @@ export default function Principles() {
               details={
                 <div>
                   <p className="mb-4">QC involves testing the product to find defects. It's about detection rather than prevention and happens after QA activities have defined the standards.</p>
-                  <h4 className="font-bold text-lg mb-2 text-[#9C27FF]">Example:</h4>
-                  <p className="italic bg-purple-50 p-3 rounded">
+                  <h4 className="font-bold text-lg mb-2 text-[#9C27FF] dark:text-purple-400">Example:</h4>
+                  <p className="italic bg-purple-50 dark:bg-[#1a0033] dark:text-gray-200 p-3 rounded">
                     After the banking app is developed, QC testers execute test cases (e.g., trying valid/invalid logins) to find issues like incorrect error messages or lockout failures. This finds defects before release.
                   </p>
                 </div>
@@ -464,10 +468,10 @@ export default function Principles() {
 
             {/* Benefits Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Benefits of Static Testing */}
-              <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-                <h3 className="text-lg font-semibold mb-3 text-blue-700">Benefits of Static Testing</h3>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+              {/* Benefits of Static Testing - Added dark mode classes */}
+              <div className="bg-blue-50 dark:bg-[#001a33] p-6 rounded-lg border border-blue-200 dark:border-blue-900">
+                <h3 className="text-lg font-semibold mb-3 text-blue-700 dark:text-blue-400">Benefits of Static Testing</h3>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
                   <li>Early defect detection, reducing cost of fixes</li>
                   <li>Identifies issues that might be missed during execution</li>
                   <li>Improves code maintainability and readability</li>
@@ -475,10 +479,10 @@ export default function Principles() {
                   <li>Enhances team communication and knowledge sharing</li>
                 </ul>
               </div>
-              {/* Benefits of Dynamic Testing */}
-              <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
-                <h3 className="text-lg font-semibold mb-3 text-purple-700">Benefits of Dynamic Testing</h3>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+              {/* Benefits of Dynamic Testing - Added dark mode classes */}
+              <div className="bg-purple-50 dark:bg-[#1a0033] p-6 rounded-lg border border-purple-200 dark:border-purple-900">
+                <h3 className="text-lg font-semibold mb-3 text-purple-700 dark:text-purple-400">Benefits of Dynamic Testing</h3>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
                   <li>Validates actual behavior of the software</li>
                   <li>Catches runtime and integration issues</li>
                   <li>Tests the user experience and performance</li>
@@ -602,79 +606,87 @@ export default function Principles() {
             details={verificationVsValidationDetails}
           />
 
-          {/* SDLC Integration separate card */}
-          <div className="mt-8 bg-white shadow-lg rounded-lg p-6">
-            <h3 className="text-xl font-bold mb-4">SDLC Integration</h3>
-            <p className="mb-4">Both verification and validation are essential throughout the software development lifecycle:</p>
+          {/* SDLC Integration separate card - Added dark mode styles */}
+          <div className="mt-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border dark:border-gray-700">
+            <h3 className="text-xl font-bold mb-4 dark:text-white">SDLC Integration</h3>
+            <p className="mb-4 dark:text-gray-300">Both verification and validation are essential throughout the software development lifecycle:</p>
             <div className="relative overflow-hidden">
               {/* Timeline vertical line */}
-              <div className="absolute h-full w-1 bg-gradient-to-b from-[#00A2FF] to-[#9C27FF] left-[15px] top-0"></div>
+              <div className="absolute h-full w-1 bg-gradient-to-b from-[#00A2FF] to-[#9C27FF] dark:from-blue-700 dark:to-purple-700 left-[15px] top-0"></div>
               <div className="space-y-6 pl-14">
                 {/* Requirements Phase */}
                 <div className="relative">
-                  <div className="absolute w-4 h-4 bg-[#00A2FF] rounded-full -left-[11px] top-1 shadow"></div>
+                  <div className="absolute w-4 h-4 bg-[#00A2FF] dark:bg-blue-600 rounded-full -left-[11px] top-1 shadow"></div>
                   <div className="pl-10">
-                    <h4 className="font-bold">Requirements Phase</h4>
+                    <h4 className="font-bold dark:text-gray-200">Requirements Phase</h4>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="bg-blue-50 p-3 rounded">
-                      <p className="font-medium text-[#00A2FF]">Verification</p>
-                      <p className="text-sm">Review requirements for consistency, completeness, and clarity</p>
+                    {/* Verification Block - Adjusted dark mode classes */}
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded border dark:border-blue-800/50">
+                      <p className="font-medium text-[#00A2FF] dark:text-blue-400">Verification</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Review requirements for consistency, completeness, and clarity</p>
                     </div>
-                    <div className="bg-purple-50 p-3 rounded">
-                      <p className="font-medium text-[#9C27FF]">Validation</p>
-                      <p className="text-sm">Confirm requirements actually meet user needs and business goals</p>
+                    {/* Validation Block - Adjusted dark mode classes */}
+                    <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded border dark:border-purple-800/50">
+                      <p className="font-medium text-[#9C27FF] dark:text-purple-400">Validation</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Confirm requirements actually meet user needs and business goals</p>
                     </div>
                   </div>
                 </div>
                 {/* Design Phase */}
                 <div className="relative">
-                  <div className="absolute w-4 h-4 bg-[#4482FF] rounded-full -left-[11px] top-1 shadow"></div>
+                  <div className="absolute w-4 h-4 bg-[#4482FF] dark:bg-sky-600 rounded-full -left-[11px] top-1 shadow"></div>
                   <div className="pl-10">
-                    <h4 className="font-bold">Design Phase</h4>
+                    <h4 className="font-bold dark:text-gray-200">Design Phase</h4>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="bg-blue-50 p-3 rounded">
-                      <p className="font-medium text-[#00A2FF]">Verification</p>
-                      <p className="text-sm">Ensure design aligns with requirements specifications</p>
+                     {/* Verification Block - Adjusted dark mode classes */}
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded border dark:border-blue-800/50">
+                      <p className="font-medium text-[#00A2FF] dark:text-blue-400">Verification</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Ensure design aligns with requirements specifications</p>
                     </div>
-                    <div className="bg-purple-50 p-3 rounded">
-                      <p className="font-medium text-[#9C27FF]">Validation</p>
-                      <p className="text-sm">Review design with stakeholders to confirm it meets expectations</p>
+                     {/* Validation Block - Adjusted dark mode classes */}
+                    <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded border dark:border-purple-800/50">
+                      <p className="font-medium text-[#9C27FF] dark:text-purple-400">Validation</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Review design with stakeholders to confirm it meets expectations</p>
                     </div>
                   </div>
                 </div>
                 {/* Implementation Phase */}
                 <div className="relative">
-                  <div className="absolute w-4 h-4 bg-[#7B54FF] rounded-full -left-[11px] top-1 shadow"></div>
+                  <div className="absolute w-4 h-4 bg-[#7B54FF] dark:bg-indigo-600 rounded-full -left-[11px] top-1 shadow"></div>
                   <div className="pl-10">
-                    <h4 className="font-bold">Implementation Phase</h4>
+                    <h4 className="font-bold dark:text-gray-200">Implementation Phase</h4>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="bg-blue-50 p-3 rounded">
-                      <p className="font-medium text-[#00A2FF]">Verification</p>
-                      <p className="text-sm">Code reviews, static analysis, unit tests to verify against design</p>
+                     {/* Verification Block - Adjusted dark mode classes */}
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded border dark:border-blue-800/50">
+                      <p className="font-medium text-[#00A2FF] dark:text-blue-400">Verification</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Code reviews, static analysis, unit tests to verify against design</p>
                     </div>
-                    <div className="bg-purple-50 p-3 rounded">
-                      <p className="font-medium text-[#9C27FF]">Validation</p>
-                      <p className="text-sm">Component/integration tests to validate against requirements</p>
+                     {/* Validation Block - Adjusted dark mode classes */}
+                    <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded border dark:border-purple-800/50">
+                      <p className="font-medium text-[#9C27FF] dark:text-purple-400">Validation</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">Component/integration tests to validate against requirements</p>
                     </div>
                   </div>
                 </div>
                 {/* Testing Phase */}
                 <div className="relative">
-                  <div className="absolute w-4 h-4 bg-[#9C27FF] rounded-full -left-[11px] top-1 shadow"></div>
+                  <div className="absolute w-4 h-4 bg-[#9C27FF] dark:bg-purple-600 rounded-full -left-[11px] top-1 shadow"></div>
                   <div className="pl-10">
-                    <h4 className="font-bold">Testing Phase</h4>
+                    <h4 className="font-bold dark:text-gray-200">Testing Phase</h4>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    <div className="bg-blue-50 p-3 rounded">
-                      <p className="font-medium text-[#00A2FF]">Verification</p>
-                      <p className="text-sm">System testing, test coverage analysis, compliance checking</p>
+                     {/* Verification Block - Adjusted dark mode classes */}
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded border dark:border-blue-800/50">
+                      <p className="font-medium text-[#00A2FF] dark:text-blue-400">Verification</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">System testing, test coverage analysis, compliance checking</p>
                     </div>
-                    <div className="bg-purple-50 p-3 rounded">
-                      <p className="font-medium text-[#9C27FF]">Validation</p>
-                      <p className="text-sm">User acceptance testing, beta testing, usability testing</p>
+                     {/* Validation Block - Adjusted dark mode classes */}
+                    <div className="bg-purple-50 dark:bg-purple-900/30 p-3 rounded border dark:border-purple-800/50">
+                      <p className="font-medium text-[#9C27FF] dark:text-purple-400">Validation</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">User acceptance testing, beta testing, usability testing</p>
                     </div>
                   </div>
                 </div>

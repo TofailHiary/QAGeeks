@@ -116,10 +116,11 @@ export default function DefectManagement() {
                           {item.icon}
                           <span className="font-medium text-gray-700 dark:text-gray-200">{item.term}</span>
                         </motion.div>
-                      </TooltipTrigger>
-                      <TooltipContent className="bg-black text-white dark:bg-white dark:text-black rounded-md shadow-lg p-2 max-w-xs text-sm">
-                        <p>{item.definition}</p>
-                      </TooltipContent>
+                       </TooltipTrigger>
+                       {/* Applying explicit styles directly - Updated light mode */}
+                       <TooltipContent className="bg-black text-white border border-gray-700 rounded-md shadow-lg p-2 max-w-xs text-sm dark:bg-gray-800 dark:text-white dark:border-gray-600">
+                         <p>{item.definition}</p>
+                       </TooltipContent>
                     </Tooltip>
                   ))}
                 </div>

@@ -44,7 +44,7 @@ export default function TrainingSchedule() {
       <div className="relative py-12 max-w-6xl mx-auto space-y-16">
 
         {/* Introduction Section */}
-        <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <Card className="bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
           <CardContent className="p-8">
             <h2 className="text-2xl font-bold mb-4 text-[#00A2FF]">Welcome to QAGeeks</h2>
             <div className="text-lg text-gray-700 leading-relaxed space-y-4">
@@ -71,11 +71,11 @@ export default function TrainingSchedule() {
         </Card>
 
         {/* Training Objectives */}
-        <div className="bg-gradient-to-br from-[#00A2FF]/10 to-[#9C27FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
+        <div className="bg-gradient-to-br from-[#00A2FF]/10 to-[#9C27FF]/10 dark:bg-gray-900 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A2FF] to-[#9C27FF]">
             Training Objectives
           </h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 dark:text-gray-200 max-w-4xl mx-auto">
             {objectives.map((item, index) => (
               <li key={index} className="flex items-start">
                 <span className="text-green-500 mr-3 mt-1">✓</span>
@@ -86,11 +86,11 @@ export default function TrainingSchedule() {
         </div>
 
         {/* Schedule List */}
-        <div className="bg-gradient-to-br from-[#9C27FF]/10 to-[#00A2FF]/10 p-8 rounded-lg shadow-lg border border-gray-200">
+        <div className="bg-gradient-to-br from-[#9C27FF]/10 to-[#00A2FF]/10 dark:bg-gray-900 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#9C27FF] to-[#00A2FF]">
             Training Schedule
           </h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 max-w-4xl mx-auto">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-lg text-gray-800 dark:text-gray-200 max-w-4xl mx-auto">
             {scheduleItems.map((item, index) => (
               <li key={index} className="flex items-start">
                 <span className="text-blue-500 mr-3 mt-1">✓</span>

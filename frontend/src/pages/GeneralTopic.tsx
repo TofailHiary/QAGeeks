@@ -32,31 +32,34 @@ const SectionCard: React.FC<{ title: string; icon?: React.ElementType; children:
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.5 }}
-    className={`bg-sky-50 border border-blue-200 rounded-3xl shadow-lg p-8 mb-12 transition-all duration-300 hover:shadow-blue-200/50 hover:border-blue-300 ${className}`}
+    // Added dark mode styles
+    className={`bg-sky-50 dark:bg-gray-800 border border-blue-200 dark:border-blue-900 rounded-3xl shadow-lg p-8 mb-12 transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-900/50 hover:border-blue-300 dark:hover:border-blue-700 ${className}`}
   >
-    <h2 className="text-4xl font-extrabold mb-6 text-blue-700 flex items-center">
-      {Icon && <Icon className="mr-4 text-blue-500" size="1.1em" />} {/* Render icon if provided */}
+    <h2 className="text-4xl font-extrabold mb-6 text-blue-700 dark:text-blue-400 flex items-center">
+      {Icon && <Icon className="mr-4 text-blue-500 dark:text-blue-400" size="1.1em" />} {/* Render icon if provided */}
       {title}
     </h2>
-    <div className="text-slate-700 space-y-5 text-lg leading-relaxed">{children}</div>
+    <div className="text-slate-700 dark:text-slate-300 space-y-5 text-lg leading-relaxed">{children}</div>
   </motion.div>
 );
 
-// Enhanced StyledListItem for light background
+// Enhanced StyledListItem - Added dark mode styles
 const StyledListItem: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <li className="relative pl-8 py-3 border-l-4 border-blue-500 transition duration-300 ease-in-out hover:bg-blue-100/70 hover:border-blue-600 group">
-    <span className="absolute left-[-0.7rem] top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full transition duration-300 group-hover:scale-125 group-hover:bg-blue-600"></span>
+  <li className="relative pl-8 py-3 border-l-4 border-blue-500 dark:border-blue-700 transition duration-300 ease-in-out hover:bg-blue-100/70 dark:hover:bg-gray-700/50 hover:border-blue-600 dark:hover:border-blue-500 group">
+    <span className="absolute left-[-0.7rem] top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 dark:bg-blue-700 rounded-full transition duration-300 group-hover:scale-125 group-hover:bg-blue-600 dark:group-hover:bg-blue-500"></span>
     {children}
   </li>
 );
 
 // Tooltip Wrapper for definitions
+// Tooltip Wrapper - Added dark mode styles
 const InfoTip: React.FC<{ term: string; definition: string }> = ({ term, definition }) => (
   <TooltipProvider delayDuration={100}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="text-blue-600 font-semibold border-b border-dotted border-blue-600 cursor-help">{term}</span>
+        <span className="text-blue-600 dark:text-blue-400 font-semibold border-b border-dotted border-blue-600 dark:border-blue-500 cursor-help">{term}</span>
       </TooltipTrigger>
+      {/* TooltipContent already dark-friendly */}
       <TooltipContent className="bg-slate-800 text-white p-2 rounded max-w-xs text-sm">
         <p>{definition}</p>
       </TooltipContent>
@@ -65,12 +68,12 @@ const InfoTip: React.FC<{ term: string; definition: string }> = ({ term, definit
 );
 
 
-// Enhanced Strong component for alternating accent colors on light background
+// Enhanced Strong component - Added dark mode styles
 const StrongHighlight: React.FC<{ children: React.ReactNode; color?: 'blue' | 'purple' | 'gray' }> = ({ children, color = 'blue' }) => {
   const colorClass =
-    color === 'purple' ? 'text-purple-600 font-semibold' :
-    color === 'gray' ? 'text-slate-600 font-semibold' :
-    'text-blue-600 font-semibold';
+    color === 'purple' ? 'text-purple-600 dark:text-purple-400 font-semibold' :
+    color === 'gray' ? 'text-slate-600 dark:text-slate-400 font-semibold' :
+    'text-blue-600 dark:text-blue-400 font-semibold';
   return <strong className={colorClass}>{children}</strong>;
 };
 
@@ -81,16 +84,17 @@ export default function GeneralTopic() {
 
         {/* --- Mobile vs Web Testing --- */}
         <SectionCard title="Mobile vs. Web App Testing" icon={FaMobileAlt}>
-          <div className="overflow-x-auto rounded-xl border border-blue-300/70 shadow-inner">
+          {/* Added dark mode styles to table */}
+          <div className="overflow-x-auto rounded-xl border border-blue-300/70 dark:border-blue-800/70 shadow-inner">
             <Table>
-              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600">
-                <TableRow>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Feature</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Mobile App Testing</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Web App Testing</TableHead>
+              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-700 dark:to-gray-800">
+                <TableRow className="border-b-0"> {/* Removed bottom border for header row */}
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Feature</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Mobile App Testing</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Web App Testing</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className="bg-white">
+              <TableBody className="bg-white dark:bg-gray-800 divide-y divide-blue-200/80 dark:divide-gray-700">
                 {[
                   { feature: "Usage", mobile: "Software programs used on mobile devices.", web: "Software programs used on computers." },
                   { feature: "User Base", mobile: "Developed for a broader range of users.", web: "Developed for a shorter range of users compared to mobile." },
@@ -104,11 +108,12 @@ export default function GeneralTopic() {
                   { feature: "Interaction", mobile: "Focus on interaction with user moves, voice, environment, gestures, etc.", web: "Less focus on complex user interactions." },
                   { feature: "Tools/Frameworks", mobile: "Appium, Espresso, XCUITest, Xamarin, Robotium, etc.", web: "Selenium, WebLOAD, Acunetix, Netsparker, etc." },
                   { feature: "Peripheral Testing", mobile: "Tablets, smartwatches, fitness trackers, medical devices.", web: "Mouse, webcams, game controllers, keyboards." },
-                ].map((row) => (
-                  <TableRow key={row.feature} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
-                    <TableCell className="p-5 font-semibold text-blue-700">{row.feature}</TableCell>
-                    <TableCell className="p-5 text-slate-700">{row.mobile}</TableCell>
-                    <TableCell className="p-5 text-slate-700">{row.web}</TableCell>
+                ].map((row, idx) => (
+                  // Added alternating dark bg and text colors
+                  <TableRow key={row.feature} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}>
+                    <TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.feature}</TableCell>
+                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.mobile}</TableCell>
+                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.web}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -147,17 +152,18 @@ export default function GeneralTopic() {
           <p><StrongHighlight color="purple">Emulator Analogy (Arcade Emulator):</StrongHighlight> Replicates old game software *and* hardware (CPU, memory) on a modern computer.</p>
           <p><StrongHighlight color="purple">Emulator Example (Android Emulator):</StrongHighlight> Replicates Android hardware/software, allowing testing of camera, GPS, network conditions.</p>
 
-          <h3 className="text-2xl font-semibold mt-10 mb-5 text-purple-700">Comparison</h3>
-          <div className="overflow-x-auto rounded-xl border border-blue-300/70 shadow-inner mt-4">
+          <h3 className="text-2xl font-semibold mt-10 mb-5 text-purple-700 dark:text-purple-400">Comparison</h3>
+          {/* Added dark mode styles to table */}
+          <div className="overflow-x-auto rounded-xl border border-blue-300/70 dark:border-blue-800/70 shadow-inner mt-4">
             <Table>
-              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600">
-                <TableRow>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Aspect</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Emulator</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white">Simulator</TableHead>
+              <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-700 dark:to-gray-800">
+                <TableRow className="border-b-0"> {/* Removed bottom border for header row */}
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Aspect</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Emulator</TableHead>
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Simulator</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className="bg-white">
+              <TableBody className="bg-white dark:bg-gray-800 divide-y divide-blue-200/80 dark:divide-gray-700">
                 {[
                   { aspect: "Definition", emulator: "Replicates hardware and software.", simulator: "Models software behavior only." },
                   { aspect: "Purpose", emulator: "Testing hardware-specific features, close replication.", simulator: "Testing app functionality without precise hardware replication." },
@@ -166,11 +172,12 @@ export default function GeneralTopic() {
                   { aspect: "Hardware Interaction", emulator: "Supports testing GPS, camera, network, etc.", simulator: "Limited or no support for hardware features." },
                   { aspect: "Use Cases", emulator: "Firmware, OS features, hardware-dependent apps.", simulator: "UI/UX, basic functionality testing in development." },
                   { aspect: "Example", emulator: "Android Emulator", simulator: "iOS Simulator" },
-                ].map((row) => (
-                  <TableRow key={row.aspect} className="hover:bg-sky-100/70 transition duration-200 border-b border-blue-200/80 last:border-b-0">
-                    <TableCell className="p-5 font-semibold text-blue-700">{row.aspect}</TableCell>
-                    <TableCell className="p-5 text-slate-700">{row.emulator}</TableCell>
-                    <TableCell className="p-5 text-slate-700">{row.simulator}</TableCell>
+                ].map((row, idx) => (
+                  // Added alternating dark bg and text colors
+                  <TableRow key={row.aspect} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}>
+                    <TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.aspect}</TableCell>
+                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.emulator}</TableCell>
+                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.simulator}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -207,8 +214,9 @@ export default function GeneralTopic() {
               { trigger: "Usability Testing", content: "Evaluating the ease of use and overall user experience." },
             ].map((item, index) => (
               <AccordionItem value={`item-${index}`} key={item.trigger}>
-                <AccordionTrigger className="text-lg hover:no-underline">{item.trigger}</AccordionTrigger>
-                <AccordionContent className="text-base text-slate-600 pt-2"> {/* Added content */}
+                {/* Added dark mode styles */}
+                <AccordionTrigger className="text-lg hover:no-underline dark:text-gray-200 dark:hover:text-blue-400">{item.trigger}</AccordionTrigger>
+                <AccordionContent className="text-base text-slate-600 dark:text-slate-400 pt-2">
                   {item.content}
                 </AccordionContent>
               </AccordionItem>
@@ -324,7 +332,8 @@ export default function GeneralTopic() {
               { name: "Swagger Petstore", url: "https://petstore.swagger.io/" },
             ].map(link => (
               <StyledListItem key={link.name}>
-                <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline transition duration-200">
+                {/* Added dark mode styles */}
+                <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline transition duration-200">
                   {link.name}
                 </a>
               </StyledListItem>

@@ -221,11 +221,12 @@ export default function Stlc() {
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow className="bg-gradient-to-r from-blue-50 to-purple-50">
-                      <TableHead className="font-semibold text-gray-700">Aspect</TableHead>
-                      <TableHead className="font-semibold text-gray-700">BRS</TableHead>
-                      <TableHead className="font-semibold text-gray-700">FRS</TableHead>
-                      <TableHead className="font-semibold text-gray-700">SRS</TableHead>
+                    {/* Added dark mode classes to table header row and cells */}
+                    <TableRow className="bg-gradient-to-r from-blue-50 to-purple-50 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-700">
+                      <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Aspect</TableHead>
+                      <TableHead className="font-semibold text-gray-700 dark:text-gray-200">BRS</TableHead>
+                      <TableHead className="font-semibold text-gray-700 dark:text-gray-200">FRS</TableHead>
+                      <TableHead className="font-semibold text-gray-700 dark:text-gray-200">SRS</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

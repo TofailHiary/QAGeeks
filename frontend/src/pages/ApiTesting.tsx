@@ -10,15 +10,17 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Lightbulb, Users, Settings, ShieldCheck, Network, FileCode, Server, GitCompareArrows, TestTubeDiagonal, ListChecks, KeyRound, Wrench, Code, HelpCircle, AlertTriangle, CheckCircle } from 'lucide-react'; // Added HelpCircle, AlertTriangle, CheckCircle
 
 // Helper component for Tooltips
+// Helper component for Tooltips - Added dark mode styles for trigger
 const InfoTooltip: React.FC<{ term: string; definition: string }> = ({ term, definition }) => (
   <TooltipProvider delayDuration={100}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="inline-flex items-center cursor-help text-blue-600 font-semibold underline decoration-dotted decoration-blue-400">
+        <span className="inline-flex items-center cursor-help text-blue-600 dark:text-blue-400 font-semibold underline decoration-dotted decoration-blue-400 dark:decoration-blue-600">
           {term}
           <HelpCircle size={14} className="ml-1 opacity-70" />
         </span>
       </TooltipTrigger>
+      {/* TooltipContent already dark-friendly */}
       <TooltipContent className="bg-gray-800 text-white p-2 rounded shadow-lg max-w-xs text-sm">
         <p>{definition}</p>
       </TooltipContent>
@@ -41,14 +43,16 @@ const SectionCard: React.FC<{ title: string; icon?: React.ReactNode; children: R
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
-    <Card className={`mb-8 shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow duration-300 ${className}`}>
+    {/* Added dark mode styles to SectionCard */}
+    <Card className={`mb-8 shadow-lg border-l-4 border-blue-500 dark:border-blue-700 hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-gray-800 ${className}`}>
       <CardHeader>
-        <CardTitle className="flex items-center text-2xl font-bold text-gray-800">
-          {icon && <span className="mr-3 text-blue-600">{icon}</span>}
+        <CardTitle className="flex items-center text-2xl font-bold text-gray-800 dark:text-white">
+          {icon && <span className="mr-3 text-blue-600 dark:text-blue-400">{icon}</span>}
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent className="prose max-w-none prose-indigo prose-a:text-blue-600 hover:prose-a:text-blue-800">
+      {/* Added dark:prose-invert for content styling */}
+      <CardContent className="prose dark:prose-invert max-w-none prose-indigo prose-a:text-blue-600 hover:prose-a:text-blue-800 dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300">
         {children}
       </CardContent>
     </Card>
@@ -69,12 +73,13 @@ export default function ApiTesting() {
           <p>An <InfoTooltip term="API" definition="Application Programming Interface: A software intermediary that allows two applications to talk to each other." /> is a set of rules and protocols that allows different software applications to communicate with each other. APIs define the methods and data formats that applications can use to request and exchange information, enabling developers to integrate external functionalities without building them from scratch.</p>
 
           <h3 className="text-xl font-semibold mt-6 mb-3">Real-life Example (The Restaurant Analogy)</h3>
-          <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 mb-4 border border-blue-200 shadow-sm">
+          {/* Added dark mode styles */}
+          <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 p-4 mb-4 border border-blue-200 dark:border-gray-600 shadow-sm">
             <ul className="list-none space-y-2">
-              <li><strong className="text-blue-700">Customer (User):</strong> You, wanting services/data.</li>
-              <li><strong className="text-blue-700">Menu (API Documentation):</strong> Lists available services/data and how to request them.</li>
-              <li><strong className="text-blue-700">Waiter (API):</strong> The intermediary taking your request to the system (kitchen).</li>
-              <li><strong className="text-blue-700">Kitchen (Server):</strong> Processes the request and returns the response (meal).</li>
+              <li><strong className="text-blue-700 dark:text-blue-400">Customer (User):</strong> You, wanting services/data.</li>
+              <li><strong className="text-blue-700 dark:text-blue-400">Menu (API Documentation):</strong> Lists available services/data and how to request them.</li>
+              <li><strong className="text-blue-700 dark:text-blue-400">Waiter (API):</strong> The intermediary taking your request to the system (kitchen).</li>
+              <li><strong className="text-blue-700 dark:text-blue-400">Kitchen (Server):</strong> Processes the request and returns the response (meal).</li>
             </ul>
           </Card>
 
@@ -99,22 +104,23 @@ export default function ApiTesting() {
 
         {/* Types of APIs */}
         <SectionCard title="Types of APIs" icon={<Settings size={24} />}>
+          {/* Added dark mode styles to Accordion */}
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="web">
-              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 transition-colors">1. Web APIs</AccordionTrigger>
-              <AccordionContent>Facilitate communication over the internet (e.g., fetching data from a remote server). Commonly use <InfoTooltip term="HTTP/HTTPS" definition="Hypertext Transfer Protocol / Secure: The foundation of data communication for the World Wide Web." />.</AccordionContent>
+              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 dark:text-white dark:hover:text-blue-400 transition-colors">1. Web APIs</AccordionTrigger>
+              <AccordionContent className="dark:text-gray-300">Facilitate communication over the internet (e.g., fetching data from a remote server). Commonly use <InfoTooltip term="HTTP/HTTPS" definition="Hypertext Transfer Protocol / Secure: The foundation of data communication for the World Wide Web." />.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="library">
-              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 transition-colors">2. Library APIs</AccordionTrigger>
-              <AccordionContent>Provide functions within software libraries (e.g., Java Standard Library for file I/O).</AccordionContent>
+              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 dark:text-white dark:hover:text-blue-400 transition-colors">2. Library APIs</AccordionTrigger>
+              <AccordionContent className="dark:text-gray-300">Provide functions within software libraries (e.g., Java Standard Library for file I/O).</AccordionContent>
             </AccordionItem>
             <AccordionItem value="framework">
-              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 transition-colors">3. Framework APIs</AccordionTrigger>
-              <AccordionContent>Part of software frameworks offering predefined classes/functions (e.g., Django APIs for database access).</AccordionContent>
+              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 dark:text-white dark:hover:text-blue-400 transition-colors">3. Framework APIs</AccordionTrigger>
+              <AccordionContent className="dark:text-gray-300">Part of software frameworks offering predefined classes/functions (e.g., Django APIs for database access).</AccordionContent>
             </AccordionItem>
             <AccordionItem value="os">
-              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 transition-colors">4. Operating System APIs</AccordionTrigger>
-              <AccordionContent>Allow applications to interact with the OS (e.g., Windows API for creating windows).</AccordionContent>
+              <AccordionTrigger className="text-lg font-semibold hover:text-blue-700 dark:text-white dark:hover:text-blue-400 transition-colors">4. Operating System APIs</AccordionTrigger>
+              <AccordionContent className="dark:text-gray-300">Allow applications to interact with the OS (e.g., Windows API for creating windows).</AccordionContent>
             </AccordionItem>
           </Accordion>
         </SectionCard>
@@ -122,7 +128,7 @@ export default function ApiTesting() {
         {/* Web Services */}
         <SectionCard title="Web Services" icon={<Server size={24} />}>
           <p><strong>Web Services</strong> are services that communicate between machines over a network, typically the internet. They use standardized web protocols (like HTTP) and data formats (like <InfoTooltip term="XML" definition="Extensible Markup Language: A markup language for encoding documents in a format that is both human-readable and machine-readable." /> or <InfoTooltip term="JSON" definition="JavaScript Object Notation: A lightweight data-interchange format." />).</p>
-          <p className="mt-2 italic text-gray-600">Key takeaway: All Web Services are APIs, but not all APIs are Web Services (e.g., Library or OS APIs don't necessarily use a network).</p>
+          <p className="mt-2 italic text-gray-600 dark:text-gray-400">Key takeaway: All Web Services are APIs, but not all APIs are Web Services (e.g., Library or OS APIs don't necessarily use a network).</p>
 
           <h3 className="text-xl font-semibold mt-6 mb-3">Examples of Web Services</h3>
           <ul className="list-disc list-inside space-y-2">
@@ -132,21 +138,22 @@ export default function ApiTesting() {
           </ul>
 
           <h3 className="text-xl font-semibold mt-6 mb-3">APIs vs. Web Services</h3>
-           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 my-4">
+           {/* Added dark mode styles */}
+           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 my-4">
             <Table>
-              <TableHeader className="bg-gray-100">
-                <TableRow>
-                  <TableHead className="font-bold text-gray-700">Aspect</TableHead>
-                  <TableHead className="font-bold text-gray-700">API</TableHead>
-                  <TableHead className="font-bold text-gray-700">Web Service</TableHead>
+              <TableHeader className="bg-gray-100 dark:bg-gray-700">
+                <TableRow className="border-b dark:border-gray-600">
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Aspect</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">API</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Web Service</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                <TableRow><TableCell>Definition</TableCell><TableCell>Set of rules for software communication.</TableCell><TableCell>Standardized method for communication over a network.</TableCell></TableRow>
-                <TableRow><TableCell>Communication</TableCell><TableCell>Various protocols (HTTP, TCP, etc.)</TableCell><TableCell>Primarily web protocols (HTTP/HTTPS).</TableCell></TableRow>
-                <TableRow><TableCell>Data Formats</TableCell><TableCell>Multiple (JSON, XML, etc.)</TableCell><TableCell>Typically XML or JSON.</TableCell></TableRow>
-                <TableRow><TableCell>Accessibility</TableCell><TableCell>Local or remote.</TableCell><TableCell>Specifically remote over a network.</TableCell></TableRow>
-                <TableRow><TableCell>Implementation</TableCell><TableCell>Various styles (REST, SOAP, GraphQL, etc.)</TableCell><TableCell>Generally SOAP or REST.</TableCell></TableRow>
+              <TableBody className="divide-y dark:divide-gray-700">
+                <TableRow className="dark:text-gray-300"><TableCell>Definition</TableCell><TableCell>Set of rules for software communication.</TableCell><TableCell>Standardized method for communication over a network.</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Communication</TableCell><TableCell>Various protocols (HTTP, TCP, etc.)</TableCell><TableCell>Primarily web protocols (HTTP/HTTPS).</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Data Formats</TableCell><TableCell>Multiple (JSON, XML, etc.)</TableCell><TableCell>Typically XML or JSON.</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Accessibility</TableCell><TableCell>Local or remote.</TableCell><TableCell>Specifically remote over a network.</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Implementation</TableCell><TableCell>Various styles (REST, SOAP, GraphQL, etc.)</TableCell><TableCell>Generally SOAP or REST.</TableCell></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -157,22 +164,24 @@ export default function ApiTesting() {
            <p className="mb-4">A <strong>Web API</strong> is an API accessed over the web using HTTP. It's a framework for creating HTTP-based services, often following architectural styles like REST or query languages like GraphQL. It's crucial for distributed systems serving various devices (laptops, mobiles).</p>
 
           <Tabs defaultValue="rest" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-4"> {/* Changed to 3 cols */}
-              <TabsTrigger value="rest" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-sm">REST</TabsTrigger>
-              <TabsTrigger value="soap" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 data-[state=active]:shadow-sm">SOAP</TabsTrigger>
-              <TabsTrigger value="graphql" className="data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700 data-[state=active]:shadow-sm">GraphQL</TabsTrigger> {/* Added GraphQL Tab */}
+            {/* Added dark mode styles to TabsList and Triggers */}
+            <TabsList className="grid w-full grid-cols-3 mb-4 bg-gray-100 dark:bg-gray-700 rounded-md p-1">
+              <TabsTrigger value="rest" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-900/50 dark:data-[state=active]:text-blue-300 data-[state=active]:shadow-sm dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300">REST</TabsTrigger>
+              <TabsTrigger value="soap" className="data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 dark:data-[state=active]:bg-purple-900/50 dark:data-[state=active]:text-purple-300 data-[state=active]:shadow-sm dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-300">SOAP</TabsTrigger>
+              <TabsTrigger value="graphql" className="data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700 dark:data-[state=active]:bg-pink-900/50 dark:data-[state=active]:text-pink-300 data-[state=active]:shadow-sm dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-300">GraphQL</TabsTrigger>
             </TabsList>
 
             {/* REST Tab */}
             <TabsContent value="rest">
-              <Card className="border-blue-300 border shadow-sm">
+              {/* Added dark mode styles */}
+              <Card className="border-blue-300 dark:border-blue-700 border shadow-sm dark:bg-gray-800">
                 <CardHeader>
-                  <CardTitle><InfoTooltip term="REST" definition="Representational State Transfer: An architectural style for designing networked applications." /> Architecture</CardTitle>
-                  <CardDescription>An architectural style using standard HTTP methods, emphasizing statelessness and flexibility. Preferred for web and mobile apps due to simplicity and performance.</CardDescription>
+                  <CardTitle className="dark:text-white"><InfoTooltip term="REST" definition="Representational State Transfer: An architectural style for designing networked applications." /> Architecture</CardTitle>
+                  <CardDescription className="dark:text-gray-300">An architectural style using standard HTTP methods, emphasizing statelessness and flexibility. Preferred for web and mobile apps due to simplicity and performance.</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="dark:text-gray-300">
                   <p><strong>How it Works:</strong> Client sends HTTP request (GET, POST, PUT, DELETE) to a URI. Server responds with a resource representation (often JSON).</p>
-                  <h4 className="font-semibold mt-4 mb-2">REST Request Structure:</h4>
+                  <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">REST Request Structure:</h4>
                   <ul className="list-disc list-inside space-y-1 mb-4">
                     <li><strong>HTTP Method:</strong> GET, POST, PUT, DELETE, PATCH, etc.</li>
                     <li><strong>Endpoint/URI:</strong> Identifies the resource (e.g., `/users/123`).</li>
@@ -180,7 +189,7 @@ export default function ApiTesting() {
                     <li><strong>Query Parameters (Optional):</strong> Filter/modify request (e.g., `/users?active=true`).</li>
                     <li><strong>Body (Optional):</strong> Data payload for POST/PUT/PATCH (usually JSON).</li>
                   </ul>
-                   <h4 className="font-semibold mt-4 mb-2">Example Request:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Example Request:</h4>
                    <CodeBlock>
 {`GET /api/users/123 HTTP/1.1
 Host: api.example.com
@@ -193,29 +202,30 @@ Authorization: Bearer eyJhbGciOiJIU...`}
 
             {/* SOAP Tab */}
             <TabsContent value="soap">
-              <Card className="border-purple-300 border shadow-sm">
+              {/* Added dark mode styles */}
+              <Card className="border-purple-300 dark:border-purple-700 border shadow-sm dark:bg-gray-800">
                 <CardHeader>
-                  <CardTitle><InfoTooltip term="SOAP" definition="Simple Object Access Protocol: A messaging protocol specification for exchanging structured information." /> Protocol</CardTitle>
-                  <CardDescription>A protocol designed for exchanging structured information, ensuring interoperability across platforms using XML. More rigid than REST.</CardDescription>
+                  <CardTitle className="dark:text-white"><InfoTooltip term="SOAP" definition="Simple Object Access Protocol: A messaging protocol specification for exchanging structured information." /> Protocol</CardTitle>
+                  <CardDescription className="dark:text-gray-300">A protocol designed for exchanging structured information, ensuring interoperability across platforms using XML. More rigid than REST.</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="dark:text-gray-300">
                   <p>Uses XML format for messages and can operate over various protocols (HTTP, SMTP).</p>
-                  <h4 className="font-semibold mt-4 mb-2">SOAP Protocol Structure:</h4>
+                  <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">SOAP Protocol Structure:</h4>
                   <ul className="list-disc list-inside space-y-1">
                     <li><strong>Envelope:</strong> Root element defining the message.</li>
                     <li><strong>Header (Optional):</strong> Application-specific info (e.g., authentication).</li>
                     <li><strong>Body:</strong> Contains the actual message/call.</li>
                     <li><strong>Fault (Optional):</strong> Error information.</li>
                   </ul>
-                   <h4 className="font-semibold mt-4 mb-2"><InfoTooltip term="WSDL" definition="Web Services Description Language: An XML-based interface description language used for describing the functionality offered by a web service." />:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200"><InfoTooltip term="WSDL" definition="Web Services Description Language: An XML-based interface description language used for describing the functionality offered by a web service." />:</h4>
                    <p>An XML-based language describing the service's functionalities, acting as a contract.</p>
-                   <h4 className="font-semibold mt-4 mb-2">Messaging Patterns:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Messaging Patterns:</h4>
                    <ul className="list-disc list-inside space-y-1">
                      <li>Request-Response</li>
                      <li>One-Way</li>
                      <li>Publish-Subscribe</li>
                    </ul>
-                   <h4 className="font-semibold mt-4 mb-2">Example SOAP Message:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Example SOAP Message:</h4>
                    <CodeBlock>
 {`<?xml version="1.0"?>
 <soap:Envelope
@@ -234,21 +244,22 @@ Authorization: Bearer eyJhbGciOiJIU...`}
 
             {/* GraphQL Tab */}
             <TabsContent value="graphql">
-              <Card className="border-pink-300 border shadow-sm">
+              {/* Added dark mode styles */}
+              <Card className="border-pink-300 dark:border-pink-700 border shadow-sm dark:bg-gray-800">
                 <CardHeader>
-                  <CardTitle><InfoTooltip term="GraphQL" definition="A query language for APIs and a runtime for fulfilling those queries with your existing data." /> Query Language</CardTitle>
-                  <CardDescription>A query language for APIs developed by Facebook. Allows clients to request exactly the data they need, reducing over-fetching and under-fetching.</CardDescription>
+                  <CardTitle className="dark:text-white"><InfoTooltip term="GraphQL" definition="A query language for APIs and a runtime for fulfilling those queries with your existing data." /> Query Language</CardTitle>
+                  <CardDescription className="dark:text-gray-300">A query language for APIs developed by Facebook. Allows clients to request exactly the data they need, reducing over-fetching and under-fetching.</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="dark:text-gray-300">
                   <p><strong>How it Works:</strong> Client sends a query specifying the structure of the data needed. Server responds with a JSON object matching that structure.</p>
-                  <h4 className="font-semibold mt-4 mb-2">Key Features:</h4>
+                  <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Key Features:</h4>
                   <ul className="list-disc list-inside space-y-1 mb-4">
                     <li><strong>Declarative Data Fetching:</strong> Clients ask for specific fields.</li>
                     <li><strong>Single Endpoint:</strong> Typically uses a single endpoint (e.g., `/graphql`).</li>
                     <li><strong>Strongly Typed Schema:</strong> Defines the API's capabilities.</li>
                     <li><strong>Real-time Data (Subscriptions):</strong> Supports real-time updates.</li>
                   </ul>
-                   <h4 className="font-semibold mt-4 mb-2">Example Query:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Example Query:</h4>
                    <CodeBlock>
 {`query {
   user(id: "123") {
@@ -261,7 +272,7 @@ Authorization: Bearer eyJhbGciOiJIU...`}
   }
 }`}
                    </CodeBlock>
-                   <h4 className="font-semibold mt-4 mb-2">Use Cases:</h4>
+                   <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Use Cases:</h4>
                    <p>Complex systems, mobile apps needing efficient data loading, applications with rapidly evolving frontends.</p>
                 </CardContent>
               </Card>
@@ -270,24 +281,25 @@ Authorization: Bearer eyJhbGciOiJIU...`}
 
           {/* REST vs SOAP vs GraphQL Table */}
           <h3 className="text-xl font-semibold mt-8 mb-3">Architecture Comparison</h3>
-           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 my-4">
+           {/* Added dark mode styles */}
+           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 my-4">
             <Table>
-              <TableHeader className="bg-gray-100">
-                <TableRow>
-                  <TableHead className="font-bold text-gray-700">Aspect</TableHead>
-                  <TableHead className="font-bold text-gray-700">REST</TableHead>
-                  <TableHead className="font-bold text-gray-700">SOAP</TableHead>
-                  <TableHead className="font-bold text-gray-700">GraphQL</TableHead>
+              <TableHeader className="bg-gray-100 dark:bg-gray-700">
+                <TableRow className="border-b dark:border-gray-600">
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Aspect</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">REST</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">SOAP</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">GraphQL</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                <TableRow><TableCell>Type</TableCell><TableCell>Architectural Style</TableCell><TableCell>Protocol</TableCell><TableCell>Query Language</TableCell></TableRow>
-                <TableRow><TableCell>Data Format</TableCell><TableCell>JSON, XML, etc.</TableCell><TableCell>XML only</TableCell><TableCell>JSON</TableCell></TableRow>
-                <TableRow><TableCell>Endpoints</TableCell><TableCell>Multiple (per resource)</TableCell><TableCell>Often Single</TableCell><TableCell>Typically Single</TableCell></TableRow>
-                <TableRow><TableCell>Data Fetching</TableCell><TableCell>Fixed structure (potential over/under-fetching)</TableCell><TableCell>Fixed structure</TableCell><TableCell>Client specifies needed data</TableCell></TableRow>
-                <TableRow><TableCell>Communication</TableCell><TableCell>Stateless</TableCell><TableCell>Can be Stateful/Stateless</TableCell><TableCell>Stateless</TableCell></TableRow>
-                <TableRow><TableCell>Security</TableCell><TableCell>Transport (HTTPS), OAuth</TableCell><TableCell>Built-in WS-Security</TableCell><TableCell>Transport (HTTPS), App-level</TableCell></TableRow>
-                <TableRow><TableCell>Contract</TableCell><TableCell>Less Strict (OpenAPI optional)</TableCell><TableCell>Strict (WSDL required)</TableCell><TableCell>Strict (Schema required)</TableCell></TableRow>
+              <TableBody className="divide-y dark:divide-gray-700">
+                <TableRow className="dark:text-gray-300"><TableCell>Type</TableCell><TableCell>Architectural Style</TableCell><TableCell>Protocol</TableCell><TableCell>Query Language</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Data Format</TableCell><TableCell>JSON, XML, etc.</TableCell><TableCell>XML only</TableCell><TableCell>JSON</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Endpoints</TableCell><TableCell>Multiple (per resource)</TableCell><TableCell>Often Single</TableCell><TableCell>Typically Single</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Data Fetching</TableCell><TableCell>Fixed structure (potential over/under-fetching)</TableCell><TableCell>Fixed structure</TableCell><TableCell>Client specifies needed data</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Communication</TableCell><TableCell>Stateless</TableCell><TableCell>Can be Stateful/Stateless</TableCell><TableCell>Stateless</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Security</TableCell><TableCell>Transport (HTTPS), OAuth</TableCell><TableCell>Built-in WS-Security</TableCell><TableCell>Transport (HTTPS), App-level</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Contract</TableCell><TableCell>Less Strict (OpenAPI optional)</TableCell><TableCell>Strict (WSDL required)</TableCell><TableCell>Strict (Schema required)</TableCell></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -298,24 +310,25 @@ Authorization: Bearer eyJhbGciOiJIU...`}
           <p><strong>API Testing</strong> is a type of software testing that validates APIs directly by sending calls, getting output, and checking the system's response. It focuses on the <strong>business logic layer</strong>, verifying functionality, reliability, performance, and security, rather than the graphical user interface (<InfoTooltip term="GUI" definition="Graphical User Interface: Allows users to interact with electronic devices through graphical icons and visual indicators." />).</p>
 
           <h3 className="text-xl font-semibold mt-6 mb-3">Types of API Testing</h3>
-           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 my-4">
+           {/* Added dark mode styles */}
+           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 my-4">
             <Table>
-              <TableHeader className="bg-gray-100">
-                <TableRow>
-                  <TableHead className="font-bold text-gray-700">Type</TableHead>
-                  <TableHead className="font-bold text-gray-700">Description</TableHead>
-                  <TableHead className="font-bold text-gray-700">Example Tool / Focus</TableHead>
+              <TableHeader className="bg-gray-100 dark:bg-gray-700">
+                <TableRow className="border-b dark:border-gray-600">
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Type</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Description</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Example Tool / Focus</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                <TableRow><TableCell>Functional</TableCell><TableCell>Validates API works per requirements (endpoints, methods, parameters).</TableCell><TableCell>Postman, REST-Assured</TableCell></TableRow>
-                <TableRow><TableCell>Performance</TableCell><TableCell>Assesses responsiveness & stability under load (latency, throughput).</TableCell><TableCell>JMeter, k6, Gatling</TableCell></TableRow>
-                <TableRow><TableCell>Security</TableCell><TableCell>Identifies vulnerabilities (auth, injection, data exposure). Check <a href="https://owasp.org/www-project-api-security/" target="_blank" rel="noopener noreferrer">OWASP API Security Top 10</a>.</TableCell><TableCell>OWASP ZAP, Burp Suite</TableCell></TableRow>
-                <TableRow><TableCell>Validation</TableCell><TableCell>Confirms API meets business needs & data format/schema.</TableCell><TableCell>Schema validation tools, Custom scripts</TableCell></TableRow>
-                <TableRow><TableCell>Load</TableCell><TableCell>Evaluates behavior under expected user loads.</TableCell><TableCell>JMeter, LoadRunner</TableCell></TableRow>
-                <TableRow><TableCell>Runtime/Error Detection</TableCell><TableCell>Monitors for issues during execution (exceptions, error codes).</TableCell><TableCell>APM tools (Datadog, Dynatrace)</TableCell></TableRow>
-                <TableRow><TableCell>Interoperability</TableCell><TableCell>Ensures seamless interaction with other systems/APIs.</TableCell><TableCell>Contract Testing (Pact)</TableCell></TableRow>
-                <TableRow><TableCell>Fuzz</TableCell><TableCell>Sends random/invalid data to find crashes or security issues.</TableCell><TableCell>Fuzzing tools (AFL, Peach Fuzzer)</TableCell></TableRow>
+              <TableBody className="divide-y dark:divide-gray-700">
+                <TableRow className="dark:text-gray-300"><TableCell>Functional</TableCell><TableCell>Validates API works per requirements (endpoints, methods, parameters).</TableCell><TableCell>Postman, REST-Assured</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Performance</TableCell><TableCell>Assesses responsiveness & stability under load (latency, throughput).</TableCell><TableCell>JMeter, k6, Gatling</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Security</TableCell><TableCell>Identifies vulnerabilities (auth, injection, data exposure). Check <a href="https://owasp.org/www-project-api-security/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">OWASP API Security Top 10</a>.</TableCell><TableCell>OWASP ZAP, Burp Suite</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Validation</TableCell><TableCell>Confirms API meets business needs & data format/schema.</TableCell><TableCell>Schema validation tools, Custom scripts</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Load</TableCell><TableCell>Evaluates behavior under expected user loads.</TableCell><TableCell>JMeter, LoadRunner</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Runtime/Error Detection</TableCell><TableCell>Monitors for issues during execution (exceptions, error codes).</TableCell><TableCell>APM tools (Datadog, Dynatrace)</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Interoperability</TableCell><TableCell>Ensures seamless interaction with other systems/APIs.</TableCell><TableCell>Contract Testing (Pact)</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Fuzz</TableCell><TableCell>Sends random/invalid data to find crashes or security issues.</TableCell><TableCell>Fuzzing tools (AFL, Peach Fuzzer)</TableCell></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -370,21 +383,22 @@ Authorization: Bearer eyJhbGciOiJIU...`}
           </ul>
 
           <h3 className="text-xl font-semibold mt-6 mb-3">POST vs. PUT vs. PATCH</h3>
-           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 my-4">
+           {/* Added dark mode styles */}
+           <div className="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700 my-4">
             <Table>
-              <TableHeader className="bg-gray-100">
-                <TableRow>
-                  <TableHead className="font-bold text-gray-700">Category</TableHead>
-                  <TableHead className="font-bold text-gray-700">POST</TableHead>
-                  <TableHead className="font-bold text-gray-700">PUT</TableHead>
-                  <TableHead className="font-bold text-gray-700">PATCH</TableHead>
+              <TableHeader className="bg-gray-100 dark:bg-gray-700">
+                <TableRow className="border-b dark:border-gray-600">
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">Category</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">POST</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">PUT</TableHead>
+                  <TableHead className="font-bold text-gray-700 dark:text-gray-300">PATCH</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                <TableRow><TableCell>Purpose</TableCell><TableCell>Create new resource.</TableCell><TableCell>Replace existing resource (or create if not exists).</TableCell><TableCell>Partially update existing resource.</TableCell></TableRow>
-                <TableRow><TableCell>Idempotency</TableCell><TableCell>No (multiple requests create multiple resources).</TableCell><TableCell>Yes (multiple requests have same effect).</TableCell><TableCell>Yes (usually, if applied correctly).</TableCell></TableRow>
-                <TableRow><TableCell>Resource URI</TableCell><TableCell>Usually applied to a collection URI (e.g., /users).</TableCell><TableCell>Applied to a specific resource URI (e.g., /users/123).</TableCell><TableCell>Applied to a specific resource URI (e.g., /users/123).</TableCell></TableRow>
-                <TableRow><TableCell>Payload</TableCell><TableCell>Contains data for the new resource.</TableCell><TableCell>Contains the complete new representation.</TableCell><TableCell>Contains only the changes to apply.</TableCell></TableRow>
+              <TableBody className="divide-y dark:divide-gray-700">
+                <TableRow className="dark:text-gray-300"><TableCell>Purpose</TableCell><TableCell>Create new resource.</TableCell><TableCell>Replace existing resource (or create if not exists).</TableCell><TableCell>Partially update existing resource.</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Idempotency</TableCell><TableCell>No (multiple requests create multiple resources).</TableCell><TableCell>Yes (multiple requests have same effect).</TableCell><TableCell>Yes (usually, if applied correctly).</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Resource URI</TableCell><TableCell>Usually applied to a collection URI (e.g., /users).</TableCell><TableCell>Applied to a specific resource URI (e.g., /users/123).</TableCell><TableCell>Applied to a specific resource URI (e.g., /users/123).</TableCell></TableRow>
+                <TableRow className="dark:text-gray-300"><TableCell>Payload</TableCell><TableCell>Contains data for the new resource.</TableCell><TableCell>Contains the complete new representation.</TableCell><TableCell>Contains only the changes to apply.</TableCell></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -417,7 +431,8 @@ Authorization: Bearer eyJhbGciOiJIU...`}
               </ul>
             </div>
           </div>
-           <p className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md text-sm">
+           {/* Added dark mode styles */}
+           <p className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700/50 rounded-md text-sm text-yellow-800 dark:text-yellow-200">
              <strong>Testing Focus:</strong> Verify that unauthenticated requests are rejected (401/403), authenticated users can access allowed resources, users cannot access resources they shouldn't (e.g., another user's data), and different roles have appropriate permissions.
            </p>
         </SectionCard>
@@ -428,31 +443,34 @@ Authorization: Bearer eyJhbGciOiJIU...`}
           <h3 className="text-xl font-semibold mt-6 mb-3">Popular Tools:</h3>
           <div className="flex flex-wrap gap-3 mb-6">
             {["Postman", "Insomnia", "Swagger UI", "Stoplight", "JMeter", "k6", "REST-Assured", "Karate DSL", "Katalon Platform", "ReadyAPI", "Burp Suite", "OWASP ZAP"].map(tool => (
-              <span key={tool} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm text-center border border-gray-300 shadow-sm hover:bg-gray-200 transition-colors">{tool}</span>
+              // Added dark mode styles for tool badges
+              <span key={tool} className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full text-sm text-center border border-gray-300 dark:border-gray-600 shadow-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">{tool}</span>
             ))}
           </div>
 
           {/* Swagger / OpenAPI */}
-          <Card className="mb-6 border border-green-300 shadow-sm hover:shadow-md transition-shadow">
+          {/* Added dark mode styles */}
+          <Card className="mb-6 border border-green-300 dark:border-green-700 shadow-sm hover:shadow-md transition-shadow dark:bg-gray-800">
              <CardHeader>
-               <CardTitle className="flex items-center text-xl"><FileCode size={20} className="mr-2 text-green-600" />Swagger / OpenAPI Specification</CardTitle>
+               <CardTitle className="flex items-center text-xl dark:text-white"><FileCode size={20} className="mr-2 text-green-600 dark:text-green-400" />Swagger / OpenAPI Specification</CardTitle>
              </CardHeader>
-             <CardContent>
+             <CardContent className="dark:text-gray-300">
                <p>The <InfoTooltip term="OpenAPI Specification" definition="A standard, language-agnostic interface description for RESTful APIs, which allows both humans and computers to discover and understand the capabilities of the service." /> (formerly Swagger Specification) defines a standard way to describe REST APIs. Swagger provides tools built around this specification.</p>
                <p className="mt-2">Key tools include <strong>Swagger UI</strong> (interactive documentation), <strong>Swagger Editor</strong> (design APIs), and <strong>Swagger Codegen</strong> (generate client/server code).</p>
-               <a href="https://swagger.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mt-2 inline-block mr-4">Visit Swagger.io</a>
-               <a href="https://petstore.swagger.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mt-2 inline-block">Swagger Petstore Example</a>
+               <a href="https://swagger.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block mr-4">Visit Swagger.io</a>
+               <a href="https://petstore.swagger.io/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block">Swagger Petstore Example</a>
              </CardContent>
           </Card>
 
           {/* Postman */}
-          <Card className="border border-orange-300 shadow-sm hover:shadow-md transition-shadow">
+          {/* Added dark mode styles */}
+          <Card className="border border-orange-300 dark:border-orange-700 shadow-sm hover:shadow-md transition-shadow dark:bg-gray-800">
              <CardHeader>
-               <CardTitle className="flex items-center text-xl"><Code size={20} className="mr-2 text-orange-600" />Postman</CardTitle>
+               <CardTitle className="flex items-center text-xl dark:text-white"><Code size={20} className="mr-2 text-orange-600 dark:text-orange-400" />Postman</CardTitle>
              </CardHeader>
-             <CardContent>
+             <CardContent className="dark:text-gray-300">
                <p>A popular collaborative platform for API development and testing. It simplifies making requests, organizing tests, and sharing work.</p>
-               <h4 className="font-semibold mt-4 mb-2">Key Features:</h4>
+               <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Key Features:</h4>
                <ul className="list-disc list-inside space-y-1 mb-4 columns-2">
                  <li>Intuitive Request Builder</li>
                  <li>Automated Testing (Collections, Scripts)</li>
@@ -463,9 +481,9 @@ Authorization: Bearer eyJhbGciOiJIU...`}
                  <li>Monitoring & Reporting</li>
                  <li>API Client for various protocols (REST, SOAP, GraphQL, gRPC)</li>
                </ul>
-               <h4 className="font-semibold mt-4 mb-2">Installation & Use:</h4>
-               <p>Download from the <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Postman Downloads page</a>. Use it to create requests, organize them in Collections, write JavaScript tests in the "Tests" tab, and run collections automatically.</p>
-               <h5 className="font-semibold mt-3 mb-1">Example Postman Test Script:</h5>
+               <h4 className="font-semibold mt-4 mb-2 dark:text-gray-200">Installation & Use:</h4>
+               <p>Download from the <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Postman Downloads page</a>. Use it to create requests, organize them in Collections, write JavaScript tests in the "Tests" tab, and run collections automatically.</p>
+               <h5 className="font-semibold mt-3 mb-1 dark:text-gray-200">Example Postman Test Script:</h5>
                <CodeBlock>
 {`// Example test in Postman's "Tests" tab
 pm.test("Status code is 200", () => {
@@ -500,7 +518,7 @@ pm.test("User ID is correct", function () {
           <div className="grid md:grid-cols-2 gap-8 mt-6">
             {/* Challenges */}
             <div>
-              <h3 className="text-xl font-semibold mb-3 flex items-center"><AlertTriangle size={20} className="mr-2 text-red-500" />Challenges</h3>
+              <h3 className="text-xl font-semibold mb-3 flex items-center dark:text-gray-200"><AlertTriangle size={20} className="mr-2 text-red-500 dark:text-red-400" />Challenges</h3>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong>Environment Setup:</strong> Configuring test environments mimicking production can be complex.</li>
                 <li><strong>Parameter Combinations:</strong> Testing all possible input combinations is often infeasible.</li>
@@ -514,7 +532,7 @@ pm.test("User ID is correct", function () {
 
             {/* Best Practices */}
             <div>
-              <h3 className="text-xl font-semibold mb-3 flex items-center"><CheckCircle size={20} className="mr-2 text-green-500" />Best Practices</h3>
+              <h3 className="text-xl font-semibold mb-3 flex items-center dark:text-gray-200"><CheckCircle size={20} className="mr-2 text-green-500 dark:text-green-400" />Best Practices</h3>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong>Test Early, Test Often:</strong> Integrate API testing into the CI/CD pipeline.</li>
                 <li><strong>Focus on Business Logic:</strong> Prioritize tests validating core functionalities.</li>

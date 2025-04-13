@@ -118,20 +118,21 @@ export default function InterviewQuestions() {
       description="Prepare for your QA interview with categorized questions covering general concepts, SDLC/STLC, testing principles, levels, methods (Black Box, White Box), API testing, automation, and more."
     >
       <div className="max-w-6xl mx-auto py-12 px-4 space-y-12">
-        <p className="text-gray-700 leading-relaxed text-lg text-center max-w-3xl mx-auto mb-8"> {/* Reduced bottom margin */}
+        {/* Added dark mode text color */}
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg text-center max-w-3xl mx-auto mb-8">
           Explore a comprehensive list of categorized QA interview questions. Use the search below to filter by keyword.
         </p>
 
-        {/* Search Input with Icon */}
+        {/* Search Input with Icon - Added dark mode styles */}
         <div className="mb-10 max-w-xl mx-auto relative">
           <Input
             type="text"
             placeholder="Search questions, answers, or categories..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-sm transition-shadow duration-200 hover:shadow-md" // Rounded full, added padding, focus style
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-full focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:border-transparent dark:focus:border-transparent shadow-sm transition-shadow duration-200 hover:shadow-md"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" /> {/* Search Icon */}
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-5 w-5" />
         </div>
 
         {filteredQuestions.length > 0 ? (
@@ -142,22 +143,25 @@ export default function InterviewQuestions() {
                 <AccordionItem
                   key={category.category}
                   value={category.category}
-                  className="border border-gray-200 bg-white rounded-lg shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md" // More subtle styling
+                  // Added dark mode styles
+                  className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md"
                 >
-                  <AccordionTrigger className="flex items-center w-full px-5 py-4 text-left text-lg font-semibold text-gray-800 hover:bg-gray-50 transition-colors duration-200 [&>svg]:ml-auto [&>svg]:text-blue-600"> {/* Adjusted trigger style */}
-                    <IconComponent className="mr-3 h-5 w-5 text-blue-600 flex-shrink-0" /> {/* Icon added */}
-                    <span className="flex-1">{category.category}</span> {/* Ensure text takes available space */}
+                  {/* Added dark mode styles */}
+                  <AccordionTrigger className="flex items-center w-full px-5 py-4 text-left text-lg font-semibold text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200 [&>svg]:ml-auto [&>svg]:text-blue-600 dark:[&>svg]:text-blue-400">
+                    <IconComponent className="mr-3 h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                    <span className="flex-1">{category.category}</span>
                   </AccordionTrigger>
-                  <AccordionContent className="bg-gray-50/50 px-5 pt-3 pb-5 text-gray-700 border-t border-gray-200"> {/* Subtle background, adjusted padding */}
-                    <ul className="space-y-4"> {/* Adjusted spacing */}
+                  {/* Added dark mode styles */}
+                  <AccordionContent className="bg-gray-50/50 dark:bg-gray-900/50 px-5 pt-3 pb-5 text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-gray-700">
+                    <ul className="space-y-4">
                       {category.questions.map((q, index) => (
-                        <li key={index} className="border-l-4 border-blue-500 pl-4 py-1"> {/* Adjusted border and padding */}
+                        <li key={index} className="border-l-4 border-blue-500 dark:border-blue-600 pl-4 py-1">
                           {typeof q === "string" ? (
-                            <span className="italic text-gray-500">{q} (Answer pending)</span>
+                            <span className="italic text-gray-500 dark:text-gray-400">{q} (Answer pending)</span>
                           ) : (
                             <div>
-                              <strong className="block text-base font-medium text-gray-900 mb-1">{q.question}</strong> {/* Adjusted question style */}
-                              <span className="block text-sm leading-relaxed text-gray-600">{q.answer}</span> {/* Adjusted answer style */}
+                              <strong className="block text-base font-medium text-gray-900 dark:text-gray-100 mb-1">{q.question}</strong>
+                              <span className="block text-sm leading-relaxed text-gray-600 dark:text-gray-400">{q.answer}</span>
                             </div>
                           )}
                         </li>
@@ -169,8 +173,9 @@ export default function InterviewQuestions() {
             })}
           </Accordion>
         ) : (
-          <p className="text-center text-gray-500 text-lg mt-12"> {/* Adjusted margin and color */}
-            No questions found matching <strong className="text-gray-700">"{searchTerm}"</strong>. Try a different keyword.
+          // Added dark mode styles
+          <p className="text-center text-gray-500 dark:text-gray-400 text-lg mt-12">
+            No questions found matching <strong className="text-gray-700 dark:text-gray-200">"{searchTerm}"</strong>. Try a different keyword.
           </p>
         )}
       </div>

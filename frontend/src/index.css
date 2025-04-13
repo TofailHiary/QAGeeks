@@ -37,33 +37,184 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    /* Pure Black Backgrounds */
+    --background: 0 0% 0%; /* Black */
+    --foreground: 0 0% 100%; /* White */
+    --card: 0 0% 0%; /* Black */
+    --card-foreground: 0 0% 100%; /* White */
+    --popover: 240 3.7% 15.9%; /* Dark Gray - Changed from Black */
+    --popover-foreground: 0 0% 95% !important; /* Very Light Gray - Changed from Orange, added !important */
+    --secondary: 0 0% 0%; /* Black */
+    --secondary-foreground: 0 0% 100%; /* White */
+    --muted: 0 0% 0%; /* Black */
+    --muted-foreground: 0 0% 60%; /* Lighter Gray for muted text */
+    --accent: 0 0% 10%; /* Dark Gray for accent bg */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    /* Primary remains light text on dark bg */
+    --primary: 0 0% 98%; /* Near White */
+    --primary-foreground: 0 0% 9%; /* Near Black */
+
+    /* Destructive */
+    --destructive: 0 70% 50%; /* Adjust saturation/lightness if needed */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    /* Border, Input, Ring */
+    --border: 0 0% 15%; /* Dark Gray */
+    --input: 0 0% 15%; /* Dark Gray */
+    --ring: 0 0% 100%; /* White */
+
+    /* Charts - Keep original dark theme colors for now */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+  /* Dark mode card fixes */
+  .dark .bg-white {
+    background-color: #121212; /* Dark gray background for cards */
+  }
+
+  .dark .text-gray-800 {
+    color: rgba(255, 255, 255, 0.9); /* Light text for card titles */
+  }
+
+  .dark .text-gray-600 {
+    color: rgba(255, 255, 255, 0.7); /* Light text for card descriptions */
+  }
+
+  .dark .text-gray-700 {
+    color: rgba(255, 255, 255, 0.8); /* Light text for card content */
+  }
+
+  .dark .bg-gradient-to-r {
+    background-image: linear-gradient(to right, #001a33, #1a0033); /* Dark gradient for example sections */
+  }
+
+  .dark .text-purple-700 {
+    color: #9C27FF; /* Neon purple for example titles */
+  }
+
+  .dark .text-blue-500 {
+    color: #00A2FF; /* Electric blue for principle numbers */
+  }
+
+  .dark .group-hover\:text-blue-700:hover {
+    color: #00A2FF; /* Electric blue on hover for principle titles */
+  }
+
+  /* Dark mode general content fixes */
+  .dark .text-black {
+    color: rgba(255, 255, 255, 0.9); /* Light text for general content */
+  }
+
+  .dark .bg-blue-50 {
+    background-color: #001a33; /* Dark blue background */
+  }
+
+  .dark .bg-purple-50 {
+    background-color: #1a0033; /* Dark purple background */
+  }
+
+  .dark .bg-gray-50 {
+    background-color: #121212; /* Dark gray background */
+  }
+
+  .dark .border-gray-200 {
+    border-color: rgba(255, 255, 255, 0.1); /* Light border */
+  }
+
+  .dark .text-blue-600 {
+    color: #00A2FF; /* Electric blue for links and highlights */
+  }
+
+  .dark .text-purple-600 {
+    color: #9C27FF; /* Neon purple for links and highlights */
+  }
+
+  .dark .text-red-600 {
+    color: #FF4500; /* Tomato color for red highlights */
+  }
+
+  .dark .text-green-600 {
+    color: #32CD32; /* Lime green for green highlights */
+  }
+
+  .dark .text-yellow-600 {
+    color: #FFD700; /* Gold for yellow highlights */
+  }
+
+  /* More specific fix for "Why These Principles Matter" block */
+  .dark div[data-active-tab="principles"] > div > div:last-child {
+    background-image: linear-gradient(to right, #1a0033, #001a33) !important;
+  }
+  .dark div[data-active-tab="principles"] > div > div:last-child h3 {
+    color: #f0f0f0 !important; /* Lighter text for heading */
+  }
+  .dark div[data-active-tab="principles"] > div > div:last-child p {
+    color: #d0d0d0 !important; /* Lighter text for paragraphs */
+  }
+
+  /* Specific fix for tooltips in dark mode */
+  .dark .bg-popover .text-popover-foreground {
+    color: rgba(255, 255, 255, 0.9) !important; /* Light text for tooltips */
   }
 }
 
+/* Dark mode SDLC page fixes */
+.dark .bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, #001a33, #1a0033); /* Dark gradient for cards */
+}
+
+.dark .text-gray-800 {
+    color: rgba(255, 255, 255, 0.9); /* Light text for card content */
+  }
+
+  .dark .text-green-500 {
+    color: #32CD32; /* Lime green for checkmarks */
+  }
+
+  .dark .border-gray-200 {
+    border-color: rgba(255, 255, 255, 0.1); /* Light border */
+  }
+
+  .dark .hover\:bg-gray-50:hover {
+    background-color: #262626; /* Darker gray on hover */
+  }
+
+  .dark .bg-white {
+    background-color: #121212; /* Dark gray background for accordion items */
+  }
+
+  .dark .text-gray-700 {
+    color: rgba(255, 255, 255, 0.8); /* Light text for accordion content */
+  }
+
+  .dark .bg-gray-50 {
+    background-color: #1e1e1e; /* Darker gray for activities section */
+  }
+
+  .dark .text-purple-800 {
+    color: #9C27FF; /* Neon purple for QA involvement */
+  }
+
+  .dark .bg-purple-50 {
+    background-color: #1a0033; /* Dark purple background for QA involvement */
+  }
+
+  .dark .text-red-600 {
+    color: #FF4500; /* Tomato color for disadvantages */
+  }
+
+  .dark .text-orange-600 {
+    color: #FFA500; /* Orange color for testing icon */
+  }
+
+  .dark .text-teal-600 {
+    color: #008080; /* Teal color for deployment icon */
+  }
+} /* End of .dark block */
 
 @layer base {
   * {
@@ -72,6 +223,8 @@
   body {
     /* Add padding-right to compensate for scrollbar width */
     @apply bg-background text-foreground pr-4;
+    /* Add smooth transition for color changes */
+    @apply transition-colors duration-200;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   html {
