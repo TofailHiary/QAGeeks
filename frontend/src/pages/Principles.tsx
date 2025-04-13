@@ -172,37 +172,37 @@ export default function Principles() {
         {/* Tabs - Added dark mode classes */}
         <div className="flex flex-wrap justify-center mb-12 border-b border-gray-200 dark:border-gray-700">
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'principles' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'principles' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('principles'))}
           >
             Seven Principles
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'keyConcepts' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'keyConcepts' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('keyConcepts'))}
           >
             Key Concepts
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'staticVsDynamic' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'staticVsDynamic' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('staticVsDynamic'))}
           >
             Static vs Dynamic
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'manualVsAuto' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'manualVsAuto' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('manualVsAuto'))}
           >
             Manual vs Automation
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'qaqc' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'qaqc' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('qaqc'))}
           >
             QA vs QC
           </button>
           <button
-            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'verificationVsValidation' ? 'text-blue-600 border-blue-600 dark:text-sky-400 dark:border-sky-400 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
+            className={`px-4 py-3 md:px-6 font-medium transition-colors duration-200 ease-in-out border-b-2 ${activeTab === 'verificationVsValidation' ? 'text-blue-600 border-blue-600 dark:text-blue-400 !important dark:border-blue-400 !important dark:bg-gray-800 dark:font-semibold dark:border-b-[3px]' : 'text-gray-500 dark:text-gray-300 !important border-transparent hover:text-blue-600 dark:hover:text-sky-400 hover:border-blue-300 dark:hover:border-sky-500'}`}
             onClick={() => React.startTransition(() => setActiveTab('verificationVsValidation'))}
           >
             Verification vs Validation
