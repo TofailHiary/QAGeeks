@@ -97,19 +97,21 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
               : 'bottom-4 right-4 w-80 h-[30rem] rounded-lg' // Minimized styles
           }`}
         >
-          <Card className={`shadow-xl flex flex-col border border-border bg-card w-full h-full ${isMaximized ? 'rounded-none sm:rounded-lg' : 'rounded-lg'}`}> {/* Ensure card fills motion.div */}
-            <CardHeader className="flex flex-row items-center justify-between p-3 border-b bg-muted/40 flex-shrink-0"> {/* Added flex-shrink-0 */}
-              <div className="flex items-center gap-2 min-w-0"> {/* Added min-w-0 */}
-                <Bot className="w-5 h-5 text-primary" /> {/* Icon color */}
-                <CardTitle className="text-lg font-semibold text-card-foreground">QAGeekBot</CardTitle> {/* Adjusted text */}
+          {/* Added dark:border-gray-700 */}
+          <Card className={`shadow-xl flex flex-col border border-border dark:border-gray-700 bg-card w-full h-full ${isMaximized ? 'rounded-none sm:rounded-lg' : 'rounded-lg'}`}>
+            {/* Added dark:bg-gray-800, dark:border-gray-700, dark:text-gray-200 */}
+            <CardHeader className="flex flex-row items-center justify-between p-3 border-b dark:border-gray-700 bg-muted/40 dark:bg-gray-800 flex-shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <Bot className="w-5 h-5 text-primary dark:text-blue-400" />
+                <CardTitle className="text-lg font-semibold text-card-foreground dark:text-gray-200">QAGeekBot</CardTitle>
               </div>
-              {/* Header Buttons Group */}
+              {/* Header Buttons Group - Added dark mode hover */}
               <div className="flex items-center gap-1">
                  <Button
                    variant="ghost"
                    size="icon"
                    onClick={() => setIsMaximized(!isMaximized)}
-                   className="h-7 w-7 text-muted-foreground hover:bg-accent"
+                   className="h-7 w-7 text-muted-foreground dark:text-gray-400 hover:bg-accent dark:hover:bg-gray-700"
                    aria-label={isMaximized ? "Minimize chat" : "Maximize chat"}
                  >
                    {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -118,7 +120,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                    variant="ghost"
                    size="icon"
                    onClick={onClose}
-                   className="h-7 w-7 text-muted-foreground hover:bg-accent"
+                   className="h-7 w-7 text-muted-foreground dark:text-gray-400 hover:bg-accent dark:hover:bg-gray-700"
                    aria-label="Close chat"
                  >
                    <X className="w-4 h-4" />
@@ -138,24 +140,28 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                       transition={{ duration: 0.3, delay: index * 0.05 }}
                       className={`flex items-start gap-2.5 ${msg.role === 'user' ? 'justify-end' : ''}`}
                     >
-                      {msg.role === 'assistant' && <Bot className="w-6 h-6 text-primary flex-shrink-0" />} {/* Slightly larger icon */}
-                      <div className={`rounded-xl px-3.5 py-2 text-sm max-w-[80%] shadow-sm ${ // Changed rounding, padding, added shadow
+                      {/* Added dark mode icon color */}
+                      {msg.role === 'assistant' && <Bot className="w-6 h-6 text-primary dark:text-blue-400 flex-shrink-0" />}
+                      {/* Explicit dark mode styles for bubbles (using theme variables) */}
+                      <div className={`rounded-xl px-3.5 py-2 text-sm max-w-[80%] shadow-sm ${
                         msg.role === 'user'
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-secondary text-secondary-foreground' // Use secondary for assistant
+                          ? 'bg-primary text-primary-foreground dark:bg-blue-600 dark:text-white' // User bubble dark
+                          : 'bg-secondary text-secondary-foreground dark:bg-gray-700 dark:text-gray-200' // Assistant bubble dark
                       }`}>
                         {/* Basic Markdown-like formatting for newlines */}
                         {msg.content.split('\n').map((line, i) => (
                           <span key={i}>{line}<br/></span>
                         ))}
                       </div>
-                      {msg.role === 'user' && <User className="w-6 h-6 text-muted-foreground flex-shrink-0" />} {/* Slightly larger icon */}
+                      {/* Added dark mode icon color */}
+                      {msg.role === 'user' && <User className="w-6 h-6 text-muted-foreground dark:text-gray-500 flex-shrink-0" />}
                     </motion.div>
                   ))}
                   {isLoading && (
                     <div className="flex items-center gap-2.5 justify-start">
-                      <Bot className="w-6 h-6 text-primary flex-shrink-0" />
-                      <div className="rounded-xl px-3.5 py-2 text-sm bg-secondary text-secondary-foreground flex items-center space-x-1.5">
+                      <Bot className="w-6 h-6 text-primary dark:text-blue-400 flex-shrink-0" />
+                      {/* Added dark mode styles for loading dots */}
+                      <div className="rounded-xl px-3.5 py-2 text-sm bg-secondary dark:bg-gray-700 text-secondary-foreground dark:text-gray-400 flex items-center space-x-1.5">
                          {/* Simple dot animation */}
                          <span className="animate-pulse delay-0 duration-1000">.</span>
                          <span className="animate-pulse delay-150 duration-1000">.</span>
@@ -166,18 +172,21 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                 </div>
               </ScrollArea>
             </CardContent>
-            <CardFooter className="p-2 border-t">
+            {/* Added dark mode styles */}
+            <CardFooter className="p-2 border-t dark:border-gray-700 bg-white dark:bg-gray-800">
               <form onSubmit={handleSendMessage} className="flex w-full items-center gap-2">
+                {/* Added dark mode styles */}
                 <Input
                   type="text"
                   placeholder="Ask about QA..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isLoading}
-                  className="flex-1"
+                  className="flex-1 bg-background dark:bg-gray-700 border-border dark:border-gray-600 text-foreground dark:text-gray-200 placeholder:text-muted-foreground dark:placeholder:text-gray-400 focus:ring-primary dark:focus:ring-blue-500"
                   autoComplete="off"
                 />
-                <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+                {/* Added dark mode styles */}
+                <Button type="submit" size="icon" disabled={isLoading || !input.trim()} className="bg-primary dark:bg-blue-600 text-primary-foreground dark:text-white hover:bg-primary/90 dark:hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-600">
                   <Send className="w-4 h-4" />
                   <span className="sr-only">Send</span>
                 </Button>
