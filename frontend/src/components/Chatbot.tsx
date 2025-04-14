@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'; // Assuming ScrollArea
 import { Bot, User, Send, X, Maximize2, Minimize2 } from 'lucide-react'; // Added Maximize2, Minimize2
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion'; // Import motion and AnimatePresence
+import { API_URL } from '@/constants'; // Import the API_URL constant
 
 // API Key is now handled by the backend proxy
 
@@ -48,8 +49,8 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const currentMessages = [...messages, { role: 'user', content: userMessage }];
 
     try {
-      // --- Call to YOUR backend proxy endpoint via ngrok ---
-      const backendUrl = 'https://85a7-2a01-9700-3fc6-4900-51a7-570-ff70-ca9b.ngrok-free.app/routes/chat'; // Updated ngrok URL
+      // Use the API_URL from constants
+      const backendUrl = `${API_URL}routes/chat`; // Construct URL using the constant
       const response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
