@@ -12,8 +12,48 @@ router = APIRouter()
 
 # --- Configuration ---
 NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
-NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
-MODEL_NAME = "qwen/qwen2.5-coder-32b-instruct" # Or your desired model
+# Read API URL from env var, fallback to default if not set
+NVIDIA_API_URL = os.getenv("NVIDIA_API_URL", "https://integrate.api.nvidia.com/v1/chat/completions")
+# Read model name from env var, fallback to default if not set
+MODEL_NAME = os.getenv("NVIDIA_MODEL_NAME", "qwen/qwen2.5-coder-32b-instruct")
+
+# Read other parameters from env vars with defaults and type conversion
+try:
+    TEMPERATURE = float(os.getenv("NVIDIA_TEMPERATURE", "0.2"))
+except ValueError:
+    logger.warning("Invalid NVIDIA_TEMPERATURE value, using default 0.2")
+    TEMPERATURE = 0.2
+
+try:
+    TOP_P = float(os.getenv("NVIDIA_TOP_P", "0.7"))
+except ValueError:
+    logger.warning("Invalid NVIDIA_TOP_P value, using default 0.7")
+    TOP_P = 0.7
+
+try:
+    MAX_TOKENS = int(os.getenv("NVIDIA_MAX_TOKENS", "1024"))
+except ValueError:
+    logger.warning("Invalid NVIDIA_MAX_TOKENS value, using default 1024")
+    MAX_TOKENS = 1024
+
+try:
+    PRESENCE_PENALTY = float(os.getenv("NVIDIA_PRESENCE_PENALTY", "0.1"))
+except ValueError:
+    logger.warning("Invalid NVIDIA_PRESENCE_PENALTY value, using default 0.1")
+    PRESENCE_PENALTY = 0.1
+
+try:
+    FREQUENCY_PENALTY = float(os.getenv("NVIDIA_FREQUENCY_PENALTY", "0.0"))
+except ValueError:
+    logger.warning("Invalid NVIDIA_FREQUENCY_PENALTY value, using default 0.0")
+    FREQUENCY_PENALTY = 0.0
+
+# Read stop sequences as a comma-separated string and split into a list
+# Default based on the example curl command
+DEFAULT_STOP_SEQUENCES = "\\n\\nUser:,<|endoftext|>" # Use comma as separator, escape newline for env var
+stop_sequences_str = os.getenv("NVIDIA_STOP_SEQUENCES", DEFAULT_STOP_SEQUENCES)
+STOP_SEQUENCES = [seq.replace("\\n", "\n") for seq in stop_sequences_str.split(',')] if stop_sequences_str else None
+
 
 # --- Pydantic Models ---
 class ChatRequest(BaseModel):
@@ -38,10 +78,13 @@ async def call_nvidia_api(user_message: str):
     payload = {
         "model": MODEL_NAME,
         "messages": messages_payload,
-        "temperature": 0.2,
-        "top_p": 0.7,
-        "max_tokens": 1024,
-        "stream": False
+        "temperature": TEMPERATURE,
+        "top_p": TOP_P,
+        "max_tokens": MAX_TOKENS,
+        "stream": False, # Stream is kept hardcoded for now
+        "presence_penalty": PRESENCE_PENALTY,
+        "frequency_penalty": FREQUENCY_PENALTY,
+        "stop": STOP_SEQUENCES
     }
 
     headers = {

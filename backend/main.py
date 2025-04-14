@@ -7,8 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware # Import CORS Middleware
 
 dotenv.load_dotenv()
 
-from databutton_app.mw.auth_mw import AuthConfig, get_authorized_user
-
 
 def get_router_config() -> dict:
     try:
@@ -47,14 +45,8 @@ def import_api_routers() -> APIRouter:
             api_module = __import__(api_module_prefix + name, fromlist=[name])
             api_router = getattr(api_module, "router", None)
             if isinstance(api_router, APIRouter):
-                routes.include_router(
-                    api_router,
-                    dependencies=(
-                        []
-                        if is_auth_disabled(router_config, name)
-                        else [Depends(get_authorized_user)]
-                    ),
-                )
+                # Always include router without auth dependencies as databutton auth is removed
+                routes.include_router(api_router, dependencies=[])
         except Exception as e:
             print(e)
             continue
@@ -62,17 +54,6 @@ def import_api_routers() -> APIRouter:
     print(routes.routes)
 
     return routes
-
-
-def get_firebase_config() -> dict | None:
-    extensions = os.environ.get("DATABUTTON_EXTENSIONS", "[]")
-    extensions = json.loads(extensions)
-
-    for ext in extensions:
-        if ext["name"] == "firebase-auth":
-            return ext["config"]["firebaseConfig"]
-
-    return None
 
 
 def create_app() -> FastAPI:
@@ -85,6 +66,7 @@ def create_app() -> FastAPI:
         "http://localhost:5173", # Vite default port
         "http://localhost:3000", # Common React dev port
         "https://tofailhiary.github.io", # Your deployed GitHub Pages URL
+        # You might need to add your specific GitHub Pages URL if different, e.g. https://<username>.github.io/<repo-name>
     ]
 
     app.add_middleware(
@@ -104,20 +86,7 @@ def create_app() -> FastAPI:
             for method in route.methods:
                 print(f"{method} {route.path}")
 
-    firebase_config = get_firebase_config()
-
-    if firebase_config is None:
-        print("No firebase config found")
-        app.state.auth_config = None
-    else:
-        print("Firebase config found")
-        auth_config = {
-            "jwks_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
-            "audience": firebase_config["projectId"],
-            "header": "authorization",
-        }
-
-        app.state.auth_config = AuthConfig(**auth_config)
+    # Removed firebase/auth config setup
 
     return app
 
