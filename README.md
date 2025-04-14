@@ -1,52 +1,14 @@
-# QA Geeks - Software Testing Knowledge Base
+# Quality Terms Study Website Project
 
-This project is a comprehensive web application designed as a knowledge base for Quality Assurance (QA) and Software Testing concepts. It provides information on various topics relevant to software testing professionals and learners.
+This project is a website designed to help users learn and understand various quality terms.
 
-## Content Overview
+## Project Structure
 
-The site covers a wide range of topics, including:
+The project is divided into two main directories:
 
-*   Software Development Life Cycle (SDLC)
-*   Software Testing Life Cycle (STLC)
-*   Core Testing Principles
-*   Levels of Testing (Unit, Integration, System, Acceptance)
-*   Types of Testing (Functional, Non-Functional, Performance, Security, etc.)
-*   Testing Methods (Black Box, White Box, Grey Box)
-*   Defect Management
-*   API Testing
-*   Common Testing Tools
-*   QA Interview Questions
-*   Templates and Resources (Test Plans, Test Cases, Bug Reports, etc.)
+-   `backend`: Contains the backend code, written in Python using FastAPI.
+-   `frontend`: Contains the frontend code, written in React and TypeScript using Vite.
 
-## Technical Stack
+## Getting Started
 
-*   **Frontend:** React + TypeScript with Vite, styled using Tailwind CSS and shadcn/ui components. Uses `yarn` for package management.
-*   **Backend:** Python FastAPI server. Uses `uv` for package management.
-
-## Quickstart
-
-1.  **Install Dependencies:**
-    Run the following command in the root directory to install both frontend and backend dependencies:
-    ```bash
-    make
-    ```
-
-2.  **Run the Application:**
-    Start the backend and frontend servers in separate terminals:
-
-    *   **Backend:**
-        ```bash
-        make run-backend
-        ```
-    *   **Frontend:**
-        ```bash
-        make run-frontend
-        ```
-
-## Accessing the Application
-
-*   The backend server runs on port `8000`.
-*   The frontend development server runs on port `5173`.
-*   The frontend Vite server proxies API requests (`/api`) to the backend on port `8000`.
-
-Visit **<http://localhost:5173>** in your browser to view the application.
+To get started with the project, follow the instructions in the `backend/README.md` and `frontend/README.md` files.
