@@ -56,6 +56,8 @@ const buildVariables = () => {
 		__APP_DEPLOY_USERNAME__: JSON.stringify(""),
 		__APP_DEPLOY_APPNAME__: JSON.stringify(""),
 		__APP_DEPLOY_CUSTOM_DOMAIN__: JSON.stringify(""),
+		// Add reCAPTCHA Site Key placeholder - REPLACE WITH YOUR ACTUAL SITE KEY
+		__RECAPTCHA_SITE_KEY__: JSON.stringify("6LdvkRkrAAAAALiyBrMsDESnnTCGvYp-TskzHkoQ"),
 		__FIREBASE_CONFIG__: JSON.stringify(
 			getExtensionConfig(ExtensionName.FIREBASE_AUTH),
 		),

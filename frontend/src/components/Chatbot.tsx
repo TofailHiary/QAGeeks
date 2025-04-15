@@ -5,7 +5,10 @@ import { ScrollArea } from '@/components/ui/scroll-area'; // Assuming ScrollArea
 import { Bot, User, Send, X, Maximize2, Minimize2 } from 'lucide-react'; // Added Maximize2, Minimize2
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion'; // Import motion and AnimatePresence
-import { API_URL } from '@/constants'; // Import the API_URL constant
+import { API_URL, RECAPTCHA_SITE_KEY } from '@/constants'; // Import constants
+
+// Declare grecaptcha for TypeScript - it's loaded globally via script tag
+declare const grecaptcha: any;
 
 // API Key is now handled by the backend proxy
 
@@ -46,9 +49,28 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     // Keep track of messages sent to backend (optional, could simplify)
-    const currentMessages = [...messages, { role: 'user', content: userMessage }];
+    // const currentMessages = [...messages, { role: 'user', content: userMessage }];
 
     try {
+      // --- Get reCAPTCHA Token ---
+      let recaptchaToken = '';
+      if (typeof grecaptcha !== 'undefined' && RECAPTCHA_SITE_KEY) {
+        try {
+          recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'chat' });
+          console.log("reCAPTCHA token obtained:", recaptchaToken); // For debugging
+        } catch (recaptchaError) {
+          console.error("reCAPTCHA execution error:", recaptchaError);
+          setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, reCAPTCHA failed. Please try again." }]);
+          setIsLoading(false);
+          return; // Stop if reCAPTCHA fails
+        }
+      } else {
+        console.warn("grecaptcha not loaded or site key missing. Skipping reCAPTCHA.");
+        // Decide if you want to proceed without reCAPTCHA locally or show an error
+        // For now, we'll proceed but log a warning. In production, ensure it's always loaded.
+      }
+      // --- End reCAPTCHA Token ---
+
       // Use the API_URL from constants
       const backendUrl = `${API_URL}routes/chat`; // Construct URL using the constant
       const response = await fetch(backendUrl, {
@@ -56,10 +78,11 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // Send only the latest user message, or the history if your backend needs it
-        body: JSON.stringify({ message: userMessage }),
-        // Example if sending history:
-        // body: JSON.stringify({ messages: currentMessages.slice(1) }), // Exclude initial greeting
+        // Send message AND reCAPTCHA token
+        body: JSON.stringify({
+          message: userMessage,
+          recaptcha_token: recaptchaToken // Send the token to backend
+        }),
       });
 
       if (!response.ok) {

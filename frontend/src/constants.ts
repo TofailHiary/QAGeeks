@@ -43,3 +43,6 @@ export const APP_DEPLOY_APPNAME = __APP_DEPLOY_APPNAME__;
 
 declare const __APP_DEPLOY_CUSTOM_DOMAIN__: string;
 export const APP_DEPLOY_CUSTOM_DOMAIN = __APP_DEPLOY_CUSTOM_DOMAIN__;
+
+declare const __RECAPTCHA_SITE_KEY__: string;
+export const RECAPTCHA_SITE_KEY = __RECAPTCHA_SITE_KEY__;
