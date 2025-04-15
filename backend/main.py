@@ -2,10 +2,15 @@ import os
 import pathlib
 import json
 import dotenv
+import logging # Import logging
 from fastapi import FastAPI, APIRouter, Depends
 from fastapi.middleware.cors import CORSMiddleware # Import CORS Middleware
 
 dotenv.load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def get_router_config() -> dict:
@@ -61,17 +66,17 @@ def create_app() -> FastAPI:
     app = FastAPI()
 
     # --- CORS Middleware Configuration ---
-    # Allow requests from your frontend development server and deployed site
-    origins = [
-        "http://localhost:5173", # Vite default port
-        "http://localhost:3000", # Common React dev port
-        "https://tofailhiary.github.io", # Your deployed GitHub Pages URL
-        # You might need to add your specific GitHub Pages URL if different, e.g. https://<username>.github.io/<repo-name>
-    ]
+    # Read allowed origins from environment variable (comma-separated)
+    # Default to local development origins if not set
+    default_origins = "http://localhost:5173,http://localhost:3000"
+    allowed_origins_str = os.getenv("ALLOWED_ORIGINS", default_origins)
+    origins = [origin.strip() for origin in allowed_origins_str.split(',')]
+
+    logger.info(f"Configuring CORS for origins: {origins}")
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=origins, # Use the configured origins list
         allow_credentials=True,
         allow_methods=["*"], # Allow all methods (GET, POST, OPTIONS, etc.)
         allow_headers=["*"], # Allow all headers

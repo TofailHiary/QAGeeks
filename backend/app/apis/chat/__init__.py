@@ -54,17 +54,64 @@ DEFAULT_STOP_SEQUENCES = "\\n\\nUser:,<|endoftext|>" # Use comma as separator, e
 stop_sequences_str = os.getenv("NVIDIA_STOP_SEQUENCES", DEFAULT_STOP_SEQUENCES)
 STOP_SEQUENCES = [seq.replace("\\n", "\n") for seq in stop_sequences_str.split(',')] if stop_sequences_str else None
 
+# Google reCAPTCHA v3 Configuration
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY")
+RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify"
+RECAPTCHA_SCORE_THRESHOLD = 0.5 # Adjust as needed (0.0 to 1.0)
+
 
 # --- Pydantic Models ---
 class ChatRequest(BaseModel):
     message: str
+    recaptcha_token: str # Token from frontend reCAPTCHA v3
     # Optional: Add history if you want to send it from frontend
     # messages: list[dict] | None = None
 
 class ChatResponse(BaseModel):
     reply: str
 
-# --- Helper Function ---
+# --- Helper Functions ---
+
+async def verify_recaptcha(token: str) -> bool:
+    """Verifies the reCAPTCHA token with Google."""
+    if not RECAPTCHA_SECRET_KEY:
+        logger.error("RECAPTCHA_SECRET_KEY is not set. Cannot verify token.")
+        # Depending on policy, you might allow requests if key isn't set (e.g., local dev)
+        # or deny them. Denying is safer for production if setup is expected.
+        # return True # Allow if key not set (less secure)
+        raise HTTPException(status_code=500, detail="reCAPTCHA is not configured on the server.")
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post(RECAPTCHA_VERIFY_URL, data={
+                'secret': RECAPTCHA_SECRET_KEY,
+                'response': token
+            })
+            response.raise_for_status()
+            result = response.json()
+
+            logger.info(f"reCAPTCHA verification result: {result}")
+
+            # Check success and score
+            if result.get("success") and result.get("score", 0) >= RECAPTCHA_SCORE_THRESHOLD:
+                logger.info(f"reCAPTCHA verification successful (score: {result.get('score')})")
+                return True
+            else:
+                logger.warning(f"reCAPTCHA verification failed or score too low: {result}")
+                return False
+        except httpx.RequestError as exc:
+            logger.error(f"HTTP Request Error calling reCAPTCHA API: {exc}")
+            # Fail verification if we can't reach Google
+            return False
+        except httpx.HTTPStatusError as exc:
+            logger.error(f"HTTP Status Error calling reCAPTCHA API: {exc.response.status_code} - {exc.response.text}")
+             # Fail verification on error from Google
+            return False
+        except Exception as exc:
+            logger.error(f"Unexpected error during reCAPTCHA verification: {exc}")
+            # Fail verification on unexpected errors
+            return False
+
 async def call_nvidia_api(user_message: str):
     if not NVIDIA_API_KEY:
         logger.error("NVIDIA_API_KEY environment variable not set.")
@@ -123,12 +170,22 @@ async def call_nvidia_api(user_message: str):
 @router.post("/chat", response_model=ChatResponse)
 async def handle_chat(chat_request: ChatRequest):
     """
-    Receives a user message, calls the NVIDIA chat API, and returns the reply.
+    Receives a user message, verifies reCAPTCHA, calls the NVIDIA chat API,
+    and returns the reply.
     """
-    logger.info(f"Received chat request: {chat_request.message}")
+    logger.info(f"Received chat request for message: '{chat_request.message}'")
+
+    # --- Verify reCAPTCHA Token ---
+    is_human = await verify_recaptcha(chat_request.recaptcha_token)
+    if not is_human:
+        logger.warning("reCAPTCHA verification failed. Rejecting request.")
+        raise HTTPException(status_code=403, detail="reCAPTCHA verification failed.")
+    # --- End Verification ---
+
+    logger.info("reCAPTCHA verification passed.")
     try:
         ai_reply = await call_nvidia_api(chat_request.message)
-        logger.info(f"Sending reply: {ai_reply}")
+        logger.info(f"Sending reply for message '{chat_request.message}'")
         return ChatResponse(reply=ai_reply)
     except HTTPException as http_exc:
         # Re-raise HTTPException to let FastAPI handle it
