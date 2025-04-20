@@ -12,10 +12,12 @@ import {
   ListChecks, // Added for How it Works
   GraduationCap, // Added for How it Works
   Rocket, // Added for How it Works
-  // Add other icons if needed later
+  Map, // Added for Mind Maps
+  Bot as BotIcon, // Added for Mind Maps (alias to avoid conflict)
 } from 'lucide-react';
 import { Link } from "react-router-dom"; // Import Link
 import { motion } from "framer-motion"; // Import motion
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Import Card components
 import { Header } from "components/Header";
 import { HeroSection } from "components/HeroSection";
 // Removed FeatureSection import
@@ -282,6 +284,45 @@ export default function App() {
               </div>
               <p className="text-muted-foreground">Prepare for your next QA role with a curated list of common interview questions and topics.</p>
             </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Mind Maps Section */}
+      <motion.section
+        className="py-16 bg-gradient-to-r from-purple-50 to-blue-50 dark:bg-background dark:bg-none" // Use a different gradient or background
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Explore Mind Maps</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Manual Mind Map Card */}
+            <a href="/mindmaps/ManualMindmap.html" className="block group"> {/* Removed target="_blank" */}
+              <Card className="h-full shadow-md hover:shadow-lg transition-shadow border border-border hover:border-purple-600 dark:bg-card">
+                <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                  <Map className="h-8 w-8 text-purple-600 group-hover:scale-110 transition-transform" />
+                  <CardTitle className="text-xl font-semibold text-foreground">Manual Testing Mind Map</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Visualize the key areas, techniques, and concepts involved in manual software testing.</p>
+                </CardContent>
+              </Card>
+            </a>
+            {/* Automation Mind Map Card */}
+            <a href="/mindmaps/AutomationMindmap.html" className="block group"> {/* Removed target="_blank" */}
+              <Card className="h-full shadow-md hover:shadow-lg transition-shadow border border-border hover:border-teal-600 dark:bg-card">
+                <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                  <BotIcon className="h-8 w-8 text-teal-600 group-hover:scale-110 transition-transform" />
+                  <CardTitle className="text-xl font-semibold text-foreground">Automation Testing Mind Map</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Explore the landscape of test automation, including frameworks, tools, and strategies.</p>
+                </CardContent>
+              </Card>
+            </a>
           </div>
         </div>
       </motion.section>

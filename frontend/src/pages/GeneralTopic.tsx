@@ -30,7 +30,7 @@ const SectionCard: React.FC<{ title: string; icon?: React.ElementType; children:
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
+    viewport={{ once: true, amount: 0.1 }} // Trigger animation sooner (when 10% is visible)
     transition={{ duration: 0.5 }}
     // Added dark mode styles
     className={`bg-sky-50 dark:bg-gray-800 border border-blue-200 dark:border-blue-900 rounded-3xl shadow-lg p-8 mb-12 transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-900/50 hover:border-blue-300 dark:hover:border-blue-700 ${className}`}
@@ -88,10 +88,8 @@ export default function GeneralTopic() {
           <div className="overflow-x-auto rounded-xl border border-blue-300/70 dark:border-blue-800/70 shadow-inner">
             <Table>
               <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-700 dark:to-gray-800">
-                <TableRow className="border-b-0"> {/* Removed bottom border for header row */}
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Feature</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Mobile App Testing</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Web App Testing</TableHead>
+                <TableRow className="border-b-0">{/* Removed bottom border for header row */}
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Feature</TableHead><TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Mobile App Testing</TableHead><TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Web App Testing</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="bg-white dark:bg-gray-800 divide-y divide-blue-200/80 dark:divide-gray-700">
@@ -110,11 +108,8 @@ export default function GeneralTopic() {
                   { feature: "Peripheral Testing", mobile: "Tablets, smartwatches, fitness trackers, medical devices.", web: "Mouse, webcams, game controllers, keyboards." },
                 ].map((row, idx) => (
                   // Added alternating dark bg and text colors
-                  <TableRow key={row.feature} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}>
-                    <TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.feature}</TableCell>
-                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.mobile}</TableCell>
-                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.web}</TableCell>
-                  </TableRow>
+                  // Ensure TableCells are directly adjacent within TableRow to avoid whitespace issues
+                  <TableRow key={row.feature} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}><TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.feature}</TableCell><TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.mobile}</TableCell><TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.web}</TableCell></TableRow>
                 ))}
               </TableBody>
             </Table>
@@ -157,10 +152,8 @@ export default function GeneralTopic() {
           <div className="overflow-x-auto rounded-xl border border-blue-300/70 dark:border-blue-800/70 shadow-inner mt-4">
             <Table>
               <TableHeader className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-700 dark:to-gray-800">
-                <TableRow className="border-b-0"> {/* Removed bottom border for header row */}
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Aspect</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Emulator</TableHead>
-                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Simulator</TableHead>
+                <TableRow className="border-b-0">{/* Removed bottom border for header row */}
+                  <TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Aspect</TableHead><TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Emulator</TableHead><TableHead className="p-5 font-bold uppercase tracking-wider text-sm text-white dark:text-gray-200">Simulator</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="bg-white dark:bg-gray-800 divide-y divide-blue-200/80 dark:divide-gray-700">
@@ -174,11 +167,8 @@ export default function GeneralTopic() {
                   { aspect: "Example", emulator: "Android Emulator", simulator: "iOS Simulator" },
                 ].map((row, idx) => (
                   // Added alternating dark bg and text colors
-                  <TableRow key={row.aspect} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}>
-                    <TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.aspect}</TableCell>
-                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.emulator}</TableCell>
-                    <TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.simulator}</TableCell>
-                  </TableRow>
+                  // Ensure TableCells are directly adjacent within TableRow to avoid whitespace issues
+                  <TableRow key={row.aspect} className={`${idx % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-sky-50/50 dark:bg-gray-700/50'} hover:bg-sky-100/70 dark:hover:bg-gray-700 transition duration-200`}><TableCell className="p-5 font-semibold text-blue-700 dark:text-blue-400">{row.aspect}</TableCell><TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.emulator}</TableCell><TableCell className="p-5 text-slate-700 dark:text-slate-300">{row.simulator}</TableCell></TableRow>
                 ))}
               </TableBody>
             </Table>
