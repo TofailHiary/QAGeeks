@@ -300,7 +300,7 @@ export default function App() {
           <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Explore Mind Maps</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Manual Mind Map Card */}
-            <a href="/mindmaps/ManualMindmap.html" className="block group"> {/* Removed target="_blank" */}
+            <a href={`${import.meta.env.BASE_URL}mindmaps/ManualMindmap.html`} className="block group"> {/* Removed target="_blank" */}
               <Card className="h-full shadow-md hover:shadow-lg transition-shadow border border-border hover:border-purple-600 dark:bg-card">
                 <CardHeader className="flex flex-row items-center gap-4 pb-2">
                   <Map className="h-8 w-8 text-purple-600 group-hover:scale-110 transition-transform" />
@@ -312,7 +312,7 @@ export default function App() {
               </Card>
             </a>
             {/* Automation Mind Map Card */}
-            <a href="/mindmaps/AutomationMindmap.html" className="block group"> {/* Removed target="_blank" */}
+            <a href={`${import.meta.env.BASE_URL}mindmaps/AutomationMindmap.html`} className="block group"> {/* Removed target="_blank" */}
               <Card className="h-full shadow-md hover:shadow-lg transition-shadow border border-border hover:border-teal-600 dark:bg-card">
                 <CardHeader className="flex flex-row items-center gap-4 pb-2">
                   <BotIcon className="h-8 w-8 text-teal-600 group-hover:scale-110 transition-transform" />
